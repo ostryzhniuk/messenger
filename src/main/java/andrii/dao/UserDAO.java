@@ -1,7 +1,6 @@
 package andrii.dao;
 
 import andrii.entities.User;
-import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 

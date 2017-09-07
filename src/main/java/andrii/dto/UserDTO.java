@@ -1,8 +1,6 @@
 package andrii.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-
-import javax.persistence.*;
 import java.time.LocalDateTime;
 
 public class UserDTO {
