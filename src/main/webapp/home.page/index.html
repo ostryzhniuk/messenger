@@ -16,11 +16,17 @@
 
     <script src="/home.page/app.config.js"></script>
     <script src="/home.page/navbar.controller.js"></script>
-    <script src="/hello.page/lello.component.js"></script>
+    <script src="/hello.page/hello.component.js"></script>
 </head>
-<body>
+<body ng-controller="navbarCtrl">
 
-    Hi messenger!
+    <div style="margin-left: 3%; font-size: 16px; margin-top: 5px;">Messenger</div>
+
+    <div class="panel panel-default" id="content-panel">
+
+        <div ng-view></div>
+
+    </div>
 
 </body>
 </html>

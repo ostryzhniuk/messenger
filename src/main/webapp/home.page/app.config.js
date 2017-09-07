@@ -3,7 +3,7 @@
 angular.module('messengerApp', [
     'ngRoute',
     'ui.bootstrap',
-    'hello'
+    'helloPage'
 ]);
 
 angular.
@@ -15,8 +15,8 @@ config(['$locationProvider' ,'$routeProvider', '$qProvider',
 
         $routeProvider.
         when('/hello', {
-            template: '<hello></hello>'
-        })
-        .otherwise('/');
+            template: '<hello-page></hello-page>'
+        });
+        // .otherwise('/');
     }
 ]);
