@@ -4,7 +4,8 @@ angular.module('messengerApp', [
     'ngRoute',
     'ui.bootstrap',
     'helloPage',
-    'signUp'
+    'signUp',
+    'login'
 ]);
 
 angular.
@@ -20,6 +21,9 @@ config(['$locationProvider' ,'$routeProvider', '$qProvider',
         })
         .when('/signUp', {
             template: '<sign-up></sign-up>'
+        })
+        .when('/login', {
+            template: '<login></login>'
         });
         // .otherwise('/');
     }
