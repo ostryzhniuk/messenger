@@ -1,0 +1,76 @@
+#sign-up-form {
+    max-width: 600px;
+    padding: 15px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 0.3em;
+}
+#sign-up .col-sm-9 {
+    max-width: 350px;
+}
+#sign-up .col-sm-3 {
+    min-width: 170px;
+}
+#sign-up .form-wrap {
+    width: 30%;
+    margin: 0 auto;
+}
+#sign-up h1 {
+    color: #1fa67b;
+    font-size: 18px;
+    text-align: center;
+    font-weight: bold;
+}
+#sign-up .form-group {
+    margin-bottom: 20px;
+}
+
+#sign-up .btn.btn-custom {
+    width: 330px;
+    height: 35px;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+#sign-up .form-control {
+    width: 330px;
+    color: #212121;
+}
+#sign-up .btn-custom {
+    color: #fff;
+    background-color: #1fa67b;
+}
+#sign-up.btn-custom:hover,
+#sign-up .btn-custom:focus {
+    color: #fff;
+}
+
+fieldset {
+    border: thin solid #ccc;
+    border-radius: 4px;
+    padding: 20px;
+    padding-left: 40px;
+    background: #fbfbfb;
+}
+legend {
+    color: #678;
+}
+.form-control {
+    width: 95%;
+}
+label small {
+    color: #678 !important;
+}
+span.req {
+    color:maroon;
+    font-size: 112%;
+}
+div#errorMessage {
+    color: red;
+    text-align: center;
+    height: 25px;
+    padding-bottom: 5px;
+}
+#status {
+    color: red;
+}
