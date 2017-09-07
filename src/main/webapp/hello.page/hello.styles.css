@@ -1,0 +1,16 @@
+#greeting {
+    margin-top: 10%;
+    font-size: 18px;
+}
+div#body {
+    text-align: center;
+}
+.btn-authorization {
+    width: 250px;
+}
+div#login {
+    margin-top: 20px;
+}
+div#signUp{
+    margin-top: 10px;
+}
