@@ -31,5 +31,5 @@ public class UserDAO extends GenericDAO<User> {
     public void delete(User user) {
         getSession().delete(user);
     }
-    
+
 }
