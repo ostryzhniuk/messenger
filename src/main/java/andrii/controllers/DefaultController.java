@@ -1,6 +1,7 @@
 package andrii.controllers;
 
 import andrii.dto.LoginDTO;
+import andrii.dto.UserSignUpDTO;
 import andrii.services.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,6 +44,11 @@ public class DefaultController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    }
+
+    @PostMapping("/signUp")
+    public void signUp(@RequestBody UserSignUpDTO userDTO) {
+        userService.save(userDTO);
     }
 
 }
