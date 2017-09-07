@@ -3,7 +3,7 @@
 angular.module('messengerApp', [
     'ngRoute',
     'ui.bootstrap',
-    'cart'
+    'hello'
 ]);
 
 angular.
@@ -13,10 +13,10 @@ config(['$locationProvider' ,'$routeProvider', '$qProvider',
         $locationProvider.hashPrefix('!');
         $qProvider.errorOnUnhandledRejections(false);
 
-        /*$routeProvider.
-        when('/catalog', {
-            template: '<catalog-categories></catalog-categories>'
+        $routeProvider.
+        when('/hello', {
+            template: '<hello></hello>'
         })
-        .otherwise('/');*/
+        .otherwise('/');
     }
 ]);
