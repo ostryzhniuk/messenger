@@ -3,6 +3,7 @@
 angular.module('messengerApp', [
     'ngRoute',
     'ui.bootstrap',
+    'home',
     'helloPage',
     'signUp',
     'login',
@@ -17,7 +18,10 @@ config(['$locationProvider' ,'$routeProvider', '$qProvider',
         $qProvider.errorOnUnhandledRejections(false);
 
         $routeProvider.
-        when('/hello', {
+        when('/home', {
+            template: '<home></home>'
+        })
+        .when('/hello', {
             template: '<hello-page></hello-page>'
         })
         .when('/signUp', {
@@ -29,6 +33,6 @@ config(['$locationProvider' ,'$routeProvider', '$qProvider',
         .when('/id:userId', {
             template: '<profile></profile>'
         })
-        .otherwise('/');
+        .otherwise('/home');
     }
 ]);

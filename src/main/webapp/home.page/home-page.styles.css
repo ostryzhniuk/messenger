@@ -7,3 +7,45 @@
 body {
     background-color: #eee;
 }
+
+#main-navbar {
+    border-top: 2px solid #2c5c11;
+    border-bottom: 2px solid #2c5c11;
+    border-radius: 0px;
+}
+.navbar-nav {
+    font-weight: bold;
+    color: red;
+}
+footer {
+    background-color: #0c4a00;
+    color: #ababab;
+    height: 30px;
+    padding-top: 4px;
+    padding-left: 50px;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    font-size: 12px;
+    padding-top: 8px;
+}
+#search-input {
+    outline: none;
+    box-shadow: none;
+}
+.search-group {
+    height: 28px;
+    margin-top: 3px;
+}
+#search-submit {
+    outline: none;
+    box-shadow: none;
+}
+#user-functions-button-panel{
+    width: 200px;
+}
+#user-name {
+    margin-right: 50px;
+    font-weight: 100
+}
