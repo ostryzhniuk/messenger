@@ -1,6 +1,9 @@
 package andrii.dto;
 
+import andrii.entities.User;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.modelmapper.ModelMapper;
+
 import java.time.LocalDateTime;
 
 public class UserDTO {
@@ -51,5 +54,13 @@ public class UserDTO {
 
     public void setLastVisit(LocalDateTime lastVisit) {
         this.lastVisit = lastVisit;
+    }
+
+    public User convertToEntity() {
+        return new ModelMapper().map(this, User.class);
+    }
+
+    public static UserDTO convertToDTO(User user) {
+        return new ModelMapper().map(user, UserDTO.class);
     }
 }

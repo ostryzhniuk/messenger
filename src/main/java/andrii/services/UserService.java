@@ -2,6 +2,7 @@ package andrii.services;
 
 import andrii.dao.UserDAO;
 import andrii.dao.UserRoleDAO;
+import andrii.dto.UserDTO;
 import andrii.dto.UserSignUpDTO;
 import andrii.entities.User;
 import andrii.entities.UserRole;
@@ -52,6 +53,21 @@ public class UserService {
         userRoleBuilder.setUser(user);
         userRoleBuilder.setDefaultAuthority();
         return userRoleBuilder.getUserRole();
+    }
+
+    @Transactional
+    public UserDTO getUserById(Integer userId) {
+        return UserDTO.convertToDTO(userDAO.getUser(userId));
+    }
+
+    @Transactional
+    public UserDTO getUserByEmail(String email){
+        return UserDTO.convertToDTO(userDAO.getUser(email));
+    }
+
+    @Transactional
+    public Integer getUserId(String email){
+        return getUserByEmail(email).getId();
     }
 
 }

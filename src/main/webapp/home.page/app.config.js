@@ -25,7 +25,10 @@ config(['$locationProvider' ,'$routeProvider', '$qProvider',
         })
         .when('/login', {
             template: '<login></login>'
-        });
-        // .otherwise('/');
+        })
+        .when('/id:userId', {
+            template: '<profile></profile>'
+        })
+        .otherwise('/');
     }
 ]);

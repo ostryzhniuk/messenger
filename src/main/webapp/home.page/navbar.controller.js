@@ -8,6 +8,10 @@ angular
         $rootScope.user = response.data;
         if (isAuthority('ROLE_ANONYMOUS')) {
             window.location.replace('#!/hello');
+        } else {
+            $http.get('/userId?email=' + $rootScope.user.username).then(function(response) {
+                window.location.replace('#!/id' + response.data);
+            });
         }
     });
 

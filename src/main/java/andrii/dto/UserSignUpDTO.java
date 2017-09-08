@@ -65,8 +65,4 @@ public class UserSignUpDTO {
     public User convertToEntity() {
         return new ModelMapper().map(this, User.class);
     }
-
-    public static UserDTO convertToDTO(User user) {
-        return new ModelMapper().map(user, UserDTO.class);
-    }
 }

@@ -9,8 +9,6 @@ component('helloPage', {
     controller: ['$http', '$scope',
         function CartController($http, $scope) {
 
-
-
         }
     ]
 });
