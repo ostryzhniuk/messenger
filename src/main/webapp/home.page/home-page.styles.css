@@ -1,24 +1,20 @@
 #content-panel {
-    border-radius: 0px;
     min-height: 100%;
-    margin-top: 10px;
     margin-bottom: 50px;
+    background-color: #eee;
 }
 body {
     background-color: #eee;
 }
 
 #main-navbar {
-    border-top: 2px solid #2c5c11;
-    border-bottom: 2px solid #2c5c11;
+    border-top: 1px solid #3d579b;
+    border-bottom: 1px solid #0f0f0f;
     border-radius: 0px;
-}
-.navbar-nav {
-    font-weight: bold;
-    color: red;
+    background-color: #3d579b;
 }
 footer {
-    background-color: #0c4a00;
+    background-color: #3b5998;
     color: #ababab;
     height: 30px;
     padding-top: 4px;
@@ -42,10 +38,22 @@ footer {
     outline: none;
     box-shadow: none;
 }
-#user-functions-button-panel{
-    width: 200px;
+#home-button {
+    color: white;
+}
+#a-user-name {
+    color: white;
 }
 #user-name {
     margin-right: 50px;
     font-weight: 100
+}
+#login-button {
+    color: white;
+}
+#logout-button {
+    color: white;
+}
+#sign-up-button {
+    color: white;
 }

@@ -2,7 +2,6 @@
     max-width: 600px;
     padding: 15px;
     margin: 0 auto;
-    background-color: #fff;
     border-radius: 0.3em;
 }
 #sign-up .col-sm-9 {
@@ -16,7 +15,6 @@
     margin: 0 auto;
 }
 #sign-up h1 {
-    color: #1fa67b;
     font-size: 18px;
     text-align: center;
     font-weight: bold;
@@ -38,7 +36,7 @@
 }
 #sign-up .btn-custom {
     color: #fff;
-    background-color: #1fa67b;
+    background-color: #3d579b;
 }
 #sign-up.btn-custom:hover,
 #sign-up .btn-custom:focus {
