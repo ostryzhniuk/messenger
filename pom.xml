@@ -64,15 +64,13 @@
             <artifactId>c3p0</artifactId>
             <version>0.9.5.1</version>
         </dependency>
-<!--
 
-        &lt;!&ndash; https://mvnrepository.com/artifact/org.apache.commons/commons-io &ndash;&gt;
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-io -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-io</artifactId>
             <version>1.3.2</version>
         </dependency>
--->
 
         <!-- https://mvnrepository.com/artifact/org.modelmapper/modelmapper -->
         <dependency>
@@ -87,24 +85,20 @@
             <artifactId>jackson-datatype-jsr310</artifactId>
             <version>2.8.9</version>
         </dependency>
-<!--
 
-        &lt;!&ndash; https://mvnrepository.com/artifact/commons-codec/commons-codec &ndash;&gt;
+        <!-- https://mvnrepository.com/artifact/commons-codec/commons-codec -->
         <dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
             <version>1.9</version>
         </dependency>
--->
-<!--
 
-        &lt;!&ndash; https://mvnrepository.com/artifact/com.univocity/univocity-parsers &ndash;&gt;
+        <!-- https://mvnrepository.com/artifact/com.univocity/univocity-parsers -->
         <dependency>
             <groupId>com.univocity</groupId>
             <artifactId>univocity-parsers</artifactId>
             <version>2.5.1</version>
         </dependency>
--->
 
     </dependencies>
 
