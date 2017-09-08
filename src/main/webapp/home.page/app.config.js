@@ -5,7 +5,8 @@ angular.module('messengerApp', [
     'ui.bootstrap',
     'helloPage',
     'signUp',
-    'login'
+    'login',
+    'profile'
 ]);
 
 angular.
