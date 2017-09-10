@@ -9,7 +9,9 @@ component('people', {
     controller: ['$http', '$scope',
         function PeopleController($http, $scope) {
 
-
+            $http.get('/people').then(function(response) {
+                $scope.people = response.data;
+            });
 
         }
     ]

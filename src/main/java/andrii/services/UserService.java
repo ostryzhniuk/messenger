@@ -21,6 +21,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -85,6 +87,18 @@ public class UserService {
     @Transactional
     public Integer getUserId(String email){
         return getUserByEmail(email).getId();
+    }
+
+    @Transactional
+    public List<UserDTO> getUsers() {
+        return convertToDTOList(userDAO.getObjects());
+    }
+
+    public List<UserDTO> convertToDTOList(List<User> userList) {
+        return userList
+                .stream()
+                .map(user -> UserDTO.convertToDTO(user))
+                .collect(Collectors.toList());
     }
 
     public String loadPhoto(Integer userId){
