@@ -6,7 +6,7 @@ angular.
 module('home').
 component('home', {
     controller: ['$http', '$rootScope',
-        function CartController($http,  $rootScope) {
+        function HomeController($http,  $rootScope) {
 
             $http.get('/currentUser').then(function(response) {
                 $rootScope.user = response.data;

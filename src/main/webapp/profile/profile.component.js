@@ -7,7 +7,7 @@ module('profile').
 component('profile', {
     templateUrl: '/profile/profile.template.html',
     controller: ['$http', '$scope', '$routeParams', '$rootScope',
-        function LoginController($http, $scope, $routeParams, $rootScope) {
+        function ProfileController($http, $scope, $routeParams, $rootScope) {
 
             $http.get('/user/' + $routeParams.userId + '?loadImage=true').then(function(response) {
                 $scope.profile = response.data;
