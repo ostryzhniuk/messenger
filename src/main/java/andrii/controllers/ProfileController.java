@@ -20,9 +20,4 @@ public class ProfileController {
         return userService.getUserById(Integer.parseInt(userId), loadImage);
     }
 
-    @GetMapping("/userId")
-    public Integer getUserId(@RequestParam(value= "email") String email){
-        return userService.getUserId(email);
-    }
-
 }
