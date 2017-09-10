@@ -91,7 +91,9 @@ public class UserService {
 
     @Transactional
     public List<UserDTO> getUsers() {
-        return convertToDTOList(userDAO.getObjects());
+        List<UserDTO> userDTOList = convertToDTOList(userDAO.getObjects());
+        userDTOList.forEach(userDTO -> userDTO.setPhoto(loadPhoto(userDTO.getId())));
+        return userDTOList;
     }
 
     public List<UserDTO> convertToDTOList(List<User> userList) {

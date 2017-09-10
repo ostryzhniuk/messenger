@@ -5,47 +5,25 @@
 <div class="panel-body">
     <div class="row">
         <div class="list-group" id="list-group" ng-repeat="person in people">
-            <a href="" ng-click="showOrderContent(order)" class="list-group-item" id="list-group-item">
+            <div class="list-group-item" id="list-group-item">
 
                 <div id="left-container">
-                    <label>Time:</label>
-                    <div>{{order.date}}</div>
-                    <div id="price"><label>Price:&nbsp;&nbsp;</label>{{order.price}} $</div>
+                    <img ng-src="data:image/jpeg;base64,{{person.photo}}" id="photo">
                 </div>
 
                 <div id="center-container">
-                    <div id="phone-container">
-                        <div>
-                            <div class="div-label">Phone:</div>
-                        </div>
-                        <div>{{order.phone}}</div>
-                    </div>
-
-                    <div id="address-container">
-                        <div>
-                            <div class="div-label">Address:</div>
-                        </div>
-                        <textarea id="address" class="form-control">{{order.address}}</textarea>
+                    <div id="name-container">
+                        {{person.firstName}} {{person.lastName}}
                     </div>
                 </div>
 
                 <div id="right-container">
-                    <div id="status-container">
-                        <select ng-model="order.status" ng-options="status for status in statusList track by status"
-                                ng-click="$event.stopPropagation();$event.preventDefault()"
-                                id="status" class="form-control"
-                                ng-change="changeStatus(this)">
-                        </select>
-                    </div>
-                    <div class="checkbox" id="delivery-container">
-                        <label>
-                            <input ng-model="order.delivery" type="checkbox" readonly id="delivery" value="">
-                            Delivery by courier
-                        </label>
-                    </div>
+                    <button id="add-friend-button" type="button" class="btn btn-primary btn-sm">
+                        <span class="glyphicon glyphicon-user"></span> Add friend
+                    </button>
                 </div>
 
-            </a>
+            </div>
         </div>
     </div>
 </div>

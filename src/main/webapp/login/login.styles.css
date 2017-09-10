@@ -54,14 +54,6 @@
 .form-control {
     color: #212121;
 }
-.btn-custom {
-    color: #fff;
-    background-color: #3d579b;
-}
-.btn-custom:hover,
-.btn-custom:focus {
-    color: #fff;
-}
 div#errorMessage {
     color: red;
     text-align: center;

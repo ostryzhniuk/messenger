@@ -1,25 +1,9 @@
-#panel-heading {
-    text-align: center;
-    position: relative;
+#photo {
+    height: 80px;
+    width: 80px;
 }
-#capital-row {
-    color: #2c5c11;
-    font-size: 18px;
-    font-weight: bold;
-    font-family: Cambria;
-}
-#hr-heading {
-    margin: 10px 0em 0em;
-}
-select#status-view-parameter {
-    height: 25px;
-    width: 150px;
-    padding-top: 1px;
-    padding-bottom: 1px;
-    font-size: 13px;
-    position: absolute;
-    outline: none;
-    box-shadow: none;
+#add-friend-button {
+    margin-top: 14%;
 }
 #list-group-item {
     border-radius: 1px;
@@ -32,58 +16,22 @@ select#status-view-parameter {
 #list-group {
     margin: 0 0 5px;
 }
-textarea#address {
-    height: 50px;
-    padding:0;
-    border: none;
-    resize: none;
-    background-color: inherit;
-    outline: none;
-    box-shadow: none;
-    width: 100%;
-    cursor: hand;
-}
-#delivery {
-    outline: none;
-    box-shadow: none;
-}
 #left-container {
     margin-left: 1%;
 }
-#price{
-    margin-top: 15px;
-}
 #center-container {
-    right: 30%;
-    position: absolute;
+    margin-left: 20px;
     width: 40%;
 }
-#phone-container {
+#name-container {
     display: flex;
     margin-top: 5px;
-}
-div.div-label{
-    width: 70px;
-}
-#address-container {
-    display: flex;
-    margin-top: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #428bca;
 }
 #right-container {
     right: 1%;
     position: absolute;
     width: 160px;
-}
-#delivery-container {
-    margin-top: 20px;
-    font-size: 14px
-}
-.save-button {
-    height: 24px;
-    padding-top: 1px;
-    margin-left: 2px;
-    width: 103px;
-    position: absolute;
-    right: 15px;
-    top: 10px;
 }
