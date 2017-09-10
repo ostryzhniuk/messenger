@@ -15,8 +15,9 @@ public class ProfileController {
     private UserService userService;
 
     @GetMapping("/user/{userId}")
-    public UserDTO getUserById(@PathVariable("userId") String userId){
-        return userService.getUserById(Integer.parseInt(userId));
+    public UserDTO getUserById(@PathVariable("userId") String userId,
+                               @RequestParam(value= "loadImage", defaultValue = "false") boolean loadImage){
+        return userService.getUserById(Integer.parseInt(userId), loadImage);
     }
 
     @GetMapping("/userId")

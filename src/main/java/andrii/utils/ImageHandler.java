@@ -47,7 +47,7 @@ public class ImageHandler {
             return new String(Base64.encodeBase64(binaryData));
 
         }catch (IOException e){
-            LOGGER.warn("Category or product photo not found.", e);
+            LOGGER.warn("Photo not found.", e);
             return null;
         }
     }

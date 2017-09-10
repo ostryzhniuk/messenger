@@ -14,6 +14,7 @@ public class UserDTO {
     private String email;
     @JsonFormat(pattern = "d.M.yyyy, h:mm:ss a")
     private LocalDateTime lastVisit;
+    private String photo;
 
 
     public Integer getId() {
@@ -54,6 +55,14 @@ public class UserDTO {
 
     public void setLastVisit(LocalDateTime lastVisit) {
         this.lastVisit = lastVisit;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
     public User convertToEntity() {

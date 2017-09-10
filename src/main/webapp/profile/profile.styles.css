@@ -1,0 +1,17 @@
+#username-container {
+    margin-left: 50px;
+}
+#photo-container {
+    margin-top: 10px;
+}
+#photo {
+    width: 300px;
+    height: 300px;
+}
+.btn-group {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+.social-button {
+    width: 100px;
+}
