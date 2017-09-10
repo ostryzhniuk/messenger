@@ -1,5 +1,6 @@
 package andrii.controllers;
 
+import andrii.dto.AuthenticationDTO;
 import andrii.dto.LoginDTO;
 import andrii.dto.UserSignUpDTO;
 import andrii.services.UserService;
@@ -34,7 +35,7 @@ public class DefaultController {
     private AuthenticationManager authenticationManager;
 
     @GetMapping("/currentUser")
-    public User currentUser(){
+    public AuthenticationDTO currentUser(){
         return userService.getCurrentUser();
     }
 

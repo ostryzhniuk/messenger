@@ -3,6 +3,7 @@ package andrii.services;
 import andrii.dao.UserDAO;
 import andrii.dao.UserRoleDAO;
 import andrii.dto.UserDTO;
+import andrii.dto.AuthenticationDTO;
 import andrii.dto.UserSignUpDTO;
 import andrii.entities.User;
 import andrii.entities.UserRole;
@@ -36,14 +37,17 @@ public class UserService {
     @Value("${resources.path}")
     private String resourcesPath;
 
-    public org.springframework.security.core.userdetails.User getCurrentUser() {
+    public AuthenticationDTO getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication instanceof AnonymousAuthenticationToken) {
-            return new org.springframework.security.core.userdetails.User(authentication.getName(),
-                    "", authentication.getAuthorities());
+            return new AuthenticationDTO(-1, authentication.getName(), authentication.getAuthorities());
         }
-        return (org.springframework.security.core.userdetails.User) authentication.getPrincipal();
+
+        return new AuthenticationDTO(
+                getUserId(authentication.getName()),
+                authentication.getName(),
+                authentication.getAuthorities());
     }
 
     @Transactional
