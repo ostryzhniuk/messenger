@@ -44,7 +44,6 @@ footer {
     color: white;
 }
 #user-name {
-    margin-right: 50px;
     font-weight: 100
 }
 #login-button {
@@ -55,4 +54,8 @@ footer {
 }
 #sign-up-button {
     color: white;
+}
+#find-friends {
+    color: white;
+    margin-left: 50px;
 }

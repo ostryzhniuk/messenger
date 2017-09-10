@@ -7,7 +7,8 @@ angular.module('messengerApp', [
     'helloPage',
     'signUp',
     'login',
-    'profile'
+    'profile',
+    'people'
 ]);
 
 angular.
@@ -32,6 +33,9 @@ config(['$locationProvider' ,'$routeProvider', '$qProvider',
         })
         .when('/id:userId', {
             template: '<profile></profile>'
+        })
+        .when('/people', {
+            template: '<people></people>'
         })
         .otherwise('/home');
     }

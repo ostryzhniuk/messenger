@@ -21,6 +21,7 @@
     <script src="/sign.up/sign-up.component.js"></script>
     <script src="/login/login.component.js"></script>
     <script src="/profile/profile.component.js"></script>
+    <script src="/people/people.component.js"></script>
 </head>
 <body ng-controller="navbarCtrl">
 
@@ -44,6 +45,10 @@
                         </div>
                     </div>
                 </form>
+
+                <ul class="nav navbar-nav" ng-if="!isAuthority('ROLE_ANONYMOUS')">
+                    <li><a id="find-friends" href="#!/people">Find friends</a></li>
+                </ul>
 
                 <ul class="nav navbar-nav navbar-right">
                     <div id="user-name" class="nav navbar-nav" ng-if="!isAuthority('ROLE_ANONYMOUS')">
