@@ -4,16 +4,17 @@
 
 <div>
     <div id="username-container">
-        {{user.firstName}} {{user.lastName}}
+        {{profile.firstName}} {{profile.lastName}}
 
         <div id="photo-container">
-            <img ng-src="data:image/jpeg;base64,{{user.photo}}" id="photo">
+            <img ng-src="data:image/jpeg;base64,{{profile.photo}}" id="photo">
         </div>
 
         <div class="btn-group">
             <button type="button" class="btn btn-primary social-button">Friends</button>
             <button type="button" class="btn btn-primary social-button">Subscribers</button>
-            <button type="button" class="btn btn-primary social-button">Chats</button>
+            <button type="button" class="btn btn-primary social-button" ng-if="myProfile()">Chats</button>
+            <button type="button" class="btn btn-primary social-button" ng-if="!myProfile()">Message</button>
         </div>
 
         <div>
