@@ -8,7 +8,8 @@ angular.module('messengerApp', [
     'signUp',
     'login',
     'profile',
-    'people'
+    'people',
+    'chat'
 ]);
 
 angular.
@@ -36,6 +37,9 @@ config(['$locationProvider' ,'$routeProvider', '$qProvider',
         })
         .when('/people', {
             template: '<people></people>'
+        })
+        .when('/chat/:chatId', {
+            template: '<chat></chat>'
         })
         .otherwise('/home');
     }

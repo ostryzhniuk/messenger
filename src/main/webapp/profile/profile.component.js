@@ -27,6 +27,13 @@ component('profile', {
                 return false;
             };
 
+            $scope.openChat = function () {
+                $http.get('/chat/id' + '?interlocutor=' + $scope.profile.id).then(function(response) {
+                    $scope.chatId = response.data;
+                    window.location.replace('#!/chat/' + $scope.chatId);
+                });
+            };
+
         }
     ]
 });
