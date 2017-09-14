@@ -38,7 +38,7 @@ config(['$locationProvider' ,'$routeProvider', '$qProvider',
         .when('/people', {
             template: '<people></people>'
         })
-        .when('/chat/:chatId', {
+        .when('/messages/:chatId', {
             template: '<chat></chat>'
         })
         .otherwise('/home');

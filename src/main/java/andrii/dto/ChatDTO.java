@@ -1,5 +1,8 @@
 package andrii.dto;
 
+import andrii.entities.Chat;
+import org.modelmapper.ModelMapper;
+
 public class ChatDTO {
 
     private Integer id;
@@ -19,5 +22,13 @@ public class ChatDTO {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Chat convertToEntity() {
+        return new ModelMapper().map(this, Chat.class);
+    }
+
+    public static ChatDTO convertToDTO(Chat chat) {
+        return new ModelMapper().map(chat, ChatDTO.class);
     }
 }

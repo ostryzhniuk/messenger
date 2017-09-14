@@ -8,12 +8,16 @@
             <div class="list-group-item" id="list-group-item">
 
                 <div id="left-container">
-                    <img ng-src="data:image/jpeg;base64,{{person.photo}}" id="photo">
+                    <a href="#!/id{{person.id}}">
+                        <img ng-src="data:image/jpeg;base64,{{person.photo}}" id="photo">
+                    </a>
                 </div>
 
                 <div id="center-container">
                     <div id="name-container">
-                        {{person.firstName}} {{person.lastName}}
+                        <a href="#!/id{{person.id}}">
+                            {{person.firstName}} {{person.lastName}}
+                        </a>
                     </div>
                 </div>
 

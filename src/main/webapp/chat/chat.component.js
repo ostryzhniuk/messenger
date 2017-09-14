@@ -11,6 +11,10 @@ component('chat', {
 
             $scope.chatId = $routeParams.chatId;
 
+            $http.get('/chats').then(function(response) {
+                $scope.chats = response.data;
+            });
+
         }
     ]
 });

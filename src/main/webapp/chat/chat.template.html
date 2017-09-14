@@ -4,6 +4,14 @@
 
 <div id="body">
 
-    chat: {{chatId}}
+    current chat: {{chatId}}
+
+    <p>
+        chats:
+    </p>
+
+    <div ng-repeat="chat in chats">
+        {{chat.id}}
+    </div>
 
 </div>

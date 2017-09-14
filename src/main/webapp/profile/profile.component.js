@@ -34,7 +34,7 @@ component('profile', {
                     } else {
                         $scope.chatId = '-1';
                     }
-                    window.location.replace('#!/chat/' + $scope.chatId);
+                    window.location.replace('#!/messages/' + $scope.chatId);
                 });
             };
 
