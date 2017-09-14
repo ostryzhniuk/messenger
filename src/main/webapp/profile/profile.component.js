@@ -29,7 +29,11 @@ component('profile', {
 
             $scope.openChat = function () {
                 $http.get('/chat/id' + '?interlocutor=' + $scope.profile.id).then(function(response) {
-                    $scope.chatId = response.data;
+                    if (response.data != '') {
+                        $scope.chatId = response.data;
+                    } else {
+                        $scope.chatId = '-1';
+                    }
                     window.location.replace('#!/chat/' + $scope.chatId);
                 });
             };

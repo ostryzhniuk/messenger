@@ -48,7 +48,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers("/", "/home").permitAll()
-                .antMatchers("/people").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers("/people",
+                        "/chat/id").hasAnyAuthority("USER", "ADMIN")
                 .and()
                 .csrf().disable()
                 .formLogin().loginPage("/login")
