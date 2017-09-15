@@ -4,14 +4,26 @@
 
 <div id="body">
 
-    current chat: {{chatId}}
+    <div class="col-md-3" id="chat-list-container" ng-repeat="chat in chats">
+        <div id="contact-panel">
+            {{chat.id}}
+        </div>
+    </div>
 
-    <p>
-        chats:
-    </p>
+    <div class="col-md-9" id="chat-container">
+        <div class="list-group" ng-repeat="message in messages">
+                <div class="list-group-item">
 
-    <div ng-repeat="chat in chats">
-        {{chat.id}}
+                {{message.user.firstName}} {{message.user.lastName}}:
+                <p>{{message.body}}</p>
+
+            </div>
+        </div>
+
+        <div id="textarea-container">
+            <textarea ng-model="newMessage" placeholder="Input message"
+                      ng-keydown="$event.keyCode === 13 && action()"></textarea>
+        </div>
     </div>
 
 </div>

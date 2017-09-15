@@ -1,9 +1,11 @@
 package andrii.controllers;
 
 import andrii.dto.ChatDTO;
+import andrii.dto.MessageDTO;
 import andrii.services.ChatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,6 +25,11 @@ public class ChatController {
     @GetMapping("/chats")
     public List<ChatDTO> getUserChats() {
         return chatService.getChats();
+    }
+
+    @GetMapping("/messages/{chatId}")
+    public List<MessageDTO> getMessages(@PathVariable("chatId") Integer chatId) {
+        return chatService.getMessages(chatId);
     }
 
 }

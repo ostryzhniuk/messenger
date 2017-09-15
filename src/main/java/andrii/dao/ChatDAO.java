@@ -1,6 +1,7 @@
 package andrii.dao;
 
 import andrii.entities.Chat;
+import andrii.entities.Message;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -65,6 +66,15 @@ public class ChatDAO extends GenericDAO<Chat> {
                 "uc.chat.id = c.id");
 
         query.setParameter("userId", userId);
+
+        return query.getResultList();
+    }
+
+    public List<Message> getMessages(Integer chatId) {
+        Query<Message> query = getSession().createQuery("from Message m " +
+                "where m.chat.id = :chatId");
+
+        query.setParameter("chatId", chatId);
 
         return query.getResultList();
     }

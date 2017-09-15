@@ -15,6 +15,14 @@ component('chat', {
                 $scope.chats = response.data;
             });
 
+            $http.get('/messages/' + $scope.chatId).then(function(response) {
+                $scope.messages = response.data;
+            });
+
+            $scope.action = function () {
+                console.log('ENTER');
+            };
+
         }
     ]
 });

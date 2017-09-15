@@ -1,0 +1,26 @@
+#chat-list-container {
+    border: 1px solid;
+}
+#chat-container {
+    border: 1px solid;
+    height: 89%;
+    position: relative;
+    padding: 0px;
+}
+#contact-panel {
+    height: 60px;
+}
+.list-group {
+    margin: 10px;
+}
+textarea {
+    padding: 10px;
+    height: 80px;
+    width: 100%;
+    resize: none;
+}
+#textarea-container {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
