@@ -1,6 +1,7 @@
 package andrii.services;
 
 import andrii.dao.ChatDAO;
+import andrii.dao.MessageDAO;
 import andrii.dto.ChatDTO;
 import andrii.dto.MessageDTO;
 import andrii.entities.Chat;
@@ -19,6 +20,9 @@ public class ChatService {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private MessageDAO messageDAO;
 
     public Integer getChatId(Integer interlocutorId) {
 
@@ -49,6 +53,6 @@ public class ChatService {
     }
 
     public List<MessageDTO> getMessages(Integer chatId) {
-        return convertToMessageDTOList(chatDAO.getMessages(chatId));
+        return convertToMessageDTOList(messageDAO.getMessages(chatId));
     }
 }

@@ -22,7 +22,7 @@ public class Message {
     @Column(nullable = false)
     private String body;
 
-    @Column(nullable = false)
+    @Column
     private LocalDateTime time;
 
     public Integer getId() {

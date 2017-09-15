@@ -69,13 +69,4 @@ public class ChatDAO extends GenericDAO<Chat> {
 
         return query.getResultList();
     }
-
-    public List<Message> getMessages(Integer chatId) {
-        Query<Message> query = getSession().createQuery("from Message m " +
-                "where m.chat.id = :chatId");
-
-        query.setParameter("chatId", chatId);
-
-        return query.getResultList();
-    }
 }
