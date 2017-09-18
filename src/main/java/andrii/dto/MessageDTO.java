@@ -10,8 +10,8 @@ import java.time.LocalDateTime;
 public class MessageDTO {
 
     private Integer id;
-    private User user;
-    private Chat chat;
+    private UserDTO user;
+    private ChatDTO chat;
     private String body;
 
     public Integer getId() {
@@ -22,19 +22,19 @@ public class MessageDTO {
         this.id = id;
     }
 
-    public User getUser() {
+    public UserDTO getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserDTO user) {
         this.user = user;
     }
 
-    public Chat getChat() {
+    public ChatDTO getChat() {
         return chat;
     }
 
-    public void setChat(Chat chat) {
+    public void setChat(ChatDTO chat) {
         this.chat = chat;
     }
 

@@ -52,6 +52,10 @@ public class UserService {
                 authentication.getAuthorities());
     }
 
+    public Integer getCurrentUserId(){
+        return getCurrentUser().getId();
+    }
+
     @Transactional
     public void save(UserSignUpDTO userDTO) {
         User user = userDTO.convertToEntity();

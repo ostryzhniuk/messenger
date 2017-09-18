@@ -7,7 +7,7 @@ module('chat').
 component('chat', {
     templateUrl: '/chat/chat.template.html',
     controller: ['$http', '$scope', '$routeParams',
-        function ChatController($http, $scope, $routeParams) {
+        function ChatController ($http, $scope, $routeParams) {
 
             var stompClient = null;
 
@@ -20,7 +20,16 @@ component('chat', {
 
             $http.get('/messages/' + $scope.chatId).then(function(response) {
                 $scope.messages = response.data;
+                scrollToBottom();
             });
+
+            function scrollToBottom() {
+                var div = document.getElementById('messages-container');
+
+                $('#messages-container').stop().animate({
+                    scrollTop: Math.pow(div.scrollHeight, 3)
+                }, 10);
+            };
 
             $scope.action = function () {
                 console.log('ENTER');
@@ -44,19 +53,17 @@ component('chat', {
                 stompClient = Stomp.over(socket);
                 stompClient.connect({}, function (frame) {
                     setConnected(true);
-                    console.log('Connected: ' + frame);
-                    stompClient.subscribe('/topic/greetings', function (greeting) {
-                        console.log(greeting);
-                        // showGreeting(JSON.parse(greeting.body).content);
+                    stompClient.subscribe('/topic/greetings', function (message) {
+                        $scope.messages.push(JSON.parse(message.body));
+                        scrollToBottom();
                     });
                 });
             }
 
             function sendMessage() {
-                stompClient.send("/send/message", {}, $scope.newMessage);
+                var message = JSON.stringify({chatId : $scope.chatId, body : $scope.newMessage});
+                stompClient.send("/send/message", {}, message);
             }
-
-
         }
     ]
 });

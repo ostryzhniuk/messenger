@@ -2,7 +2,9 @@ package andrii.controllers;
 
 import andrii.dto.ChatDTO;
 import andrii.dto.MessageDTO;
+import andrii.dto.MessageParametersDTO;
 import andrii.services.ChatService;
+import andrii.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -36,8 +38,8 @@ public class ChatController {
 
     @MessageMapping("/message")
     @SendTo("/topic/greetings")
-    public String sendMessage(String message) throws Exception {
-        return message;
+    public MessageDTO sendMessage(MessageParametersDTO message) {
+        return chatService.saveMessage(message);
     }
 
 }

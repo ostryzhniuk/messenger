@@ -24,3 +24,10 @@ textarea {
     bottom: 0;
     width: 100%;
 }
+#messages-container {
+    overflow-y:scroll;
+    position: absolute;
+    bottom: 80px;
+    top: 0px;
+    width: 100%
+}
