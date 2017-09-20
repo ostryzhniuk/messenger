@@ -10,6 +10,7 @@ component('chat', {
         function ChatController ($http, $scope, $routeParams) {
 
             var stompClient = null;
+            $scope.messages = [];
 
             $scope.chatId = $routeParams.chatId;
 
@@ -55,6 +56,8 @@ component('chat', {
                     setConnected(true);
                     stompClient.subscribe('/topic/greetings', function (message) {
                         $scope.messages.push(JSON.parse(message.body));
+                        document.getElementById('message-textarea').value = '';
+                        $scope.$apply();
                         scrollToBottom();
                     });
                 });
