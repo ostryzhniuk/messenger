@@ -56,7 +56,7 @@ component('chat', {
                     setConnected(true);
                     stompClient.subscribe('/topic/greetings', function (message) {
                         $scope.messages.push(JSON.parse(message.body));
-                        document.getElementById('message-textarea').value = '';
+                        $scope.newMessage = '';
                         $scope.$apply();
                         scrollToBottom();
                     });

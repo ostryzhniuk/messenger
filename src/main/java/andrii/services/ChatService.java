@@ -9,7 +9,9 @@ import andrii.entities.Chat;
 import andrii.entities.Message;
 import andrii.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -59,10 +61,11 @@ public class ChatService {
         return convertToMessageDTOList(messageDAO.getMessages(chatId));
     }
 
-    public MessageDTO saveMessage(MessageParametersDTO messageParameters) {
+    @Transactional
+    public MessageDTO saveMessage(MessageParametersDTO messageParameters, Authentication authentication) {
         Message message = new Message();
-//        Integer currentUserId = userService.getCurrentUserId();
-        User user = userService.getUserById(4, false).convertToEntity();
+        Integer currentUserId = userService.getUserId(authentication.getName());
+        User user = userService.getUserById(currentUserId, false).convertToEntity();
 
         message.setUser(user);
         message.setChat(chatDAO.getChat(messageParameters.getChatId()));
