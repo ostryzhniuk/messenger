@@ -75,8 +75,13 @@ public class UserService {
     }
 
     @Transactional
-    public UserDTO getUserById(Integer userId, boolean loadPhoto) {
-        UserDTO userDTO = UserDTO.convertToDTO(userDAO.getUser(userId));
+    public User getUser(Integer userId) {
+        return userDAO.getUser(userId);
+    }
+
+    @Transactional
+    public UserDTO getUser(Integer userId, boolean loadPhoto) {
+        UserDTO userDTO = UserDTO.convertToDTO(getUser(userId));
         if (loadPhoto) {
             userDTO.setPhoto(loadPhoto(userDTO.getId()));
         }
@@ -84,13 +89,13 @@ public class UserService {
     }
 
     @Transactional
-    public UserDTO getUserByEmail(String email){
+    public UserDTO getUser(String email){
         return UserDTO.convertToDTO(userDAO.getUser(email));
     }
 
     @Transactional
     public Integer getUserId(String email){
-        return getUserByEmail(email).getId();
+        return getUser(email).getId();
     }
 
     @Transactional

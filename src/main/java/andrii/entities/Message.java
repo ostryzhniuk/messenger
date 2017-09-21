@@ -25,6 +25,36 @@ public class Message {
     @Column
     private LocalDateTime time;
 
+    public static class MessageBuilder {
+
+        private User user;
+        private Chat chat;
+        private String body;
+        private LocalDateTime time;
+
+        public MessageBuilder(User user, String body, Chat chat) {
+            this.user = user;
+            this.chat = chat;
+            this.body = body;
+            this.time = LocalDateTime.now();
+        }
+
+        public Message build(){
+            return new Message(this);
+        }
+
+    }
+
+    public Message() {
+    }
+
+    public Message(MessageBuilder messageBuilder) {
+        this.user = messageBuilder.user;
+        this.chat = messageBuilder.chat;
+        this.body = messageBuilder.body;
+        this.time = messageBuilder.time;
+    }
+
     public Integer getId() {
         return id;
     }

@@ -13,7 +13,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,8 +38,7 @@ public class ChatService {
     public List<ChatDTO> getChats() {
 
         Integer currentUserId = userService.getCurrentUserId();
-        List<ChatDTO> chatDTOList = convertToChatDTOList(chatDAO.getChats(currentUserId));
-        return chatDTOList;
+        return convertToChatDTOList(chatDAO.getChats(currentUserId));
     }
 
     public List<ChatDTO> convertToChatDTOList(List<Chat> chatList) {
@@ -63,14 +61,16 @@ public class ChatService {
 
     @Transactional
     public MessageDTO saveMessage(MessageParametersDTO messageParameters, Authentication authentication) {
-        Message message = new Message();
-        Integer currentUserId = userService.getUserId(authentication.getName());
-        User user = userService.getUserById(currentUserId, false).convertToEntity();
 
-        message.setUser(user);
-        message.setChat(chatDAO.getChat(messageParameters.getChatId()));
-        message.setBody(messageParameters.getBody());
-        message.setTime(LocalDateTime.now());
+        Integer currentUserId = userService.getUserId(authentication.getName());
+        User user = userService.getUser(currentUserId);
+
+        Message message = new Message
+                .MessageBuilder(
+                    user,
+                    messageParameters.getBody(),
+                    chatDAO.getChat(messageParameters.getChatId()))
+                .build();
 
         messageDAO.save(message);
 
