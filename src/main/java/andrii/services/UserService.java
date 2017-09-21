@@ -105,6 +105,12 @@ public class UserService {
         return userDTOList;
     }
 
+    @Transactional
+    public List<UserDTO> getChatParticipants(Integer chatId, Authentication authentication) {
+        Integer currentUserId = getUserId(authentication.getName());
+        return convertToDTOList(userDAO.getChatParticipants(chatId, currentUserId));
+    }
+
     public List<UserDTO> convertToDTOList(List<User> userList) {
         return userList
                 .stream()

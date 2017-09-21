@@ -46,4 +46,17 @@ public class UserDAO extends GenericDAO<User> {
         return query.getSingleResult();
     }
 
+    public List<User> getChatParticipants(Integer chatId, Integer currentUserId){
+        Query<User> query = getSession().createQuery("select u " +
+                "from User as u, UserChat as uc, Chat as c " +
+                "where c.id = :chatId and " +
+                "c.id = uc.chat.id and " +
+                "uc.user.id = u.id and " +
+                "u.id != :currentUserId");
+
+        query.setParameter("chatId", chatId);
+        query.setParameter("currentUserId", currentUserId);
+        return query.getResultList();
+    }
+
 }

@@ -50,11 +50,11 @@ component('chat', {
             }
 
             function connect() {
-                var socket = new SockJS('/gs-guide-websocket');
+                var socket = new SockJS('/gs-messenger-websocket');
                 stompClient = Stomp.over(socket);
                 stompClient.connect({}, function (frame) {
                     setConnected(true);
-                    stompClient.subscribe('/topic/greetings', function (message) {
+                    stompClient.subscribe('/topic/message', function (message) {
                         $scope.messages.push(JSON.parse(message.body));
                         $scope.newMessage = '';
                         $scope.$apply();
@@ -65,7 +65,7 @@ component('chat', {
 
             function sendMessage() {
                 var message = JSON.stringify({chatId : $scope.chatId, body : $scope.newMessage});
-                stompClient.send("/send/message", {}, message);
+                stompClient.send("/app/message", {}, message);
             }
         }
     ]
