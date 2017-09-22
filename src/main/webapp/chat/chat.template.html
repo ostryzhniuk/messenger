@@ -6,7 +6,7 @@
 
     <div class="col-md-3" id="chat-list-container">
         <div ng-repeat="chat in chats">
-            <div id="contact-panel">
+            <div ng-click="openChat(chat.id)" id="contact-panel">
                 {{chat.id}}
             </div>
         </div>

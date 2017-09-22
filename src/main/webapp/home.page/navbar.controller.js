@@ -6,6 +6,7 @@ angular
 
     $http.get('/currentUser').then(function(response) {
         $rootScope.user = response.data;
+        connect();
     });
 
     $rootScope.isAuthority = function (role) {
@@ -25,5 +26,30 @@ angular
         $http.get('/logout');
         window.location.replace('#!/home');
     };
+
+    function setConnected(connected) {
+        $("#connect").prop("disabled", connected);
+        $("#disconnect").prop("disabled", !connected);
+        if (connected) {
+            $("#conversation").show();
+        }
+        else {
+            $("#conversation").hide();
+        }
+        $("#greetings").html("");
+    }
+
+    function connect() {
+        var socket = new SockJS('/gs-messenger-websocket');
+        $rootScope.stompClient = Stomp.over(socket);
+        $rootScope.stompClient.connect({}, function (frame) {
+            setConnected(true);
+            setTimeout(function() {
+                $rootScope.stompClient.subscribe('/user/queue/reply', function (message) {
+                    console.log('yes!');
+                });
+            }, 500);
+        });
+    }
 
 });

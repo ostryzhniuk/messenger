@@ -12,6 +12,7 @@
     border: 1px solid;
     margin-bottom: 1px;
     width: 100%;
+    cursor: pointer;
 }
 .list-group {
     margin: 10px;

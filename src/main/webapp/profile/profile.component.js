@@ -29,13 +29,17 @@ component('profile', {
 
             $scope.openChat = function () {
                 $http.get('/chat/id' + '?interlocutor=' + $scope.profile.id).then(function(response) {
-                    if (response.data != '') {
-                        $scope.chatId = response.data;
+                    if (response.data == -1) {
+                        console.log(response.data);
                     } else {
-                        $scope.chatId = '-1';
+                        $scope.chatId = response.data;
+                        window.location.replace('#!/messages/' + $scope.chatId);
                     }
-                    window.location.replace('#!/messages/' + $scope.chatId);
                 });
+            };
+
+            $scope.openChats = function () {
+                window.location.replace('#!/messages/');
             };
 
         }

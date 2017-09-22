@@ -13,7 +13,8 @@
         <div class="btn-group">
             <button type="button" class="btn btn-primary social-button">Friends</button>
             <button type="button" class="btn btn-primary social-button">Subscribers</button>
-            <button type="button" class="btn btn-primary social-button" ng-if="myProfile()">Chats</button>
+            <button type="button" class="btn btn-primary social-button" ng-if="myProfile()"
+                    ng-click="openChats()">Chats</button>
             <button type="button" class="btn btn-primary social-button" ng-if="!myProfile()"
                     ng-click="openChat()">Message</button>
         </div>

@@ -32,7 +32,7 @@ public class ChatService {
 
         Integer currentUserId = userService.getCurrentUserId();
         Chat chat = chatDAO.getChat(currentUserId, interlocutorId);
-        return chat == null ? null : chat.getId();
+        return chat == null ? -1 : chat.getId();
     }
 
     public List<ChatDTO> getChats() {

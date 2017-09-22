@@ -6,23 +6,39 @@ angular.
 module('chat').
 component('chat', {
     templateUrl: '/chat/chat.template.html',
-    controller: ['$http', '$scope', '$routeParams',
-        function ChatController ($http, $scope, $routeParams) {
+    controller: ['$http', '$scope', '$routeParams', '$rootScope',
+        function ChatController ($http, $scope, $routeParams, $rootScope) {
 
-            var stompClient = null;
-            $scope.messages = [];
-
-            $scope.chatId = $routeParams.chatId;
+            var stompClient = $rootScope.stompClient;
 
             $http.get('/chats').then(function(response) {
                 $scope.chats = response.data;
-                connect();
-            });
+                configureStompClient();
 
-            $http.get('/messages/' + $scope.chatId).then(function(response) {
-                $scope.messages = response.data;
-                scrollToBottom();
+                determineChatId();
+                loadChat($scope.chatId);
             });
+            
+            function determineChatId() {
+                if ($routeParams.chatId == undefined) {
+                    if ($scope.chats.length != 0) {
+                        $scope.chatId = $scope.chats[0].id;
+                    }
+                } else {
+                    $scope.chatId = $routeParams.chatId;
+                }
+            }
+
+            function loadChat(chatId) {
+                $http.get('/messages/' + chatId).then(function(response) {
+                    $scope.messages = response.data;
+                    scrollToBottom();
+                });
+            }
+
+            $scope.openChat = function (chatId) {
+                loadChat(chatId);
+            }
 
             function scrollToBottom() {
                 var div = document.getElementById('messages-container');
@@ -30,38 +46,23 @@ component('chat', {
                 $('#messages-container').stop().animate({
                     scrollTop: Math.pow(div.scrollHeight, 3)
                 }, 10);
-            };
+            }
 
             $scope.action = function () {
                 console.log('ENTER');
                 sendMessage();
-            };
-
-            function setConnected(connected) {
-                $("#connect").prop("disabled", connected);
-                $("#disconnect").prop("disabled", !connected);
-                if (connected) {
-                    $("#conversation").show();
-                }
-                else {
-                    $("#conversation").hide();
-                }
-                $("#greetings").html("");
             }
 
-            function connect() {
-                var socket = new SockJS('/gs-messenger-websocket');
-                stompClient = Stomp.over(socket);
-                stompClient.connect({}, function (frame) {
-                    setConnected(true);
-                    stompClient.subscribe('/user/queue/reply', function (message) {
+            function configureStompClient() {
+                setTimeout(function() {
+                    $rootScope.stompClient.subscribe('/user/queue/reply', function (message) {
                         showMessage(message.body);
                     });
 
-                    stompClient.subscribe('/user/queue/return', function (message) {
+                    $rootScope.stompClient.subscribe('/user/queue/return', function (message) {
                         showMessage(message.body);
                     });
-                });
+                }, 500);
             }
 
             function showMessage(message) {
@@ -73,13 +74,7 @@ component('chat', {
 
             function sendMessage() {
                 var message = JSON.stringify({chatId : $scope.chatId, body : $scope.newMessage});
-                stompClient.send("/app/message", {}, message).then(function (response) {
-                    $scope.messages.push(JSON.parse(response.body));
-                    console.log($scope.messages);
-                    $scope.newMessage = '';
-                    $scope.$apply();
-                    scrollToBottom();
-                })
+                stompClient.send("/app/message", {}, message);
             }
         }
     ]

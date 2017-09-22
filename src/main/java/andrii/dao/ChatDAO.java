@@ -51,8 +51,6 @@ public class ChatDAO extends GenericDAO<Chat> {
 
         Chat chat;
 
-//        List<Chat> chats = query.getResultList();
-
         try {
             chat = query.getSingleResult();
         } catch (NoResultException e) {

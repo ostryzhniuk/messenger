@@ -38,9 +38,12 @@ config(['$locationProvider' ,'$routeProvider', '$qProvider',
         .when('/people', {
             template: '<people></people>'
         })
+        .when('/messages', {
+            template: '<chat></chat>'
+        })
         .when('/messages/:chatId', {
             template: '<chat></chat>'
         })
-        .otherwise('/home');
+        // .otherwise('/home');
     }
 ]);
