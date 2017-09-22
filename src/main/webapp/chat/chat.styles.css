@@ -1,5 +1,5 @@
 #chat-list-container {
-    border: 1px solid;
+
 }
 #chat-container {
     border: 1px solid;
@@ -9,6 +9,9 @@
 }
 #contact-panel {
     height: 60px;
+    border: 1px solid;
+    margin-bottom: 1px;
+    width: 100%;
 }
 .list-group {
     margin: 10px;

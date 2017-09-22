@@ -36,20 +36,22 @@ public class ChatDAO extends GenericDAO<Chat> {
     public Chat getChat(Integer userId1, Integer userId2) {
         Query<Chat> query = getSession().createQuery("select c " +
                 "from Chat c " +
-                "where c.id = " +
-                    "(select uc1.chat.id " +
-                    "from UserChat uc1 " +
-                    "where uc1.user.id = :userId1) and " +
-                    "c.id = " +
-                    "(select uc1.chat.id " +
-                    "from UserChat uc1 " +
-                    "where uc1.user.id = :userId2)");
+                "where c.id in " +
+                    "(select uc.chat.id " +
+                    "from UserChat uc " +
+                    "where uc.user.id = :userId1) and " +
+                    "c.id in " +
+                    "(select uc.chat.id " +
+                    "from UserChat uc " +
+                    "where uc.user.id = :userId2)");
 
 
         query.setParameter("userId1", userId1);
         query.setParameter("userId2", userId2);
 
         Chat chat;
+
+//        List<Chat> chats = query.getResultList();
 
         try {
             chat = query.getSingleResult();

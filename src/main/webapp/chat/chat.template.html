@@ -4,9 +4,11 @@
 
 <div id="body">
 
-    <div class="col-md-3" id="chat-list-container" ng-repeat="chat in chats">
-        <div id="contact-panel">
-            {{chat.id}}
+    <div class="col-md-3" id="chat-list-container">
+        <div ng-repeat="chat in chats">
+            <div id="contact-panel">
+                {{chat.id}}
+            </div>
         </div>
     </div>
 

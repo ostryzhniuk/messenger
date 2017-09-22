@@ -54,18 +54,32 @@ component('chat', {
                 stompClient = Stomp.over(socket);
                 stompClient.connect({}, function (frame) {
                     setConnected(true);
-                    stompClient.subscribe('/topic/message', function (message) {
-                        $scope.messages.push(JSON.parse(message.body));
-                        $scope.newMessage = '';
-                        $scope.$apply();
-                        scrollToBottom();
+                    stompClient.subscribe('/user/queue/reply', function (message) {
+                        showMessage(message.body);
+                    });
+
+                    stompClient.subscribe('/user/queue/return', function (message) {
+                        showMessage(message.body);
                     });
                 });
             }
 
+            function showMessage(message) {
+                $scope.messages.push(JSON.parse(message));
+                $scope.newMessage = '';
+                $scope.$apply();
+                scrollToBottom();
+            }
+
             function sendMessage() {
                 var message = JSON.stringify({chatId : $scope.chatId, body : $scope.newMessage});
-                stompClient.send("/app/message", {}, message);
+                stompClient.send("/app/message", {}, message).then(function (response) {
+                    $scope.messages.push(JSON.parse(response.body));
+                    console.log($scope.messages);
+                    $scope.newMessage = '';
+                    $scope.$apply();
+                    scrollToBottom();
+                })
             }
         }
     ]

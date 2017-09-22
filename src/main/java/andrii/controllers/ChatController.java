@@ -8,7 +8,6 @@ import andrii.services.ChatService;
 import andrii.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -43,18 +42,24 @@ public class ChatController {
     }
 
     @MessageMapping("/message")
-    @SendTo("/topic/message")
-    public MessageDTO sendMessage(MessageParametersDTO message,
+    public void sendMessage(MessageParametersDTO message,
                                   @AuthenticationPrincipal Authentication authentication) {
 
         MessageDTO messageDTO = chatService.saveMessage(message, authentication);
         List<UserDTO> userList = userService.getChatParticipants(message.getChatId(), authentication);
 
         userList
-                .forEach(user ->
-                messagingTemplate.convertAndSendToUser(user.getEmail(), "/queue/reply", messageDTO));
+                .forEach(user -> messagingTemplate
+                        .convertAndSendToUser(
+                                user.getEmail(),
+                                "/queue/reply",
+                                messageDTO));
 
-        return messageDTO;
+        messagingTemplate
+                .convertAndSendToUser(
+                    authentication.getName(),
+                    "/queue/return",
+                    messageDTO);
     }
 
 }
