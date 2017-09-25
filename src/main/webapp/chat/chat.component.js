@@ -12,9 +12,22 @@ component('chat', {
             var stompClient = $rootScope.stompClient;
 
             $scope.isSelectedChat = false;
+            $scope.model = {};
+            $scope.model.newMessage = '';
 
             configureStompClient();
             loadChat();
+            onDestroy();
+
+            function onDestroy() {
+                $scope.$on('$destroy', function(){
+                    $http({
+                        method: 'PUT',
+                        url: '/chat/lastVisit/update',
+                        data: $scope.chatId
+                    });
+                });
+            }
 
             function loadChat() {
 
@@ -37,11 +50,6 @@ component('chat', {
                 }, 10);
             }
 
-            $scope.action = function () {
-                console.log('ENTER');
-                sendMessage();
-            }
-
             function configureStompClient() {
                 setTimeout(function() {
                     $rootScope.stompClient.subscribe('/user/queue/reply', function (message) {
@@ -54,16 +62,19 @@ component('chat', {
                 }, 500);
             }
 
-            function showMessage(message) {
-                $scope.messages.push(JSON.parse(message));
-                $scope.newMessage = '';
-                $scope.$apply();
-                scrollToBottom();
+            $scope.sendMessage = function () {
+                var newMessage = $scope.model.newMessage;
+                if (newMessage != undefined && newMessage != '' && newMessage != '\n') {
+                    var message = JSON.stringify({chatId : $scope.chatId, body : newMessage});
+                    stompClient.send("/app/message", {}, message);
+                }
             }
 
-            function sendMessage() {
-                var message = JSON.stringify({chatId : $scope.chatId, body : $scope.newMessage});
-                stompClient.send("/app/message", {}, message);
+            function showMessage(message) {
+                $scope.messages.push(JSON.parse(message));
+                $scope.model.newMessage = '';
+                $scope.$apply();
+                scrollToBottom();
             }
         }
     ]

@@ -2,17 +2,20 @@ package andrii.services;
 
 import andrii.dao.ChatDAO;
 import andrii.dao.MessageDAO;
+import andrii.dao.UserChatDAO;
 import andrii.dto.ChatDTO;
 import andrii.dto.MessageDTO;
 import andrii.dto.MessageParametersDTO;
 import andrii.entities.Chat;
 import andrii.entities.Message;
 import andrii.entities.User;
+import andrii.entities.UserChat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,6 +31,10 @@ public class ChatService {
     @Autowired
     private MessageDAO messageDAO;
 
+    @Autowired
+    private UserChatDAO userChatDAO;
+
+    @Transactional
     public Integer getChatId(Integer interlocutorId) {
 
         Integer currentUserId = userService.getCurrentUserId();
@@ -35,6 +42,7 @@ public class ChatService {
         return chat == null ? -1 : chat.getId();
     }
 
+    @Transactional
     public List<ChatDTO> getChats() {
 
         Integer currentUserId = userService.getCurrentUserId();
@@ -55,6 +63,7 @@ public class ChatService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     public List<MessageDTO> getMessages(Integer chatId) {
         return convertToMessageDTOList(messageDAO.getMessages(chatId));
     }
@@ -75,5 +84,18 @@ public class ChatService {
         messageDAO.save(message);
 
         return MessageDTO.convertToDTO(message);
+    }
+
+    @Transactional
+    public void updateLastChatVisit(Integer chatId) {
+
+        LocalDateTime dateTime = LocalDateTime.now();
+        UserChat userChat = userChatDAO
+                .getUserChat(
+                        chatId,
+                        userService.getCurrentUserId());
+
+        userChat.setLastVisit(dateTime);
+        userChatDAO.update(userChat);
     }
 }

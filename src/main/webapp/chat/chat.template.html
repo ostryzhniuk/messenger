@@ -2,6 +2,7 @@
     <link rel="stylesheet" href="/chat/chat.styles.css"/>
 </head>
 
+<div>
 <div class="col-md-9" id="panel-body">
     <div ng-if="isSelectedChat">
         <div id="messages-container">
@@ -16,12 +17,13 @@
         </div>
 
         <div id="textarea-container">
-                    <textarea id="message-textarea" ng-model="newMessage" placeholder="Input message"
-                              ng-keydown="$event.keyCode === 13 && action()"></textarea>
+            <textarea id="message-textarea" ng-model="model.newMessage" placeholder="Input message"
+                ng-keydown="$event.keyCode === 13 && sendMessage()"></textarea>
         </div>
     </div>
 
     <div id="not-selected-chat-message" ng-if="!isSelectedChat">
         Please select a chat to start messaging
     </div>
+</div>
 </div>

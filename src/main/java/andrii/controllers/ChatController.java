@@ -41,6 +41,11 @@ public class ChatController {
         return chatService.getMessages(chatId);
     }
 
+    @PutMapping("/chat/lastVisit/update")
+    public void updateChatLastVisit(@RequestBody Integer chatId) {
+        chatService.updateLastChatVisit(chatId);
+    }
+
     @MessageMapping("/message")
     public void sendMessage(MessageParametersDTO message,
                                   @AuthenticationPrincipal Authentication authentication) {

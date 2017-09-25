@@ -55,7 +55,7 @@
 
                 <ul class="nav navbar-nav navbar-right">
                     <div id="user-name" class="nav navbar-nav" ng-if="!isAuthority('ROLE_ANONYMOUS')">
-                        <li><a id="a-user-name">
+                        <li><a href="" ng-click="myProfile()" id="a-user-name">
                             <span class="glyphicon glyphicon-user"></span>&nbsp;{{user.username}}
                         </a></li>
                     </div>

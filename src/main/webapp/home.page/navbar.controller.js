@@ -60,4 +60,8 @@ angular
         window.location.replace('#!/messages/' + chatId);
     }
 
+    $scope.myProfile = function () {
+        window.location.replace('#!/id' + $rootScope.user.id);
+    }
+
 });
