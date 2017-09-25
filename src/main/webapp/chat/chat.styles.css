@@ -1,18 +1,8 @@
-#chat-list-container {
-
-}
-#chat-container {
+#panel-body {
     border: 1px solid;
     height: 89%;
     position: relative;
     padding: 0px;
-}
-#contact-panel {
-    height: 60px;
-    border: 1px solid;
-    margin-bottom: 1px;
-    width: 100%;
-    cursor: pointer;
 }
 .list-group {
     margin: 10px;

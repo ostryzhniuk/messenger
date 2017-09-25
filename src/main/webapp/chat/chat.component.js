@@ -22,7 +22,7 @@ component('chat', {
             function determineChatId() {
                 if ($routeParams.chatId == undefined) {
                     if ($scope.chats.length != 0) {
-                        $scope.chatId = $scope.chats[0].id;
+                        window.location.replace('#!/messages/' + $scope.chats[0].id);
                     }
                 } else {
                     $scope.chatId = $routeParams.chatId;
@@ -34,10 +34,6 @@ component('chat', {
                     $scope.messages = response.data;
                     scrollToBottom();
                 });
-            }
-
-            $scope.openChat = function (chatId) {
-                loadChat(chatId);
             }
 
             function scrollToBottom() {

@@ -9,6 +9,10 @@ angular
         connect();
     });
 
+    $http.get('/chats').then(function(response) {
+        $scope.chats = response.data;
+    });
+
     $rootScope.isAuthority = function (role) {
         if ($rootScope.user == undefined) {
             return false;
@@ -50,6 +54,10 @@ angular
                 });
             }, 500);
         });
+    }
+
+    $scope.openChat = function (chatId) {
+        window.location.replace('#!/messages/' + chatId);
     }
 
 });

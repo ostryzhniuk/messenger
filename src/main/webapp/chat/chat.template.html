@@ -2,32 +2,20 @@
     <link rel="stylesheet" href="/chat/chat.styles.css"/>
 </head>
 
-<div id="body">
+<div class="col-md-9" id="panel-body">
+    <div id="messages-container">
+        <div class="list-group" ng-repeat="message in messages">
+            <div class="list-group-item">
 
-    <div class="col-md-3" id="chat-list-container">
-        <div ng-repeat="chat in chats">
-            <div ng-click="openChat(chat.id)" id="contact-panel">
-                {{chat.id}}
+                {{message.user.firstName}} {{message.user.lastName}}:
+                <p>{{message.body}}</p>
+
             </div>
         </div>
     </div>
 
-    <div class="col-md-9" id="chat-container">
-        <div id="messages-container">
-            <div class="list-group" ng-repeat="message in messages">
-                    <div class="list-group-item">
-
-                    {{message.user.firstName}} {{message.user.lastName}}:
-                    <p>{{message.body}}</p>
-
-                </div>
-            </div>
-        </div>
-
-        <div id="textarea-container">
-            <textarea id="message-textarea" ng-model="newMessage" placeholder="Input message"
-                      ng-keydown="$event.keyCode === 13 && action()"></textarea>
-        </div>
+    <div id="textarea-container">
+                <textarea id="message-textarea" ng-model="newMessage" placeholder="Input message"
+                          ng-keydown="$event.keyCode === 13 && action()"></textarea>
     </div>
-
 </div>

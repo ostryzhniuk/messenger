@@ -13,7 +13,7 @@ component('home', {
                 if (isAuthority('ROLE_ANONYMOUS')) {
                     window.location.replace('#!/hello');
                 } else {
-                    window.location.replace('#!/id' + $rootScope.user.id);
+                    window.location.replace('#!/messages');
                 }
             });
 

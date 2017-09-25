@@ -59,3 +59,16 @@ footer {
     color: white;
     margin-left: 50px;
 }
+
+
+
+#chat-list-container {
+
+}
+#contact-panel {
+    height: 60px;
+    border: 1px solid;
+    margin-bottom: 1px;
+    width: 100%;
+    cursor: pointer;
+}

@@ -1,5 +1,18 @@
+#panel-body {
+    border: 1px solid;
+    height: 89%;
+    position: relative;
+    padding: 0px;
+}
+#profile-wrapper {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    width: 100%;
+    margin-left: 0px;
+}
 #username-container {
-    margin-left: 50px;
+    margin-left: 20px;
 }
 #photo-container {
     margin-top: 10px;

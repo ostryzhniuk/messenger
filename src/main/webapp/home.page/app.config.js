@@ -44,6 +44,6 @@ config(['$locationProvider' ,'$routeProvider', '$qProvider',
         .when('/messages/:chatId', {
             template: '<chat></chat>'
         })
-        // .otherwise('/home');
+        .otherwise('/home');
     }
 ]);

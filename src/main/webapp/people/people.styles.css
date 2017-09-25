@@ -1,3 +1,16 @@
+#panel-body {
+    border: 1px solid;
+    height: 89%;
+    position: relative;
+    padding: 0px;
+}
+#people-container {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    width: 100%;
+    margin-left: 0px;
+}
 #photo {
     height: 80px;
     width: 80px;
