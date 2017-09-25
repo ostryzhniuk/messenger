@@ -25,3 +25,7 @@ textarea {
     top: 0px;
     width: 100%
 }
+#not-selected-chat-message {
+    text-align: center;
+    margin-top: 20%;
+}

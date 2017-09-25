@@ -11,29 +11,22 @@ component('chat', {
 
             var stompClient = $rootScope.stompClient;
 
-            $http.get('/chats').then(function(response) {
-                $scope.chats = response.data;
-                configureStompClient();
+            $scope.isSelectedChat = false;
 
-                determineChatId();
-                loadChat($scope.chatId);
-            });
-            
-            function determineChatId() {
-                if ($routeParams.chatId == undefined) {
-                    if ($scope.chats.length != 0) {
-                        window.location.replace('#!/messages/' + $scope.chats[0].id);
-                    }
-                } else {
+            configureStompClient();
+            loadChat();
+
+            function loadChat() {
+
+                if ($routeParams.chatId != undefined) {
                     $scope.chatId = $routeParams.chatId;
-                }
-            }
+                    $scope.isSelectedChat = true;
 
-            function loadChat(chatId) {
-                $http.get('/messages/' + chatId).then(function(response) {
-                    $scope.messages = response.data;
-                    scrollToBottom();
-                });
+                    $http.get('/messages/' + $scope.chatId).then(function(response) {
+                        $scope.messages = response.data;
+                        scrollToBottom();
+                    });
+                }
             }
 
             function scrollToBottom() {

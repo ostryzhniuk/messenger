@@ -3,19 +3,25 @@
 </head>
 
 <div class="col-md-9" id="panel-body">
-    <div id="messages-container">
-        <div class="list-group" ng-repeat="message in messages">
-            <div class="list-group-item">
+    <div ng-if="isSelectedChat">
+        <div id="messages-container">
+            <div class="list-group" ng-repeat="message in messages">
+                <div class="list-group-item">
 
-                {{message.user.firstName}} {{message.user.lastName}}:
-                <p>{{message.body}}</p>
+                    {{message.user.firstName}} {{message.user.lastName}}:
+                    <p>{{message.body}}</p>
 
+                </div>
             </div>
+        </div>
+
+        <div id="textarea-container">
+                    <textarea id="message-textarea" ng-model="newMessage" placeholder="Input message"
+                              ng-keydown="$event.keyCode === 13 && action()"></textarea>
         </div>
     </div>
 
-    <div id="textarea-container">
-                <textarea id="message-textarea" ng-model="newMessage" placeholder="Input message"
-                          ng-keydown="$event.keyCode === 13 && action()"></textarea>
+    <div id="not-selected-chat-message" ng-if="!isSelectedChat">
+        Please select a chat to start messaging
     </div>
 </div>
