@@ -46,7 +46,14 @@ public class ChatService {
     public List<ChatDTO> getChats() {
 
         Integer currentUserId = userService.getCurrentUserId();
-        return convertToChatDTOList(chatDAO.getChats(currentUserId));
+        List<ChatDTO> chatDTOList = convertToChatDTOList(chatDAO.getChats(currentUserId));
+        chatDTOList.forEach(chatDTO ->
+            chatDTO.setUnreadMessages(
+                            messageDAO.getUnreadMessages(
+                                    chatDTO.getId(),
+                                    userService.getCurrentUserId()))
+        );
+        return chatDTOList;
     }
 
     public List<ChatDTO> convertToChatDTOList(List<Chat> chatList) {

@@ -39,4 +39,22 @@ public class MessageDAO extends GenericDAO<Message> {
 
         return query.getResultList();
     }
+
+    public Long getUnreadMessages(Integer chatId, Integer userId) {
+        Query<Long> query = getSession().createQuery("select count(m) " +
+                "from Chat c, Message m " +
+                "where c.id = :chatId and " +
+                "c.id = m.chat.id and " +
+                "m.user.id != :userId and " +
+                "m.time > " +
+                "   (select uc.lastVisit " +
+                "   from UserChat uc " +
+                "   where uc.chat.id = :chatId and " +
+                "   uc.user.id = :userId)");
+
+        query.setParameter("chatId", chatId);
+        query.setParameter("userId", userId);
+
+        return query.getSingleResult();
+    }
 }
