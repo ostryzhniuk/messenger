@@ -76,7 +76,7 @@ public class UserService {
 
     @Transactional
     public User getUser(Integer userId) {
-        return userDAO.getUser(userId);
+        return userDAO.get(userId);
     }
 
     @Transactional
@@ -90,7 +90,7 @@ public class UserService {
 
     @Transactional
     public UserDTO getUser(String email){
-        return UserDTO.convertToDTO(userDAO.getUser(email));
+        return UserDTO.convertToDTO(userDAO.get(email));
     }
 
     @Transactional
@@ -100,7 +100,7 @@ public class UserService {
 
     @Transactional
     public List<UserDTO> getUsers() {
-        List<UserDTO> userDTOList = convertToDTOList(userDAO.getObjects());
+        List<UserDTO> userDTOList = convertToDTOList(userDAO.getUsers());
         userDTOList.forEach(userDTO -> userDTO.setPhoto(loadPhoto(userDTO.getId())));
         return userDTOList;
     }

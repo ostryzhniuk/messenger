@@ -17,18 +17,23 @@ public class MessageDAO extends GenericDAO<Message> {
     }
 
     @Override
-    public List<Message> getObjects() {
-        return null;
+    public Message get(Integer messageId) {
+        Query<Message> query = getSession().createQuery("from Message m " +
+                "where m.id = :messageId");
+
+        query.setParameter("messageId", messageId);
+
+        return query.getSingleResult();
     }
 
     @Override
-    public void update(Message value) {
-
+    public void update(Message message) {
+        getSession().update(message);
     }
 
     @Override
-    public void delete(Message value) {
-
+    public void delete(Message message) {
+        getSession().delete(message);
     }
 
     public List<Message> getMessages(Integer chatId) {
@@ -47,10 +52,11 @@ public class MessageDAO extends GenericDAO<Message> {
                 "c.id = m.chat.id and " +
                 "m.user.id != :userId and " +
                 "m.time > " +
-                "   (select uc.lastVisit " +
-                "   from UserChat uc " +
+                "   (select m.time " +
+                "   from UserChat uc, Message m " +
                 "   where uc.chat.id = :chatId and " +
-                "   uc.user.id = :userId)");
+                "   uc.user.id = :userId and " +
+                "   uc.lastMessage.id = m.id)");
 
         query.setParameter("chatId", chatId);
         query.setParameter("userId", userId);

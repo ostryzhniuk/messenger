@@ -2,7 +2,7 @@
 
 angular
 .module('messengerApp')
-.controller('navbarCtrl', function ($http, $scope, $rootScope, $uibModal) {
+.controller('navbarCtrl', function ($http, $scope, $rootScope, $routeParams) {
 
     $http.get('/currentUser').then(function(response) {
         $rootScope.user = response.data;
@@ -11,6 +11,7 @@ angular
 
     $http.get('/chats').then(function(response) {
         $scope.chats = response.data;
+        console.log('$routeParams.chatId: ' + $routeParams.chatId);
     });
 
     $rootScope.isAuthority = function (role) {
@@ -50,14 +51,26 @@ angular
             setConnected(true);
             setTimeout(function() {
                 $rootScope.stompClient.subscribe('/user/queue/reply', function (message) {
-                    console.log('yes!');
+
+                    var parsedMessage = JSON.parse(message.body);
+
+                    if (window.location.href.indexOf('/messages/' + parsedMessage.chat.id) == -1) {
+                        $scope.chats.forEach(function(chat) {
+                            if (chat.id == parsedMessage.chat.id) {
+                                $http.get('/unreadMessages/count/' + chat.id).then(function(response) {
+                                    chat.unreadMessages = response.data;
+                                });
+                            }
+                        });
+                    }
                 });
             }, 500);
         });
     }
 
-    $scope.openChat = function (chatId) {
-        window.location.replace('#!/messages/' + chatId);
+    $scope.openChat = function (chat) {
+        window.location.replace('#!/messages/' + chat.id);
+        chat.unreadMessages = 0;
     }
 
     $scope.myProfile = function () {

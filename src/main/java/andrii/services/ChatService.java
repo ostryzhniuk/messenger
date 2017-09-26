@@ -38,7 +38,7 @@ public class ChatService {
     public Integer getChatId(Integer interlocutorId) {
 
         Integer currentUserId = userService.getCurrentUserId();
-        Chat chat = chatDAO.getChat(currentUserId, interlocutorId);
+        Chat chat = chatDAO.get(currentUserId, interlocutorId);
         return chat == null ? -1 : chat.getId();
     }
 
@@ -85,7 +85,7 @@ public class ChatService {
                 .MessageBuilder(
                     user,
                     messageParameters.getBody(),
-                    chatDAO.getChat(messageParameters.getChatId()))
+                    chatDAO.get(messageParameters.getChatId()))
                 .build();
 
         messageDAO.save(message);
@@ -94,15 +94,22 @@ public class ChatService {
     }
 
     @Transactional
-    public void updateLastChatVisit(Integer chatId) {
+    public void updateLastReadMessage(Integer messageId) {
 
-        LocalDateTime dateTime = LocalDateTime.now();
+        Message message = messageDAO.get(messageId);
         UserChat userChat = userChatDAO
-                .getUserChat(
-                        chatId,
+                .get(
+                        message.getChat().getId(),
                         userService.getCurrentUserId());
 
-        userChat.setLastVisit(dateTime);
+        userChat.setLastMessage(message);
         userChatDAO.update(userChat);
+    }
+
+    @Transactional
+    public Long getCountUnreadMessages(Integer chatId) {
+        return messageDAO.getUnreadMessages(
+                chatId,
+                userService.getCurrentUserId());
     }
 }

@@ -41,9 +41,9 @@ public class ChatController {
         return chatService.getMessages(chatId);
     }
 
-    @PutMapping("/chat/lastVisit/update")
-    public void updateChatLastVisit(@RequestBody Integer chatId) {
-        chatService.updateLastChatVisit(chatId);
+    @PutMapping("/message/last")
+    public void updateChatLastVisit(@RequestBody Integer messageId) {
+        chatService.updateLastReadMessage(messageId);
     }
 
     @MessageMapping("/message")
@@ -65,6 +65,11 @@ public class ChatController {
                     authentication.getName(),
                     "/queue/return",
                     messageDTO);
+    }
+
+    @GetMapping("/unreadMessages/count/{chatId}")
+    public Long getCountUnreadMessages(@PathVariable("chatId") Integer chatId) {
+        return chatService.getCountUnreadMessages(chatId);
     }
 
 }

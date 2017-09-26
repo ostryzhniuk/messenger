@@ -6,38 +6,29 @@ angular.
 module('chat').
 component('chat', {
     templateUrl: '/chat/chat.template.html',
-    controller: ['$http', '$scope', '$routeParams', '$rootScope',
-        function ChatController ($http, $scope, $routeParams, $rootScope) {
+    controller: ['$http', '$scope', '$routeParams', '$rootScope', '$location',
+        function ChatController ($http, $scope, $routeParams, $rootScope, $location) {
 
             var stompClient = $rootScope.stompClient;
 
             $scope.isSelectedChat = false;
             $scope.model = {};
             $scope.model.newMessage = '';
+            var chatId;
 
             configureStompClient();
             loadChat();
-            onDestroy();
-
-            function onDestroy() {
-                $scope.$on('$destroy', function(){
-                    $http({
-                        method: 'PUT',
-                        url: '/chat/lastVisit/update',
-                        data: $scope.chatId
-                    });
-                });
-            }
 
             function loadChat() {
 
                 if ($routeParams.chatId != undefined) {
-                    $scope.chatId = $routeParams.chatId;
+                    chatId = $routeParams.chatId;
                     $scope.isSelectedChat = true;
 
-                    $http.get('/messages/' + $scope.chatId).then(function(response) {
+                    $http.get('/messages/' + chatId).then(function(response) {
                         $scope.messages = response.data;
                         scrollToBottom();
+                        updateLastReadMessage($scope.messages[$scope.messages.length - 1]);
                     });
                 }
             }
@@ -65,16 +56,32 @@ component('chat', {
             $scope.sendMessage = function () {
                 var newMessage = $scope.model.newMessage;
                 if (newMessage != undefined && newMessage != '' && newMessage != '\n') {
-                    var message = JSON.stringify({chatId : $scope.chatId, body : newMessage});
+                    var message = JSON.stringify({chatId : chatId, body : newMessage});
                     stompClient.send("/app/message", {}, message);
                 }
             }
 
             function showMessage(message) {
-                $scope.messages.push(JSON.parse(message));
-                $scope.model.newMessage = '';
-                $scope.$apply();
-                scrollToBottom();
+                var parsedMessage = JSON.parse(message);
+
+                if (parsedMessage.chat.id == chatId) {
+                    $scope.messages.push(parsedMessage);
+                    $scope.model.newMessage = '';
+                    $scope.$apply();
+                    scrollToBottom();
+
+                    updateLastReadMessage(parsedMessage);
+                }
+            }
+
+            function updateLastReadMessage(message) {
+                if (window.location.href.indexOf('/messages/' + message.chat.id) != -1) {
+                    $http({
+                        method: 'PUT',
+                        url: '/message/last',
+                        data: message.id
+                    });
+                }
             }
         }
     ]

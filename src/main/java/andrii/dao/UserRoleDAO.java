@@ -15,7 +15,7 @@ public class UserRoleDAO extends GenericDAO<UserRole> {
     }
 
     @Override
-    public List<UserRole> getObjects() {
+    public UserRole get(Integer userRoleId) {
         throw new UnsupportedOperationException();
     }
 

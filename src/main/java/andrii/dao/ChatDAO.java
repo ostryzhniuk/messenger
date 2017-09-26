@@ -15,35 +15,30 @@ public class ChatDAO extends GenericDAO<Chat> {
 
     @Override
     public void save(Chat chat) {
-
+        getSession().save(chat);
     }
 
     @Override
-    public List<Chat> getObjects() {
-        return null;
+    public Chat get(Integer chatId) {
+        Query<Chat> query = getSession().createQuery("from Chat " +
+                "where id = :chatId");
+
+        query.setParameter("chatId", chatId);
+
+        return query.getSingleResult();
     }
 
-    @Override
-    public void update(Chat chat) {
-
-    }
-
-    @Override
-    public void delete(Chat chat) {
-
-    }
-
-    public Chat getChat(Integer userId1, Integer userId2) {
+    public Chat get(Integer userId1, Integer userId2) {
         Query<Chat> query = getSession().createQuery("select c " +
                 "from Chat c " +
                 "where c.id in " +
-                    "(select uc.chat.id " +
-                    "from UserChat uc " +
-                    "where uc.user.id = :userId1) and " +
-                    "c.id in " +
-                    "(select uc.chat.id " +
-                    "from UserChat uc " +
-                    "where uc.user.id = :userId2)");
+                "(select uc.chat.id " +
+                "from UserChat uc " +
+                "where uc.user.id = :userId1) and " +
+                "c.id in " +
+                "(select uc.chat.id " +
+                "from UserChat uc " +
+                "where uc.user.id = :userId2)");
 
 
         query.setParameter("userId1", userId1);
@@ -54,18 +49,19 @@ public class ChatDAO extends GenericDAO<Chat> {
         try {
             chat = query.getSingleResult();
         } catch (NoResultException e) {
-           return null;
+            return null;
         }
         return chat;
     }
 
-    public Chat getChat(Integer chatId) {
-        Query<Chat> query = getSession().createQuery("from Chat " +
-                "where id = :chatId");
+    @Override
+    public void update(Chat chat) {
+        getSession().update(chat);
+    }
 
-        query.setParameter("chatId", chatId);
-
-        return query.getSingleResult();
+    @Override
+    public void delete(Chat chat) {
+        getSession().delete(chat);
     }
 
     public List<Chat> getChats(Integer userId) {

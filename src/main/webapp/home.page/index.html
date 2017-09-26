@@ -86,7 +86,7 @@
 
         <div class="col-md-3" id="chat-list-container" ng-if="!isAuthority('ROLE_ANONYMOUS')">
             <div ng-repeat="chat in chats">
-                <div ng-click="openChat(chat.id)" id="contact-panel">
+                <div ng-click="openChat(chat)" id="contact-panel">
                     {{chat.id}} ({{chat.unreadMessages}})
                 </div>
             </div>

@@ -21,9 +21,9 @@ public class UserChat {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Column
-    @JsonIgnore
-    private LocalDateTime lastVisit;
+    @ManyToOne
+    @JoinColumn(name = "lastMessage_id")
+    private Message lastMessage;
 
     public Integer getId() {
         return id;
@@ -49,11 +49,11 @@ public class UserChat {
         this.user = user;
     }
 
-    public LocalDateTime getLastVisit() {
-        return lastVisit;
+    public Message getLastMessage() {
+        return lastMessage;
     }
 
-    public void setLastVisit(LocalDateTime lastVisit) {
-        this.lastVisit = lastVisit;
+    public void setLastMessage(Message lastMessage) {
+        this.lastMessage = lastMessage;
     }
 }

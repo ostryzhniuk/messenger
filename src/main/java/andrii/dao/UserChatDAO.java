@@ -12,25 +12,15 @@ public class UserChatDAO extends GenericDAO<UserChat> {
 
     @Override
     public void save(UserChat userChat) {
-
+        getSession().save(userChat);
     }
 
     @Override
-    public List<UserChat> getObjects() {
-        return null;
+    public UserChat get(Integer userChatId) {
+        throw new UnsupportedOperationException();
     }
 
-    @Override
-    public void update(UserChat userChat) {
-        getSession().update(userChat);
-    }
-
-    @Override
-    public void delete(UserChat userChat) {
-
-    }
-
-    public UserChat getUserChat(Integer chatId, Integer userId) {
+    public UserChat get(Integer chatId, Integer userId) {
         Query<UserChat> query = getSession().createQuery( "from UserChat us " +
                 "where us.chat.id = :chatId and " +
                 "us.user.id = :userId");
@@ -40,4 +30,15 @@ public class UserChatDAO extends GenericDAO<UserChat> {
 
         return query.getSingleResult();
     }
+
+    @Override
+    public void update(UserChat userChat) {
+        getSession().update(userChat);
+    }
+
+    @Override
+    public void delete(UserChat userChat) {
+        getSession().delete(userChat);
+    }
+
 }

@@ -17,7 +17,21 @@ public class UserDAO extends GenericDAO<User> {
     }
 
     @Override
-    public List<User> getObjects() {
+    public User get(Integer userId) {
+        Query<User> query = getSession().createQuery("from User " +
+                "where id = :userId");
+        query.setParameter("userId", userId);
+        return query.getSingleResult();
+    }
+
+    public User get(String email){
+        Query<User> query = getSession().createQuery("from User " +
+                "where email = :email");
+        query.setParameter("email", email);
+        return query.getSingleResult();
+    }
+
+    public List<User> getUsers() {
         return getSession().createQuery("from User")
                 .list();
     }
@@ -30,20 +44,6 @@ public class UserDAO extends GenericDAO<User> {
     @Override
     public void delete(User user) {
         getSession().delete(user);
-    }
-
-    public User getUser(Integer userId) {
-        Query<User> query = getSession().createQuery("from User " +
-                "where id = :userId");
-        query.setParameter("userId", userId);
-        return query.getSingleResult();
-    }
-
-    public User getUser(String email){
-        Query<User> query = getSession().createQuery("from User " +
-                "where email = :email");
-        query.setParameter("email", email);
-        return query.getSingleResult();
     }
 
     public List<User> getChatParticipants(Integer chatId, Integer currentUserId){

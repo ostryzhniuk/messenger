@@ -19,7 +19,7 @@ public abstract class GenericDAO<E> {
 
     public abstract void save(E value);
 
-    public abstract List<E> getObjects();
+    public abstract E get(Integer id);
 
     public abstract void update(E value);
 
