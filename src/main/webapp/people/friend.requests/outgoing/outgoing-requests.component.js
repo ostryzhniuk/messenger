@@ -9,20 +9,13 @@ component('outgoingRequests', {
     controller: ['$http', '$scope',
         function IncomingRequestsController($http, $scope) {
 
-            /*loadNewRequests();
-            loadRejectedRequests();
+            loadOutgoingRequests();
 
-            function loadNewRequests() {
-                $http.get('/friend-requests/incoming/not-reviewed').then(function(response) {
-                    $scope.newRequests = response.data;
+            function loadOutgoingRequests() {
+                $http.get('/friend-requests/outgoing').then(function(response) {
+                    $scope.outgoingRequests = response.data;
                 });
             };
-
-            function loadRejectedRequests() {
-                $http.get('/friend-requests/incoming/rejected').then(function(response) {
-                    $scope.rejectedRequests = response.data;
-                });
-            };*/
 
         }
     ]

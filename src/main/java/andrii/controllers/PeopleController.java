@@ -33,6 +33,11 @@ public class PeopleController {
         return friendshipService.getFriendRequests(UserFriendship.Status.REJECTED);
     }
 
+    @GetMapping("/friend-requests/outgoing")
+    public List<UserDTO> getOutgoingFriendRequests() {
+        return friendshipService.getFriendRequests(UserFriendship.Status.REQUESTED);
+    }
+
     @GetMapping("/user/{userId}")
     public UserDTO getUserById(@PathVariable("userId") String userId,
                                @RequestParam(value= "loadImage", defaultValue = "false") boolean loadImage){
