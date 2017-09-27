@@ -11,7 +11,8 @@ angular.module('messengerApp', [
     'allUsers',
     'chat',
     'incomingRequests',
-    'outgoingRequests'
+    'outgoingRequests',
+    'friends'
 
 ]);
 
@@ -46,6 +47,9 @@ config(['$locationProvider' ,'$routeProvider', '$qProvider',
         })
         .when('/messages/:chatId', {
             template: '<chat></chat>'
+        })
+        .when('/friends', {
+            template: '<friends></friends>'
         })
         .when('/friends/requests/incoming', {
             template: '<incoming-requests></incoming-requests>'

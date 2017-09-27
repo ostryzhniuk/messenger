@@ -44,6 +44,10 @@ component('profile', {
 
             $scope.openFriendRequests = function () {
                 window.location.replace('#!/friends/requests/incoming');
+            }
+
+            $scope.openFriends = function () {
+                window.location.replace('#!/friends');
             };
 
         }

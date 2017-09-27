@@ -15,8 +15,13 @@
     height: 80px;
     width: 80px;
 }
+#confirm-button {
+    margin-top: 14%;
+    width: 80px;
+}
 #remove-button {
     margin-top: 14%;
+    margin-left: 1px;
 }
 .list-group-item {
     border-radius: 1px;
@@ -44,9 +49,9 @@
     color: #428bca;
 }
 .right-container {
-    right: 1%;
+    right: 3%;
     position: absolute;
-    width: 160px;
+    width: 180px;
 }
 #top-line-container {
     margin-top: 15px;
@@ -56,11 +61,4 @@ hr {
     border: 1px solid;
     margin-top: 5px;
     color: gray;
-}
-#incomingRequests {
-    position: absolute;
-    right: 1%;
-    margin-right: 20px;
-    font-size: 15px;
-    text-decoration: none;
 }

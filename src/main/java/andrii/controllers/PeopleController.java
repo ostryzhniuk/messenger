@@ -38,6 +38,11 @@ public class PeopleController {
         return friendshipService.getFriendRequests(UserFriendship.Status.REQUESTED);
     }
 
+    @GetMapping("/friends")
+    public List<UserDTO> getFriends() {
+        return friendshipService.getFriendRequests(UserFriendship.Status.FRIENDS);
+    }
+
     @GetMapping("/user/{userId}")
     public UserDTO getUserById(@PathVariable("userId") String userId,
                                @RequestParam(value= "loadImage", defaultValue = "false") boolean loadImage){

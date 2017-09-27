@@ -7,7 +7,7 @@ module('outgoingRequests').
 component('outgoingRequests', {
     templateUrl: '/people/friend.requests/outgoing/outgoing-requests.template.html',
     controller: ['$http', '$scope',
-        function IncomingRequestsController($http, $scope) {
+        function OutgoingRequestsController($http, $scope) {
 
             loadOutgoingRequests();
 

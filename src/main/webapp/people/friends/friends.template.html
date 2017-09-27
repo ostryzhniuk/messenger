@@ -1,0 +1,45 @@
+<head>
+    <link rel="stylesheet" href="/people/friends/friends.styles.css"/>
+</head>
+
+<div class="col-md-9" id="panel-body">
+    <div class="row" id="people-container">
+
+        <div id="top-line-container">
+            FRIENDS
+            <hr>
+        </div>
+
+        <div class="list-group" ng-repeat="person in friends">
+            <div class="list-group-item" id="list-group-item">
+
+                <div class="left-container">
+                    <a href="#!/id{{person.id}}">
+                        <img ng-src="data:image/jpeg;base64,{{person.photo}}" class="photo">
+                    </a>
+                </div>
+
+                <div class="center-container">
+                    <div class="name-container">
+                        <a href="#!/id{{person.id}}">
+                            {{person.firstName}} {{person.lastName}}
+                        </a>
+                    </div>
+                </div>
+
+                <div class="right-container">
+                    <button id="confirm-button" type="button" class="btn btn-primary btn-sm"
+                            ng-click="confirm(person.id)">
+                        <span class="glyphicon glyphicon-envelope"></span> Chat
+                    </button>
+                    <button id="remove-button" type="button" class="btn btn-default btn-sm"
+                            ng-click="remove(person.id)">
+                        <span class="glyphicon glyphicon-remove"></span> Remove
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
