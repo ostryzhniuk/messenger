@@ -10,7 +10,8 @@ angular.module('messengerApp', [
     'profile',
     'allUsers',
     'chat',
-    'incomingRequests'
+    'incomingRequests',
+    'outgoingRequests'
 
 ]);
 
@@ -48,6 +49,9 @@ config(['$locationProvider' ,'$routeProvider', '$qProvider',
         })
         .when('/friends/requests/incoming', {
             template: '<incoming-requests></incoming-requests>'
+        })
+        .when('/friends/requests/outgoing', {
+            template: '<outgoing-requests></outgoing-requests>'
         })
         .otherwise('/home');
     }

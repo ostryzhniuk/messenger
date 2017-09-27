@@ -5,9 +5,12 @@
 <div class="col-md-9" id="panel-body">
     <div class="row" id="people-container">
 
-        <div style="text-align: center; margin-top: 15px;">
+        <div id="top-line-container">
             NEW REQUESTS
-            <hr style="border: 1px solid; margin-top: 5px; color: gray;">
+            <a href="#!/friends/requests/outgoing" id="outgoingRequests" type="button">
+                Outgoing requests
+            </a>
+            <hr>
         </div>
 
         <div class="list-group" ng-repeat="person in newRequests">
@@ -41,9 +44,9 @@
             </div>
         </div>
 
-        <div style="text-align: center; margin-top: 30px;">
+        <div id="bottom-line-container">
             REJECTED REQUESTS
-            <hr style="border: 1px solid; margin-top: 5px; color: gray;">
+            <hr>
         </div>
 
         <div class="list-group" ng-repeat="person in rejectedRequests">

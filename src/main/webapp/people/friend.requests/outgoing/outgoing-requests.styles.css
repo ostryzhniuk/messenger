@@ -15,12 +15,8 @@
     height: 80px;
     width: 80px;
 }
-.confirm-button {
-    margin-top: 14%;
-}
 #reject-button {
     margin-top: 14%;
-    margin-left: 1px;
 }
 .list-group-item {
     border-radius: 1px;
@@ -50,14 +46,10 @@
 .right-container {
     right: 1%;
     position: absolute;
-    width: 180px;
+    width: 160px;
 }
 #top-line-container {
     margin-top: 15px;
-    text-align: center;
-}
-#bottom-line-container {
-    margin-top: 30px;
     text-align: center;
 }
 hr {
@@ -65,7 +57,7 @@ hr {
     margin-top: 5px;
     color: gray;
 }
-#outgoingRequests {
+#incomingRequests {
     position: absolute;
     right: 1%;
     margin-right: 20px;
