@@ -1,6 +1,7 @@
 package andrii.controllers;
 
 import andrii.dto.UserDTO;
+import andrii.entities.UserFriendship;
 import andrii.services.FriendshipService;
 import andrii.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,12 @@ public class PeopleController {
 
     @GetMapping("/friend-requests/incoming/not-reviewed")
     public List<UserDTO> getNotReviewedFriendRequests() {
-        return friendshipService.getNotReviewedFriendRequests();
+        return friendshipService.getFriendRequests(UserFriendship.Status.NOT_REVIEWED);
+    }
+
+    @GetMapping("/friend-requests/incoming/rejected")
+    public List<UserDTO> getRejectedFriendRequests() {
+        return friendshipService.getFriendRequests(UserFriendship.Status.REJECTED);
     }
 
     @GetMapping("/user/{userId}")

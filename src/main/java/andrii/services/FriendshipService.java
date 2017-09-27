@@ -50,11 +50,11 @@ public class FriendshipService {
     }
 
     @Transactional
-    public List<UserDTO> getNotReviewedFriendRequests() {
+    public List<UserDTO> getFriendRequests(UserFriendship.Status status) {
 
         List<User> userList = userDAO.getFriendRequests(
                 userService.getCurrentUserId(),
-                UserFriendship.Status.NOT_REVIEWED);
+                status);
 
         List<UserDTO> userDTOList = userService.convertToDTOList(userList);
         userDTOList

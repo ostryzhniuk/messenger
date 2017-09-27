@@ -4,31 +4,69 @@
 
 <div class="col-md-9" id="panel-body">
     <div class="row" id="people-container">
-        <div class="list-group" id="list-group" ng-repeat="person in people">
+
+        <div style="text-align: center; margin-top: 15px;">
+            NEW REQUESTS
+            <hr style="border: 1px solid; margin-top: 5px; color: gray;">
+        </div>
+
+        <div class="list-group" ng-repeat="person in newRequests">
             <div class="list-group-item" id="list-group-item">
 
-                <div id="left-container">
+                <div class="left-container">
                     <a href="#!/id{{person.id}}">
-                        <img ng-src="data:image/jpeg;base64,{{person.photo}}" id="photo">
+                        <img ng-src="data:image/jpeg;base64,{{person.photo}}" class="photo">
                     </a>
                 </div>
 
-                <div id="center-container">
-                    <div id="name-container">
+                <div class="center-container">
+                    <div class="name-container">
                         <a href="#!/id{{person.id}}">
                             {{person.firstName}} {{person.lastName}}
                         </a>
                     </div>
                 </div>
 
-                <div id="right-container">
-                    <button id="confirm-button" type="button" class="btn btn-primary btn-sm"
+                <div class="right-container">
+                    <button type="button" class="btn btn-primary btn-sm confirm-button"
                             ng-click="confirm(person.id)">
                         <span class="glyphicon glyphicon-user"></span> Confirm
                     </button>
                     <button id="reject-button" type="button" class="btn btn-default btn-sm"
                             ng-click="reject(person.id)">
                         <span class="glyphicon glyphicon-remove"></span> Reject
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px;">
+            REJECTED REQUESTS
+            <hr style="border: 1px solid; margin-top: 5px; color: gray;">
+        </div>
+
+        <div class="list-group" ng-repeat="person in rejectedRequests">
+            <div class="list-group-item">
+
+                <div class="left-container">
+                    <a href="#!/id{{person.id}}">
+                        <img ng-src="data:image/jpeg;base64,{{person.photo}}" class="photo">
+                    </a>
+                </div>
+
+                <div class="center-container">
+                    <div class="name-container">
+                        <a href="#!/id{{person.id}}">
+                            {{person.firstName}} {{person.lastName}}
+                        </a>
+                    </div>
+                </div>
+
+                <div class="right-container">
+                    <button type="button" class="btn btn-primary btn-sm confirm-button"
+                            ng-click="confirm(person.id)">
+                        <span class="glyphicon glyphicon-user"></span> Confirm
                     </button>
                 </div>
 
