@@ -19,7 +19,12 @@ public class UserFriendship {
     private User user;
 
     public enum Status {
-        FRIENDS, SUBSCRIBER, NOT_REVIEWED, REJECTED
+        FRIENDS, REQUESTED, NOT_REVIEWED, REJECTED;
+
+        @Override
+        public String toString() {
+            return this.toString();
+        }
     }
 
     @Column(nullable = false)
@@ -37,8 +42,8 @@ public class UserFriendship {
             this.user = user;
         }
 
-        public UserFriendship buildSubscriber() {
-            status = Status.SUBSCRIBER;
+        public UserFriendship buildRequested() {
+            status = Status.REQUESTED;
             return new UserFriendship(this);
         }
 

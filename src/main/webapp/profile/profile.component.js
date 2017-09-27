@@ -42,6 +42,10 @@ component('profile', {
                 window.location.replace('#!/messages/');
             };
 
+            $scope.openFriendRequests = function () {
+                window.location.replace('#!/friends/requests/incoming');
+            };
+
         }
     ]
 });

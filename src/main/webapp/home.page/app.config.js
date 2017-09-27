@@ -8,8 +8,10 @@ angular.module('messengerApp', [
     'signUp',
     'login',
     'profile',
-    'people',
-    'chat'
+    'allUsers',
+    'chat',
+    'incomingRequests'
+
 ]);
 
 angular.
@@ -35,14 +37,17 @@ config(['$locationProvider' ,'$routeProvider', '$qProvider',
         .when('/id:userId', {
             template: '<profile></profile>'
         })
-        .when('/people', {
-            template: '<people></people>'
+        .when('/all-users', {
+            template: '<all-users></all-users>'
         })
         .when('/messages', {
             template: '<chat></chat>'
         })
         .when('/messages/:chatId', {
             template: '<chat></chat>'
+        })
+        .when('/friends/requests/incoming', {
+            template: '<incoming-requests></incoming-requests>'
         })
         .otherwise('/home');
     }

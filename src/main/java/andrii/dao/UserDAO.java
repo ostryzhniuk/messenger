@@ -1,6 +1,7 @@
 package andrii.dao;
 
 import andrii.entities.User;
+import andrii.entities.UserFriendship;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -56,6 +57,25 @@ public class UserDAO extends GenericDAO<User> {
 
         query.setParameter("chatId", chatId);
         query.setParameter("currentUserId", currentUserId);
+        return query.getResultList();
+    }
+
+    public List<User> getFriendRequests(Integer userId, UserFriendship.Status status) {
+        Query<User> query = getSession().createQuery("select u " +
+                "from User u, UserFriendship uf, Friendship f " +
+                "where u.id != :userId and " +
+                "u.id = uf.user.id and " +
+                "uf.friendship.id = f.id and " +
+                "f.id in " +
+                "   (select f.id " +
+                "   from User u, UserFriendship uf, Friendship f " +
+                "   where u.id = :userId and " +
+                "   u.id = uf.user.id and " +
+                "   uf.status = :status and " +
+                "   uf.friendship.id = f.id)");
+
+        query.setParameter("userId", userId);
+        query.setParameter("status", status);
         return query.getResultList();
     }
 

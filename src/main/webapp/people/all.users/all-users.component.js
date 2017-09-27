@@ -1,15 +1,15 @@
 'use strict';
 
-angular.module('people', []);
+angular.module('allUsers', []);
 
 angular.
-module('people').
-component('people', {
-    templateUrl: '/people/people.template.html',
+module('allUsers').
+component('allUsers', {
+    templateUrl: '/people/all.users/all-users.template.html',
     controller: ['$http', '$scope',
-        function PeopleController($http, $scope) {
+        function AllUsersController($http, $scope) {
 
-            $http.get('/people').then(function(response) {
+            $http.get('/all-users').then(function(response) {
                 $scope.people = response.data;
             });
 
@@ -17,7 +17,7 @@ component('people', {
 
                 $http({
                     method: 'POST',
-                    url: '/friendship/query',
+                    url: '/friend/request',
                     data: friendUserId
                 });
             }

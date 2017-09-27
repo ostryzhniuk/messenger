@@ -1,13 +1,17 @@
 package andrii.services;
 
 import andrii.dao.FriendshipDAO;
+import andrii.dao.UserDAO;
 import andrii.dao.UserFriendshipDAO;
+import andrii.dto.UserDTO;
 import andrii.entities.Friendship;
 import andrii.entities.User;
 import andrii.entities.UserFriendship;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class FriendshipService {
@@ -19,10 +23,13 @@ public class FriendshipService {
     private UserFriendshipDAO userFriendshipDAO;
 
     @Autowired
+    private UserDAO userDAO;
+
+    @Autowired
     private UserService userService;
 
     @Transactional
-    public void createFriendshipQuery(Integer friendUserId) {
+    public void createFriendRequest(Integer friendUserId) {
 
         User currentUser = userService.getUser(userService.getCurrentUserId());
         User friendUser = userService.getUser(friendUserId);
@@ -33,13 +40,28 @@ public class FriendshipService {
 
         UserFriendship friendshipCurrentUser = new UserFriendship
                 .UserFriendshipBuilder(friendship, currentUser)
-                .buildSubscriber();
+                .buildRequested();
         userFriendshipDAO.save(friendshipCurrentUser);
 
         UserFriendship friendshipFriendUser = new UserFriendship
                 .UserFriendshipBuilder(friendship, friendUser)
                 .buildNotReviewed();
         userFriendshipDAO.save(friendshipFriendUser);
+    }
+
+    @Transactional
+    public List<UserDTO> getNotReviewedFriendRequests() {
+
+        List<User> userList = userDAO.getFriendRequests(
+                userService.getCurrentUserId(),
+                UserFriendship.Status.NOT_REVIEWED);
+
+        List<UserDTO> userDTOList = userService.convertToDTOList(userList);
+        userDTOList
+                .forEach(userDTO ->
+                        userDTO.setPhoto(userService.loadPhoto(userDTO.getId())));
+
+        return userDTOList;
     }
 
 }

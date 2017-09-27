@@ -17,9 +17,14 @@ public class PeopleController {
     @Autowired
     private FriendshipService friendshipService;
 
-    @GetMapping("/people")
-    public List<UserDTO> people() {
+    @GetMapping("/all-users")
+    public List<UserDTO> getAllUsers() {
         return userService.getUsers();
+    }
+
+    @GetMapping("/friend-requests/incoming/not-reviewed")
+    public List<UserDTO> getNotReviewedFriendRequests() {
+        return friendshipService.getNotReviewedFriendRequests();
     }
 
     @GetMapping("/user/{userId}")
@@ -28,9 +33,9 @@ public class PeopleController {
         return userService.getUser(Integer.parseInt(userId), loadImage);
     }
 
-    @PostMapping("/friendship/query")
-    public void createFriendshipQuery(@RequestBody Integer friendUserId) {
-        friendshipService.createFriendshipQuery(friendUserId);
+    @PostMapping("/friend/request")
+    public void createFriendRequest(@RequestBody Integer friendUserId) {
+        friendshipService.createFriendRequest(friendUserId);
     }
 
 }
