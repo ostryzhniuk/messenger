@@ -18,13 +18,44 @@ public class UserFriendship {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    public enum Condition {
+    public enum Status {
         FRIENDS, SUBSCRIBER, NOT_REVIEWED, REJECTED
     }
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private Condition condition;
+    private Status status;
+
+    public static class UserFriendshipBuilder {
+
+        private Friendship friendship;
+        private User user;
+        private Status status;
+
+        public UserFriendshipBuilder(Friendship friendship, User user) {
+            this.friendship = friendship;
+            this.user = user;
+        }
+
+        public UserFriendship buildSubscriber() {
+            status = Status.SUBSCRIBER;
+            return new UserFriendship(this);
+        }
+
+        public UserFriendship buildNotReviewed() {
+            status = Status.NOT_REVIEWED;
+            return new UserFriendship(this);
+        }
+    }
+
+    public UserFriendship() {
+    }
+
+    public UserFriendship(UserFriendshipBuilder userFriendshipBuilder) {
+        this.friendship = userFriendshipBuilder.friendship;
+        this.user = userFriendshipBuilder.user;
+        this.status = userFriendshipBuilder.status;
+    }
 
     public Integer getId() {
         return id;
@@ -50,11 +81,11 @@ public class UserFriendship {
         this.user = user;
     }
 
-    public Condition getCondition() {
-        return condition;
+    public Status getStatus() {
+        return status;
     }
 
-    public void setCondition(Condition condition) {
-        this.condition = condition;
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }

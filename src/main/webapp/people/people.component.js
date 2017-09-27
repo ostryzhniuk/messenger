@@ -13,6 +13,15 @@ component('people', {
                 $scope.people = response.data;
             });
 
+            $scope.addFriend = function (friendUserId) {
+
+                $http({
+                    method: 'POST',
+                    url: '/friendship/query',
+                    data: friendUserId
+                });
+            }
+
         }
     ]
 });
