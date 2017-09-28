@@ -26,5 +26,8 @@
     margin-bottom: 20px;
 }
 .social-button {
-    width: 100px;
+    width: 150px;
+}
+#message-button {
+    width: 300px;
 }

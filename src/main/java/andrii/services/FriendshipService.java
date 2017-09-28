@@ -50,7 +50,7 @@ public class FriendshipService {
     }
 
     @Transactional
-    public List<UserDTO> getFriendRequests(UserFriendship.Status status) {
+    public List<UserDTO> getFriends(UserFriendship.Status status) {
 
         List<User> userList = userDAO.getFriendRequests(
                 userService.getCurrentUserId(),

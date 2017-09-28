@@ -7,11 +7,11 @@ angular
     $http.get('/currentUser').then(function(response) {
         $rootScope.user = response.data;
         connect();
+        loadFriendRequests();
     });
 
     $http.get('/chats').then(function(response) {
         $scope.chats = response.data;
-        console.log('$routeParams.chatId: ' + $routeParams.chatId);
     });
 
     $rootScope.isAuthority = function (role) {
@@ -64,7 +64,17 @@ angular
                         });
                     }
                 });
+
+                $rootScope.stompClient.subscribe('/user/queue/new-friend-request', function (message) {
+                    loadFriendRequests();
+                });
             }, 500);
+        });
+    }
+
+    function loadFriendRequests() {
+        $http.get('/friend-requests/incoming/not-reviewed').then(function(response) {
+            $rootScope.newFriendRequests = response.data.length;
         });
     }
 

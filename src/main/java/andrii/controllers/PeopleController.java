@@ -5,6 +5,7 @@ import andrii.entities.UserFriendship;
 import andrii.services.FriendshipService;
 import andrii.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +19,9 @@ public class PeopleController {
     @Autowired
     private FriendshipService friendshipService;
 
+    @Autowired
+    private SimpMessagingTemplate messagingTemplate;
+
     @GetMapping("/all-users")
     public List<UserDTO> getAllUsers() {
         return userService.getUsers();
@@ -25,22 +29,22 @@ public class PeopleController {
 
     @GetMapping("/friend-requests/incoming/not-reviewed")
     public List<UserDTO> getNotReviewedFriendRequests() {
-        return friendshipService.getFriendRequests(UserFriendship.Status.NOT_REVIEWED);
+        return friendshipService.getFriends(UserFriendship.Status.NOT_REVIEWED);
     }
 
     @GetMapping("/friend-requests/incoming/rejected")
     public List<UserDTO> getRejectedFriendRequests() {
-        return friendshipService.getFriendRequests(UserFriendship.Status.REJECTED);
+        return friendshipService.getFriends(UserFriendship.Status.REJECTED);
     }
 
     @GetMapping("/friend-requests/outgoing")
     public List<UserDTO> getOutgoingFriendRequests() {
-        return friendshipService.getFriendRequests(UserFriendship.Status.REQUESTED);
+        return friendshipService.getFriends(UserFriendship.Status.REQUESTED);
     }
 
     @GetMapping("/friends")
     public List<UserDTO> getFriends() {
-        return friendshipService.getFriendRequests(UserFriendship.Status.FRIENDS);
+        return friendshipService.getFriends(UserFriendship.Status.FRIENDS);
     }
 
     @GetMapping("/user/{userId}")
@@ -52,6 +56,11 @@ public class PeopleController {
     @PostMapping("/friend/request")
     public void createFriendRequest(@RequestBody Integer friendUserId) {
         friendshipService.createFriendRequest(friendUserId);
+        messagingTemplate
+                .convertAndSendToUser(
+                        userService.getUser(friendUserId).getEmail(),
+                        "/queue/new-friend-request",
+                        "new-friend-request");
     }
 
 }

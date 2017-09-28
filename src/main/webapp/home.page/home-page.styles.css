@@ -55,9 +55,15 @@ footer {
 #sign-up-button {
     color: white;
 }
-#find-friends {
+#find-friends-button {
     color: white;
     margin-left: 50px;
+}
+#friends-button {
+    color: white;
+}
+#friend-requests-button {
+    color: white;
 }
 
 
