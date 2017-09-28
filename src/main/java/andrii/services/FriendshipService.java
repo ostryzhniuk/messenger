@@ -37,15 +37,15 @@ public class FriendshipService {
         Friendship friendship = new Friendship();
         friendshipDAO.save(friendship);
 
-
         UserFriendship friendshipCurrentUser = new UserFriendship
                 .UserFriendshipBuilder(friendship, currentUser)
                 .buildRequested();
-        userFriendshipDAO.save(friendshipCurrentUser);
 
         UserFriendship friendshipFriendUser = new UserFriendship
                 .UserFriendshipBuilder(friendship, friendUser)
                 .buildNotReviewed();
+
+        userFriendshipDAO.save(friendshipCurrentUser);
         userFriendshipDAO.save(friendshipFriendUser);
     }
 
@@ -80,11 +80,28 @@ public class FriendshipService {
     @Transactional
     public void rejectFriendRequest(Integer friendUserId) {
         UserFriendship userFriendship =
-                userFriendshipDAO.getFriendshipOfCurrentUser(
+                userFriendshipDAO.getFriendshipOfUser(
                         userService.getCurrentUserId(),
                         friendUserId);
 
         userFriendship.setStatus(UserFriendship.Status.REJECTED);
         userFriendshipDAO.update(userFriendship);
+    }
+
+    @Transactional
+    public void removeFriend(Integer friendUserId) {
+        Integer currentUserId = userService.getCurrentUserId();
+
+        UserFriendship friendshipCurrentUser =
+                userFriendshipDAO.getFriendshipOfUser(currentUserId, friendUserId);
+
+        UserFriendship friendshipFriendUser =
+                userFriendshipDAO.getFriendshipOfUser(friendUserId, currentUserId);
+
+        friendshipCurrentUser.setStatus(UserFriendship.Status.REJECTED);
+        friendshipFriendUser.setStatus(UserFriendship.Status.REQUESTED);
+
+        userFriendshipDAO.update(friendshipCurrentUser);
+        userFriendshipDAO.update(friendshipFriendUser);
     }
 }

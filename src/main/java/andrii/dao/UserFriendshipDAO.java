@@ -42,11 +42,11 @@ public class UserFriendshipDAO extends GenericDAO<UserFriendship> {
         return query.getResultList();
     }
 
-    public UserFriendship getFriendshipOfCurrentUser(Integer currentUserId, Integer friendUserId) {
+    public UserFriendship getFriendshipOfUser(Integer userToRetrieveId, Integer friendUserId) {
         Query<UserFriendship> query = getSession().createQuery("select uf1 " +
                 "from User u1, UserFriendship uf1, Friendship f1, " +
                 "     User u2, UserFriendship uf2, Friendship f2 " +
-                "where u1.id = :currentUserId and " +
+                "where u1.id = :userToRetrieveId and " +
                 "u1.id = uf1.user.id and " +
                 "uf1.friendship.id = f1.id and " +
                 "f1.id = f2.id and " +
@@ -54,7 +54,7 @@ public class UserFriendshipDAO extends GenericDAO<UserFriendship> {
                 "uf2.user.id = u2.id and " +
                 "u2.id = :friendUserId");
 
-        query.setParameter("currentUserId", currentUserId);
+        query.setParameter("userToRetrieveId", userToRetrieveId);
         query.setParameter("friendUserId", friendUserId);
         return query.getSingleResult();
     }

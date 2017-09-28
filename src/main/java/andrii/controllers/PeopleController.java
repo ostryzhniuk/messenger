@@ -53,6 +53,11 @@ public class PeopleController {
         return friendshipService.getFriends(UserFriendship.Status.FRIENDS);
     }
 
+    @PutMapping("/friends/remove")
+    public void removeFriend(@RequestBody Integer friendUserId) {
+        friendshipService.removeFriend(friendUserId);
+    }
+
     @PostMapping("/friend/request")
     public void createFriendRequest(@RequestBody Integer friendUserId) {
         friendshipService.createFriendRequest(friendUserId);

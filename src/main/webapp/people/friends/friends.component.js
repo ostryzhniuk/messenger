@@ -28,6 +28,16 @@ component('friends', {
                 });
             };
 
+            $scope.remove = function (userId) {
+                $http({
+                    method: 'PUT',
+                    url: '/friends/remove',
+                    data: userId
+                }).then(function(response) {
+                    loadFriends();
+                });
+            };
+
         }
     ]
 });
