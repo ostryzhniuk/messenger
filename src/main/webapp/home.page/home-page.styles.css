@@ -28,6 +28,7 @@ footer {
 #search-input {
     outline: none;
     box-shadow: none;
+    width: 300px;
 }
 .search-group {
     height: 28px;

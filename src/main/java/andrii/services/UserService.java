@@ -98,13 +98,6 @@ public class UserService {
     }
 
     @Transactional
-    public List<UserDTO> getUsers() {
-        List<UserDTO> userDTOList = convertToDTOList(userDAO.getUsers());
-        userDTOList.forEach(userDTO -> userDTO.setPhoto(loadPhoto(userDTO.getId())));
-        return userDTOList;
-    }
-
-    @Transactional
     public List<UserDTO> search(String parameter) {
 
         Set<User> userSet = new HashSet<>();

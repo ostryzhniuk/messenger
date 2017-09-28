@@ -91,10 +91,9 @@ angular
     }
 
     $scope.search = function () {
+        $scope.searchParameter = $scope.searchParameter.trim();
         if ($scope.searchParameter != undefined && $scope.searchParameter != '') {
-            $http.get('/search/?parameter=' + $scope.searchParameter).then(function(response) {
-                
-            });
+            window.location.replace('#!/search/' + $scope.searchParameter);
         }
     };
 

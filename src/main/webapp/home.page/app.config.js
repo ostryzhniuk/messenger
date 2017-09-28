@@ -8,7 +8,7 @@ angular.module('messengerApp', [
     'signUp',
     'login',
     'profile',
-    'allUsers',
+    'searching',
     'chat',
     'incomingRequests',
     'outgoingRequests',
@@ -39,8 +39,8 @@ config(['$locationProvider' ,'$routeProvider', '$qProvider',
         .when('/id:userId', {
             template: '<profile></profile>'
         })
-        .when('/all-users', {
-            template: '<all-users></all-users>'
+        .when('/search/:parameter', {
+            template: '<searching></searching>'
         })
         .when('/messages', {
             template: '<chat></chat>'

@@ -22,11 +22,6 @@ public class PeopleController {
     @Autowired
     private SimpMessagingTemplate messagingTemplate;
 
-    @GetMapping("/all-users")
-    public List<UserDTO> getAllUsers() {
-        return userService.getUsers();
-    }
-
     @GetMapping("/user/{userId}")
     public UserDTO getUserById(@PathVariable("userId") String userId,
                                @RequestParam(value= "loadImage", defaultValue = "false") boolean loadImage){
@@ -34,8 +29,8 @@ public class PeopleController {
     }
 
     @GetMapping("/search")
-    public void search(@RequestParam(value= "parameter") String parameter){
-        userService.search(parameter);
+    public List<UserDTO> search(@RequestParam(value= "parameter") String parameter){
+        return userService.search(parameter);
     }
 
     @GetMapping("/friend-requests/incoming/not-reviewed")
