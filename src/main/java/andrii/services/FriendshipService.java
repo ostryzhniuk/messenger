@@ -64,4 +64,17 @@ public class FriendshipService {
         return userDTOList;
     }
 
+    @Transactional
+    public void confirmFriendRequest(Integer friendUserId) {
+        List<UserFriendship> userFriendshipList =
+                userFriendshipDAO.get(
+                        userService.getCurrentUserId(),
+                        friendUserId);
+
+        userFriendshipList.forEach(userFriendship -> {
+            userFriendship.setStatus(UserFriendship.Status.FRIENDS);
+            userFriendshipDAO.update(userFriendship);
+        });
+    }
+
 }

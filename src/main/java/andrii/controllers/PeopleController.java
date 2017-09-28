@@ -63,4 +63,9 @@ public class PeopleController {
                         "new-friend-request");
     }
 
+    @PutMapping("/friend/request/confirm")
+    public void confirmFriendRequest(@RequestBody Integer friendUserId) {
+        friendshipService.confirmFriendRequest(friendUserId);
+    }
+
 }
