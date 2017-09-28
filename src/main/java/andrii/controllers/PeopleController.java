@@ -1,5 +1,6 @@
 package andrii.controllers;
 
+import andrii.dto.GenericDTO;
 import andrii.dto.UserDTO;
 import andrii.entities.UserFriendship;
 import andrii.services.FriendshipService;
@@ -84,10 +85,9 @@ public class PeopleController {
     }
 
     @GetMapping("/friendship/status")
-    public String getFriendshipStatus(@RequestParam(value= "friendUserId") Integer friendUserId) {
-        String s = friendshipService.getFriendshipStatus(friendUserId);
-        System.out.println("status: " + s);
-        return s;
+    public GenericDTO<String> getFriendshipStatus(@RequestParam(value= "friendUserId") Integer friendUserId) {
+        return new GenericDTO<>(
+                        friendshipService.getFriendshipStatus(friendUserId));
     }
 
 }

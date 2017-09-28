@@ -19,14 +19,24 @@
                         ng-click="openFriendRequests()">Requests</button>
 
                 <button type="button" class="btn btn-primary wide-button" ng-click="openChat()"
-                        ng-if="isFriendshipStatus(statusFriends) && !myProfile()">Message</button>
+                        ng-if="isFriendshipStatus(statusFriends)">Message</button>
 
                 <button type="button" class="btn btn-primary wide-button" ng-click="addFriend(profile.id)"
-                        ng-if="isFriendshipStatus(statusNotFriends) && !myProfile()">Add friend</button>
+                        ng-if="isFriendshipStatus(statusNotFriends)">Add friend</button>
+
+                <button type="button" class="btn btn-default wide-button" ng-click="removeFriendRequest(profile.id)"
+                        ng-if="isFriendshipStatus(statusRequested)">Reject your friendship request</button>
+
+                <button type="button" class="btn btn-primary wide-button" ng-click="confirmFriendRequest(profile.id)"
+                        ng-if="isFriendshipStatus(statusNotReviewed) ||
+                                isFriendshipStatus(statusRejected)">Confirm friendship request</button>
             </div>
             <div id="btn-group-bottom">
-                <button type="button" class="btn btn-default wide-button" ng-click="addFriend(profile.id)"
-                        ng-if="isFriendshipStatus(statusFriends) && !myProfile()">Remove from friends</button>
+                <button type="button" class="btn btn-default wide-button" ng-click="removeFriend(profile.id)"
+                        ng-if="isFriendshipStatus(statusFriends)">Remove from friends</button>
+
+                <button type="button" class="btn btn-default wide-button" ng-click="rejectFriendRequest(profile.id)"
+                        ng-if="isFriendshipStatus(statusNotReviewed)">Reject friendship request</button>
             </div>
 
             <div id="user-information">

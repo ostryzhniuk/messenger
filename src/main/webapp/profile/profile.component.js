@@ -37,10 +37,8 @@ component('profile', {
             };
 
             function loadFriendshipStatus() {
-                console.log('friendshipStatus');
                 $http.get('/friendship/status/?friendUserId=' + $routeParams.userId).then(function(response) {
-                    friendshipStatus = response.data;
-                    console.log('friendshipStatus: ' + friendshipStatus);
+                    friendshipStatus = response.data.value;
                 });
             };
 
