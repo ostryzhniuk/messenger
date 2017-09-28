@@ -83,4 +83,11 @@ public class PeopleController {
         friendshipService.rejectOutgoingFriendRequest(friendUserId);
     }
 
+    @GetMapping("/friendship/status")
+    public String getFriendshipStatus(@RequestParam(value= "friendUserId") Integer friendUserId) {
+        String s = friendshipService.getFriendshipStatus(friendUserId);
+        System.out.println("status: " + s);
+        return s;
+    }
+
 }

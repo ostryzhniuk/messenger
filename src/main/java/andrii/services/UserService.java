@@ -109,9 +109,6 @@ public class UserService {
         List<UserDTO> userDTOList = convertToDTOList(userSet);
         userDTOList.forEach(userDTO -> userDTO.setPhoto(loadPhoto(userDTO.getId())));
 
-        userDTOList.forEach(user ->
-                System.out.println(user.getFirstName() + " " + user.getLastName()));
-
         return userDTOList;
     }
 

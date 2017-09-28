@@ -11,18 +11,25 @@
                 <img ng-src="data:image/jpeg;base64,{{profile.photo}}" id="photo">
             </div>
 
-            <div class="btn-group">
+            <div id="btn-group-top" class="btn-group">
                 <button type="button" class="btn btn-primary social-button" ng-if="myProfile()"
                         ng-click="openFriends()">Friends</button>
 
                 <button type="button" class="btn btn-primary social-button" ng-if="myProfile()"
                         ng-click="openFriendRequests()">Requests</button>
 
-                <button id="message-button" type="button" class="btn btn-primary" ng-if="!myProfile()"
-                        ng-click="openChat()">Message</button>
+                <button type="button" class="btn btn-primary wide-button" ng-click="openChat()"
+                        ng-if="isFriendshipStatus(statusFriends) && !myProfile()">Message</button>
+
+                <button type="button" class="btn btn-primary wide-button" ng-click="addFriend(profile.id)"
+                        ng-if="isFriendshipStatus(statusNotFriends) && !myProfile()">Add friend</button>
+            </div>
+            <div id="btn-group-bottom">
+                <button type="button" class="btn btn-default wide-button" ng-click="addFriend(profile.id)"
+                        ng-if="isFriendshipStatus(statusFriends) && !myProfile()">Remove from friends</button>
             </div>
 
-            <div>
+            <div id="user-information">
                 user information
             </div>
         </div>

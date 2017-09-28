@@ -21,13 +21,18 @@
     width: 300px;
     height: 300px;
 }
-.btn-group {
+#btn-group-top {
     margin-top: 10px;
-    margin-bottom: 20px;
+}
+#btn-group-bottom {
+    margin-top: 1px;
 }
 .social-button {
     width: 150px;
 }
-#message-button {
+.wide-button {
     width: 300px;
+}
+#user-information {
+    margin-top: 20px;
 }

@@ -32,11 +32,6 @@ public class UserDAO extends GenericDAO<User> {
         return query.getSingleResult();
     }
 
-    public List<User> getUsers() {
-        return getSession().createQuery("from User")
-                .list();
-    }
-
     @Override
     public void update(User user) {
         getSession().update(user);

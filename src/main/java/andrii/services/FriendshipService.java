@@ -119,4 +119,15 @@ public class FriendshipService {
 
         friendshipDAO.delete(friendship);
     }
+
+    @Transactional
+    public String getFriendshipStatus(Integer friendUserId) {
+        if (friendUserId == userService.getCurrentUserId()) {
+            return "MY_ACCOUNT";
+        }
+        return friendshipDAO
+                .getFriendshipStatus(
+                        userService.getCurrentUserId(),
+                        friendUserId);
+    }
 }

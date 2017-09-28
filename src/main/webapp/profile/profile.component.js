@@ -9,9 +9,18 @@ component('profile', {
     controller: ['$http', '$scope', '$routeParams', '$rootScope',
         function ProfileController($http, $scope, $routeParams, $rootScope) {
 
+            var friendshipStatus = '';
+            $scope.statusFriends = 'FRIENDS';
+            $scope.statusRequested = 'REQUESTED';
+            $scope.statusNotReviewed = 'NOT_REVIEWED';
+            $scope.statusRejected = 'REJECTED';
+            $scope.statusNotFriends = 'NOT_FRIENDS';
+
             $http.get('/user/' + $routeParams.userId + '?loadImage=true').then(function(response) {
                 $scope.profile = response.data;
             });
+
+            loadFriendshipStatus();
 
             $http.get('/currentUser').then(function(response) {
                 $rootScope.user = response.data;
@@ -25,6 +34,22 @@ component('profile', {
                     return true;
                 }
                 return false;
+            };
+
+            function loadFriendshipStatus() {
+                console.log('friendshipStatus');
+                $http.get('/friendship/status/?friendUserId=' + $routeParams.userId).then(function(response) {
+                    friendshipStatus = response.data;
+                    console.log('friendshipStatus: ' + friendshipStatus);
+                });
+            };
+
+            $scope.isFriendshipStatus = function (status) {
+                if (friendshipStatus == status) {
+                    return true;
+                } else {
+                    return false;
+                }
             };
 
             $scope.openChat = function () {
@@ -44,6 +69,14 @@ component('profile', {
 
             $scope.openFriends = function () {
                 window.location.replace('#!/friends');
+            };
+
+            $scope.addFriend = function (friendUserId) {
+                $http({
+                    method: 'POST',
+                    url: '/friend/request',
+                    data: friendUserId
+                });
             };
 
         }
