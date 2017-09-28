@@ -38,10 +38,6 @@ component('profile', {
                 });
             };
 
-            $scope.openChats = function () {
-                window.location.replace('#!/messages/');
-            };
-
             $scope.openFriendRequests = function () {
                 window.location.replace('#!/friends/requests/incoming');
             }

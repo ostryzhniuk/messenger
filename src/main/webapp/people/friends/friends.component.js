@@ -17,6 +17,17 @@ component('friends', {
                 });
             };
 
+            $scope.openChat = function (userId) {
+                $http.get('/chat/id' + '?interlocutor=' + userId).then(function(response) {
+                    if (response.data == -1) {
+                        console.log(response.data);
+                    } else {
+                        $scope.chatId = response.data;
+                        window.location.replace('#!/messages/' + $scope.chatId);
+                    }
+                });
+            };
+
         }
     ]
 });
