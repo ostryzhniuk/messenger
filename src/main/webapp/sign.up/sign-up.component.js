@@ -38,8 +38,8 @@ component('signUp', {
                             password: $scope.password
                         }
                     }).then(function() {
-                        window.location.reload();
                         window.location.replace('#!/');
+                        window.location.reload();
                     });
                 },function errorCallback(response) {
                     if (response.status == 409) {

@@ -17,11 +17,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -106,13 +105,31 @@ public class UserService {
     }
 
     @Transactional
+    public List<UserDTO> search(String parameter) {
+
+        Set<User> userSet = new HashSet<>();
+
+        for (String substring : parameter.split(" ")) {
+            userSet.addAll(userDAO.search(substring));
+        }
+
+        List<UserDTO> userDTOList = convertToDTOList(userSet);
+        userDTOList.forEach(userDTO -> userDTO.setPhoto(loadPhoto(userDTO.getId())));
+
+        userDTOList.forEach(user ->
+                System.out.println(user.getFirstName() + " " + user.getLastName()));
+
+        return userDTOList;
+    }
+
+    @Transactional
     public List<UserDTO> getChatParticipants(Integer chatId, Authentication authentication) {
         Integer currentUserId = getUserId(authentication.getName());
         return convertToDTOList(userDAO.getChatParticipants(chatId, currentUserId));
     }
 
-    public List<UserDTO> convertToDTOList(List<User> userList) {
-        return userList
+    public List<UserDTO> convertToDTOList(Collection<User> users) {
+        return users
                 .stream()
                 .map(user -> UserDTO.convertToDTO(user))
                 .collect(Collectors.toList());

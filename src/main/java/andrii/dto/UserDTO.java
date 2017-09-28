@@ -72,4 +72,19 @@ public class UserDTO {
     public static UserDTO convertToDTO(User user) {
         return new ModelMapper().map(user, UserDTO.class);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        UserDTO userDTO = (UserDTO) obj;
+
+        return getId().equals(userDTO.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return getId().hashCode();
+    }
 }

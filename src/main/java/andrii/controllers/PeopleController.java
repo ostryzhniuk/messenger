@@ -33,6 +33,11 @@ public class PeopleController {
         return userService.getUser(Integer.parseInt(userId), loadImage);
     }
 
+    @GetMapping("/search")
+    public void search(@RequestParam(value= "parameter") String parameter){
+        userService.search(parameter);
+    }
+
     @GetMapping("/friend-requests/incoming/not-reviewed")
     public List<UserDTO> getNotReviewedFriendRequests() {
         return friendshipService.getFriends(UserFriendship.Status.NOT_REVIEWED);

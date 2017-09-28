@@ -4,6 +4,8 @@ angular
 .module('messengerApp')
 .controller('navbarCtrl', function ($http, $scope, $rootScope, $routeParams) {
 
+    $scope.searchParameter = '';
+
     $http.get('/currentUser').then(function(response) {
         $rootScope.user = response.data;
         connect();
@@ -30,6 +32,7 @@ angular
     $scope.logout = function () {
         $http.get('/logout');
         window.location.replace('#!/home');
+        window.location.reload();
     };
 
     function setConnected(connected) {
@@ -86,5 +89,13 @@ angular
     $scope.myProfile = function () {
         window.location.replace('#!/id' + $rootScope.user.id);
     }
+
+    $scope.search = function () {
+        if ($scope.searchParameter != undefined && $scope.searchParameter != '') {
+            $http.get('/search/?parameter=' + $scope.searchParameter).then(function(response) {
+                
+            });
+        }
+    };
 
 });

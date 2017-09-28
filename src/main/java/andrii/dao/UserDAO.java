@@ -47,6 +47,14 @@ public class UserDAO extends GenericDAO<User> {
         getSession().delete(user);
     }
 
+    public List<User> search(String parameter) {
+        Query<User> query = getSession().createQuery("from User " +
+                "where lower(firstName) like lower(concat('%', :parameter, '%'))");
+
+        query.setParameter("parameter", parameter);
+        return query.getResultList();
+    }
+
     public List<User> getChatParticipants(Integer chatId, Integer currentUserId){
         Query<User> query = getSession().createQuery("select u " +
                 "from User as u, UserChat as uc, Chat as c " +

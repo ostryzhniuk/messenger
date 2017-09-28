@@ -24,8 +24,8 @@ component('login', {
                     }
                 }).then(function(response) {
                     if (response.status == 200) {
-                        window.location.reload();
                         window.location.replace('#!/');
+                        window.location.reload();
                     }
                 },function errorCallback(response) {
                     if (response.status == 404) {
