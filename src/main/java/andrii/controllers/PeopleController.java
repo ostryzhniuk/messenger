@@ -27,6 +27,12 @@ public class PeopleController {
         return userService.getUsers();
     }
 
+    @GetMapping("/user/{userId}")
+    public UserDTO getUserById(@PathVariable("userId") String userId,
+                               @RequestParam(value= "loadImage", defaultValue = "false") boolean loadImage){
+        return userService.getUser(Integer.parseInt(userId), loadImage);
+    }
+
     @GetMapping("/friend-requests/incoming/not-reviewed")
     public List<UserDTO> getNotReviewedFriendRequests() {
         return friendshipService.getFriends(UserFriendship.Status.NOT_REVIEWED);
@@ -47,12 +53,6 @@ public class PeopleController {
         return friendshipService.getFriends(UserFriendship.Status.FRIENDS);
     }
 
-    @GetMapping("/user/{userId}")
-    public UserDTO getUserById(@PathVariable("userId") String userId,
-                               @RequestParam(value= "loadImage", defaultValue = "false") boolean loadImage){
-        return userService.getUser(Integer.parseInt(userId), loadImage);
-    }
-
     @PostMapping("/friend/request")
     public void createFriendRequest(@RequestBody Integer friendUserId) {
         friendshipService.createFriendRequest(friendUserId);
@@ -66,6 +66,11 @@ public class PeopleController {
     @PutMapping("/friend/request/confirm")
     public void confirmFriendRequest(@RequestBody Integer friendUserId) {
         friendshipService.confirmFriendRequest(friendUserId);
+    }
+
+    @PutMapping("/friend/request/reject")
+    public void rejectFriendRequest(@RequestBody Integer friendUserId) {
+        friendshipService.rejectFriendRequest(friendUserId);
     }
 
 }

@@ -27,7 +27,8 @@ public class UserFriendshipDAO extends GenericDAO<UserFriendship> {
                 "where uf.friendship.id = f.id and " +
                 "f.id = " +
                 "   (select f2.id " +
-                "   from User u1, UserFriendship uf1, Friendship f1, User u2, UserFriendship uf2, Friendship f2 " +
+                "   from User u1, UserFriendship uf1, Friendship f1, " +
+                "        User u2, UserFriendship uf2, Friendship f2 " +
                 "   where u1.id = :userId1 and " +
                 "   u1.id = uf1.user.id and " +
                 "   uf1.friendship.id = f1.id and " +
@@ -39,6 +40,23 @@ public class UserFriendshipDAO extends GenericDAO<UserFriendship> {
         query.setParameter("userId1", userId1);
         query.setParameter("userId2", userId2);
         return query.getResultList();
+    }
+
+    public UserFriendship getFriendshipOfCurrentUser(Integer currentUserId, Integer friendUserId) {
+        Query<UserFriendship> query = getSession().createQuery("select uf1 " +
+                "from User u1, UserFriendship uf1, Friendship f1, " +
+                "     User u2, UserFriendship uf2, Friendship f2 " +
+                "where u1.id = :currentUserId and " +
+                "u1.id = uf1.user.id and " +
+                "uf1.friendship.id = f1.id and " +
+                "f1.id = f2.id and " +
+                "f2.id = uf2.friendship.id and " +
+                "uf2.user.id = u2.id and " +
+                "u2.id = :friendUserId");
+
+        query.setParameter("currentUserId", currentUserId);
+        query.setParameter("friendUserId", friendUserId);
+        return query.getSingleResult();
     }
 
     @Override

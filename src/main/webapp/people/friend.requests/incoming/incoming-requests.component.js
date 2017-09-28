@@ -9,10 +9,10 @@ component('incomingRequests', {
     controller: ['$http', '$scope', '$rootScope',
         function IncomingRequestsController($http, $scope, $rootScope) {
 
-            loadNewRequests();
+            loadNotReviewedRequests();
             loadRejectedRequests();
 
-            function loadNewRequests() {
+            function loadNotReviewedRequests() {
                 $http.get('/friend-requests/incoming/not-reviewed').then(function(response) {
                     $scope.newRequests = response.data;
                 });
@@ -36,13 +36,22 @@ component('incomingRequests', {
                     url: '/friend/request/confirm',
                     data: userId
                 }).then(function(response) {
-                    loadNewRequests();
+                    loadNotReviewedRequests();
+                    loadRejectedRequests();
                     loadFriendRequests();
                 });
             };
 
             $scope.reject = function (userId) {
-
+                $http({
+                    method: 'PUT',
+                    url: '/friend/request/reject',
+                    data: userId
+                }).then(function(response) {
+                    loadNotReviewedRequests();
+                    loadRejectedRequests();
+                    loadFriendRequests();
+                });
             };
 
         }

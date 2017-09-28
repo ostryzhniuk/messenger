@@ -77,4 +77,14 @@ public class FriendshipService {
         });
     }
 
+    @Transactional
+    public void rejectFriendRequest(Integer friendUserId) {
+        UserFriendship userFriendship =
+                userFriendshipDAO.getFriendshipOfCurrentUser(
+                        userService.getCurrentUserId(),
+                        friendUserId);
+
+        userFriendship.setStatus(UserFriendship.Status.REJECTED);
+        userFriendshipDAO.update(userFriendship);
+    }
 }
