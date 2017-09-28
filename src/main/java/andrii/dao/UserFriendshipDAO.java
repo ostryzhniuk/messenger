@@ -66,7 +66,12 @@ public class UserFriendshipDAO extends GenericDAO<UserFriendship> {
 
     @Override
     public void delete(UserFriendship userFriendship) {
-        getSession().delete(userFriendship);
+        Query<UserFriendship> query = getSession().createQuery("delete " +
+                "from UserFriendship " +
+                "where id = :userFriendshipId");
+
+        query.setParameter("userFriendshipId", userFriendship.getId());
+        query.executeUpdate();
     }
 
 }

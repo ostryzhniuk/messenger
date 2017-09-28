@@ -17,6 +17,16 @@ component('outgoingRequests', {
                 });
             };
 
+            $scope.reject = function (userId) {
+                $http({
+                    method: 'PUT',
+                    url: '/friend/request/outgoing/reject',
+                    data: userId
+                }).then(function(response) {
+                    loadOutgoingRequests();
+                });
+            };
+
         }
     ]
 });

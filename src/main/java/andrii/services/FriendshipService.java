@@ -104,4 +104,19 @@ public class FriendshipService {
         userFriendshipDAO.update(friendshipCurrentUser);
         userFriendshipDAO.update(friendshipFriendUser);
     }
+
+    @Transactional
+    public void rejectOutgoingFriendRequest(Integer friendUserId) {
+        List<UserFriendship> userFriendshipList =
+                userFriendshipDAO.get(
+                        userService.getCurrentUserId(),
+                        friendUserId);
+
+        Friendship friendship = userFriendshipList.get(0).getFriendship();
+
+        userFriendshipList.forEach(userFriendship ->
+                userFriendshipDAO.delete(userFriendship));
+
+        friendshipDAO.delete(friendship);
+    }
 }

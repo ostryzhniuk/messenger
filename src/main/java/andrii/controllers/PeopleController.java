@@ -78,4 +78,9 @@ public class PeopleController {
         friendshipService.rejectFriendRequest(friendUserId);
     }
 
+    @PutMapping("/friend/request/outgoing/reject")
+    public void rejectOutgoingFriendRequest(@RequestBody Integer friendUserId) {
+        friendshipService.rejectOutgoingFriendRequest(friendUserId);
+    }
+
 }
