@@ -25,6 +25,14 @@ public class UserChat {
     @JoinColumn(name = "lastMessage_id")
     private Message lastMessage;
 
+    public UserChat() {
+    }
+
+    public UserChat(Chat chat, User user) {
+        this.chat = chat;
+        this.user = user;
+    }
+
     public Integer getId() {
         return id;
     }

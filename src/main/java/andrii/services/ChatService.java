@@ -114,6 +114,21 @@ public class ChatService {
     }
 
     @Transactional
+    public ChatDTO createChat(User firstUser, User secondUser) {
+        Chat chat = createChat();
+
+        createUserChat(chat, firstUser);
+        createUserChat(chat, secondUser);
+
+        ChatDTO chatDTO = ChatDTO.convertToDTO(chat);
+        chatDTO.setUnreadMessages(
+                messageDAO.getUnreadMessages(
+                        chatDTO.getId(),
+                        userService.getCurrentUserId()));
+        return chatDTO;
+    }
+
+    @Transactional
     public Chat createChat() {
         Chat chat = new Chat();
         chatDAO.save(chat);
@@ -121,11 +136,9 @@ public class ChatService {
     }
 
     @Transactional
-    public UserChat createUserChat(User user, Chat chat) {
+    public UserChat createUserChat(Chat chat, User user) {
 
-        UserChat userChat = new UserChat();
-        userChat.setUser(user);
-        userChat.setChat(chat);
+        UserChat userChat = new UserChat(chat, user);
         userChatDAO.save(userChat);
         return userChat;
     }

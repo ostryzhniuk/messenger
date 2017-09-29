@@ -5,14 +5,12 @@ import andrii.dao.UserDAO;
 import andrii.dao.UserFriendshipDAO;
 import andrii.dto.ChatDTO;
 import andrii.dto.UserDTO;
-import andrii.entities.Chat;
 import andrii.entities.Friendship;
 import andrii.entities.User;
 import andrii.entities.UserFriendship;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 
 @Service
@@ -81,10 +79,10 @@ public class FriendshipService {
             userFriendshipDAO.update(userFriendship);
         });
 
-        Chat chat = chatService.createChat();
-        userFriendshipList.forEach(userFriendship ->
-            chatService.createUserChat(userFriendship.getUser(), chat));
-        return ChatDTO.convertToDTO(chat);
+        return chatService
+                .createChat(
+                        userFriendshipList.get(0).getUser(),
+                        userFriendshipList.get(1).getUser());
     }
 
     @Transactional
