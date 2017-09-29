@@ -16,11 +16,14 @@ component('profile', {
             $scope.statusRejected = 'REJECTED';
             $scope.statusNotFriends = 'NOT_FRIENDS';
 
-            $http.get('/user/' + $routeParams.userId + '?loadImage=true').then(function(response) {
-                $scope.profile = response.data;
-            });
+            loadProfile();
 
-            loadFriendshipStatus();
+            function loadProfile() {
+                $http.get('/user/' + $routeParams.userId + '?loadImage=true').then(function(response) {
+                    $scope.profile = response.data;
+                    loadFriendshipStatus();
+                });
+            }
 
             $http.get('/currentUser').then(function(response) {
                 $rootScope.user = response.data;
@@ -69,11 +72,62 @@ component('profile', {
                 window.location.replace('#!/friends');
             };
 
-            $scope.addFriend = function (friendUserId) {
+            function loadFriendRequests() {
+                $http.get('/friend-requests/incoming/not-reviewed').then(function(response) {
+                    $rootScope.newFriendRequests = response.data.length;
+                    console.log('$rootScope.newFriendRequests: ' + $rootScope.newFriendRequests);
+                });
+            }
+
+            $scope.addFriend = function (userId) {
                 $http({
                     method: 'POST',
                     url: '/friend/request',
-                    data: friendUserId
+                    data: userId
+                }).then(function(response) {
+                    loadProfile();
+                });
+            };
+
+            $scope.removeFriendRequest = function (userId) {
+                $http({
+                    method: 'PUT',
+                    url: '/friend/request/outgoing/reject',
+                    data: userId
+                }).then(function(response) {
+                    loadProfile();
+                });
+            };
+
+            $scope.confirmFriendRequest = function (userId) {
+                $http({
+                    method: 'PUT',
+                    url: '/friend/request/confirm',
+                    data: userId
+                }).then(function(response) {
+                    loadProfile();
+                    loadFriendRequests();
+                });
+            };
+
+            $scope.removeFriend = function (userId) {
+                $http({
+                    method: 'PUT',
+                    url: '/friends/remove',
+                    data: userId
+                }).then(function(response) {
+                    loadProfile();
+                });
+            };
+
+            $scope.rejectFriendRequest = function (userId) {
+                $http({
+                    method: 'PUT',
+                    url: '/friend/request/reject',
+                    data: userId
+                }).then(function(response) {
+                    loadProfile();
+                    loadFriendRequests();
                 });
             };
 
