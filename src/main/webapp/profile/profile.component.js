@@ -107,6 +107,7 @@ component('profile', {
                 }).then(function(response) {
                     loadProfile();
                     loadFriendRequests();
+                    $rootScope.chats.push(response.data);
                 });
             };
 

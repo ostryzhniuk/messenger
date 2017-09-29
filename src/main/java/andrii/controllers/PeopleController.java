@@ -1,5 +1,6 @@
 package andrii.controllers;
 
+import andrii.dto.ChatDTO;
 import andrii.dto.GenericDTO;
 import andrii.dto.UserDTO;
 import andrii.entities.UserFriendship;
@@ -70,8 +71,8 @@ public class PeopleController {
     }
 
     @PutMapping("/friend/request/confirm")
-    public void confirmFriendRequest(@RequestBody Integer friendUserId) {
-        friendshipService.confirmFriendRequest(friendUserId);
+    public ChatDTO confirmFriendRequest(@RequestBody Integer friendUserId) {
+        return friendshipService.confirmFriendRequest(friendUserId);
     }
 
     @PutMapping("/friend/request/reject")

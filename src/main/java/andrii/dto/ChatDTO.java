@@ -6,7 +6,6 @@ import org.modelmapper.ModelMapper;
 public class ChatDTO {
 
     private Integer id;
-    private String name;
     private Long unreadMessages;
 
     public Integer getId() {
@@ -15,14 +14,6 @@ public class ChatDTO {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public Long getUnreadMessages() {

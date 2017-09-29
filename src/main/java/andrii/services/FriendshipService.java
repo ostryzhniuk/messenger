@@ -3,7 +3,9 @@ package andrii.services;
 import andrii.dao.FriendshipDAO;
 import andrii.dao.UserDAO;
 import andrii.dao.UserFriendshipDAO;
+import andrii.dto.ChatDTO;
 import andrii.dto.UserDTO;
+import andrii.entities.Chat;
 import andrii.entities.Friendship;
 import andrii.entities.User;
 import andrii.entities.UserFriendship;
@@ -27,6 +29,9 @@ public class FriendshipService {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private ChatService chatService;
 
     @Transactional
     public void createFriendRequest(Integer friendUserId) {
@@ -65,7 +70,7 @@ public class FriendshipService {
     }
 
     @Transactional
-    public void confirmFriendRequest(Integer friendUserId) {
+    public ChatDTO confirmFriendRequest(Integer friendUserId) {
         List<UserFriendship> userFriendshipList =
                 userFriendshipDAO.get(
                         userService.getCurrentUserId(),
@@ -75,6 +80,11 @@ public class FriendshipService {
             userFriendship.setStatus(UserFriendship.Status.FRIENDS);
             userFriendshipDAO.update(userFriendship);
         });
+
+        Chat chat = chatService.createChat();
+        userFriendshipList.forEach(userFriendship ->
+            chatService.createUserChat(userFriendship.getUser(), chat));
+        return ChatDTO.convertToDTO(chat);
     }
 
     @Transactional

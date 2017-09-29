@@ -39,6 +39,7 @@ component('incomingRequests', {
                     loadNotReviewedRequests();
                     loadRejectedRequests();
                     loadFriendRequests();
+                    $rootScope.chats.push(response.data);
                 });
             };
 

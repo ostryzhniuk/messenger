@@ -13,7 +13,7 @@ angular
     });
 
     $http.get('/chats').then(function(response) {
-        $scope.chats = response.data;
+        $rootScope.chats = response.data;
     });
 
     $rootScope.isAuthority = function (role) {
@@ -58,7 +58,7 @@ angular
                     var parsedMessage = JSON.parse(message.body);
 
                     if (window.location.href.indexOf('/messages/' + parsedMessage.chat.id) == -1) {
-                        $scope.chats.forEach(function(chat) {
+                        $rootScope.chats.forEach(function(chat) {
                             if (chat.id == parsedMessage.chat.id) {
                                 $http.get('/unreadMessages/count/' + chat.id).then(function(response) {
                                     chat.unreadMessages = response.data;

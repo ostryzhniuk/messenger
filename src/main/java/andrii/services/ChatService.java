@@ -112,4 +112,21 @@ public class ChatService {
                 chatId,
                 userService.getCurrentUserId());
     }
+
+    @Transactional
+    public Chat createChat() {
+        Chat chat = new Chat();
+        chatDAO.save(chat);
+        return chat;
+    }
+
+    @Transactional
+    public UserChat createUserChat(User user, Chat chat) {
+
+        UserChat userChat = new UserChat();
+        userChat.setUser(user);
+        userChat.setChat(chat);
+        userChatDAO.save(userChat);
+        return userChat;
+    }
 }
