@@ -1,6 +1,5 @@
 package andrii.controllers;
 
-import andrii.dto.AuthenticationDTO;
 import andrii.dto.LoginDTO;
 import andrii.dto.UserSignUpDTO;
 import andrii.services.UserService;
@@ -15,29 +14,22 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @RestController
-public class DefaultController {
+public class AuthorizeController {
 
     @Autowired
     private UserService userService;
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DefaultController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AuthorizeController.class);
 
     @Autowired
     private AuthenticationManager authenticationManager;
-
-    @GetMapping("/currentUser")
-    public AuthenticationDTO currentUser(){
-        return userService.getCurrentUser();
-    }
 
     @PostMapping("/authorize")
     public User login(@RequestBody LoginDTO loginDTO, HttpServletRequest httpServletRequest) {

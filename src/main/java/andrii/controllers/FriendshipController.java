@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-public class PeopleController {
+public class FriendshipController {
 
     @Autowired
     private UserService userService;
@@ -23,17 +23,6 @@ public class PeopleController {
 
     @Autowired
     private SimpMessagingTemplate messagingTemplate;
-
-    @GetMapping("/user/{userId}")
-    public UserDTO getUserById(@PathVariable("userId") String userId,
-                               @RequestParam(value= "loadImage", defaultValue = "false") boolean loadImage){
-        return userService.getUser(Integer.parseInt(userId), loadImage);
-    }
-
-    @GetMapping("/search")
-    public List<UserDTO> search(@RequestParam(value= "parameter") String parameter){
-        return userService.search(parameter);
-    }
 
     @GetMapping("/friend-requests/incoming/not-reviewed")
     public List<UserDTO> getNotReviewedFriendRequests() {
