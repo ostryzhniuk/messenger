@@ -12,7 +12,8 @@ angular.module('messengerApp', [
     'chat',
     'incomingRequests',
     'outgoingRequests',
-    'friends'
+    'friends',
+    'profileEditor'
 
 ]);
 
@@ -38,6 +39,9 @@ config(['$locationProvider' ,'$routeProvider', '$qProvider',
         })
         .when('/id:userId', {
             template: '<profile></profile>'
+        })
+        .when('/profile/edit', {
+            template: '<profile-editor></profile-editor>'
         })
         .when('/search/:parameter', {
             template: '<searching></searching>'
