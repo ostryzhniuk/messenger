@@ -76,9 +76,12 @@ footer {
     left: 0px;
     overflow-y:scroll;
 }
-#contact-panel {
+#contact-panel-chat {
     height: 60px;
     width: 100%;
+    background-color: white;
+    margin-bottom: 1px;
+    cursor: pointer;
 }
 #chat-user-photo {
     margin: 5px;
@@ -90,10 +93,6 @@ footer {
     width: 40px;
     float: right;
     margin-top: 18px;
-}
-#list-group-item {
-    padding: 0px;
-    border-radius: 0px;
 }
 
 

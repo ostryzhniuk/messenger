@@ -1,6 +1,7 @@
 #greeting {
     margin-top: 10%;
     font-size: 18px;
+    border: 1px solid #eee;
 }
 div#body {
     text-align: center;
