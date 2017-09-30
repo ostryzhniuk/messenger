@@ -118,6 +118,21 @@ public class UserService {
         return convertToDTOList(userDAO.getChatParticipants(chatId, currentUserId));
     }
 
+    @Transactional
+    public void update(UserDTO userDTO) {
+        User user = buildUser(userDTO);
+        userDAO.update(user);
+        savePhoto(userDTO.getPhoto(), user.getId());
+    }
+
+    @Transactional
+    public User buildUser(UserDTO userDTO) {
+        User user = userDAO.get(userDTO.getId());
+        user.setFirstName(userDTO.getFirstName());
+        user.setLastName(userDTO.getLastName());
+        return user;
+    }
+
     public List<UserDTO> convertToDTOList(Collection<User> users) {
         return users
                 .stream()

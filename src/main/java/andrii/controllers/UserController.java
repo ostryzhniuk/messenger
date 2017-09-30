@@ -4,10 +4,8 @@ import andrii.dto.AuthenticationDTO;
 import andrii.dto.UserDTO;
 import andrii.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -21,6 +19,11 @@ public class UserController {
         return userService.getCurrentUser();
     }
 
+    @GetMapping("/currentUser/profile")
+    public UserDTO getCurrentUserProfile() {
+        return userService.getUser(userService.getCurrentUserId(), true);
+    }
+
     @GetMapping("/user/{userId}")
     public UserDTO getUserById(@PathVariable("userId") String userId,
                                @RequestParam(value= "loadImage", defaultValue = "false") boolean loadImage){
@@ -30,6 +33,11 @@ public class UserController {
     @GetMapping("/search")
     public List<UserDTO> search(@RequestParam(value= "parameter") String parameter){
         return userService.search(parameter);
+    }
+
+    @PutMapping("/user/information/update")
+    public void updateProduct (@RequestBody UserDTO userDTO) {
+        userService.update(userDTO);
     }
 
 }

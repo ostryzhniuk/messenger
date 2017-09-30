@@ -3,62 +3,46 @@
 </head>
 
 <div class="col-md-9" id="panel-body">
-    <div id="profile-wrapper">
 
-        <div id="buttons-container">
+    <form ng-submit="save()">
 
-            <div id="photo-container">
-                <img ng-src="data:image/jpeg;base64,{{profile.photo}}" id="photo">
+        <div id="profile-wrapper">
+
+
+            <div id="photo-container" onmouseover="mouseOverEditProduct(this)" onmouseout="mouseOutEditProduct(this)">
+                <div id="choose-photo-container">
+                    <input ng-model="photo" id="choose-photo-input" type="file" accept=".jpg,.jpeg,.png"
+                           onchange="readProductPhotoURL(this)">
+                    <button id="choose-photo-button" type="button" class="btn btn-default">Choose photo</button>
+                    <p><label id="choose-photo-label" for="choose-photo-button">1 X 1</label></p>
+                </div>
+
+                <img ng-src="{{photo}}" id="photo">
             </div>
 
-            <div id="btn-group-top" class="btn-group">
-                <button type="button" class="btn btn-primary social-button" ng-if="myProfile()"
-                        ng-click="openFriends()">Friends
-                </button>
+            <div id="user-information-container">
+                <div id="internal-information-container">
+                    <div id="username-container">
+                        <input ng-model="profile.firstName" id="firstName" class="form-control"
+                               placeholder="First Name" required maxlength="50">
 
-                <button type="button" class="btn btn-primary social-button" ng-if="myProfile()"
-                        ng-click="openFriendRequests()">Requests
-                </button>
-
-                <button type="button" class="btn btn-primary wide-button" ng-click="openChat()"
-                        ng-if="isFriendshipStatus(statusFriends)">Message
-                </button>
-
-                <button type="button" class="btn btn-primary wide-button" ng-click="addFriend(profile.id)"
-                        ng-if="isFriendshipStatus(statusNotFriends)">Add friend
-                </button>
-
-                <button type="button" class="btn btn-default wide-button" ng-click="removeFriendRequest(profile.id)"
-                        ng-if="isFriendshipStatus(statusRequested)">Reject your friendship request
-                </button>
-
-                <button type="button" class="btn btn-primary wide-button" ng-click="confirmFriendRequest(profile.id)"
-                        ng-if="isFriendshipStatus(statusNotReviewed) ||
-                                isFriendshipStatus(statusRejected)">Confirm friendship request
-                </button>
+                        <input ng-model="profile.lastName" id="lastName" class="form-control"
+                               placeholder="Last Name" required maxlength="50">
+                    </div>
+                </div>
             </div>
 
-            <div id="btn-group-bottom">
-                <button type="button" class="btn btn-default wide-button" ng-click="removeFriend(profile.id)"
-                        ng-if="isFriendshipStatus(statusFriends)">Remove from friends
-                </button>
 
-                <button type="button" class="btn btn-default wide-button" ng-click="rejectFriendRequest(profile.id)"
-                        ng-if="isFriendshipStatus(statusNotReviewed)">Reject friendship request
-                </button>
+        </div>
+
+        <div id="save-button-container">
+            <button id="save-button" type="submit" class="btn btn-success">Save</button>
+
+            <div id="message-container">
+                <span id="errorMessage">{{errorMessage}}</span>
+                <span id="successMessage">{{successMessage}}</span>
             </div>
         </div>
 
-        <div id="user-information-container">
-            <div id="internal-information-container">
-                <div id="username-container">
-                    {{profile.firstName}} {{profile.lastName}}
-                </div>
-                <div id="user-information">
-                    user information
-                </div>
-            </div>
-        </div>
-
-    </div>
+    </form>
 </div>

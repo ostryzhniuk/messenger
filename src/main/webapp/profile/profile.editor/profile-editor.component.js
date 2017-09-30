@@ -9,129 +9,107 @@ component('profileEditor', {
     controller: ['$http', '$scope', '$routeParams', '$rootScope',
         function ProfileEditorController($http, $scope, $routeParams, $rootScope) {
 
-            var friendshipStatus = '';
-            $scope.statusFriends = 'FRIENDS';
-            $scope.statusRequested = 'REQUESTED';
-            $scope.statusNotReviewed = 'NOT_REVIEWED';
-            $scope.statusRejected = 'REJECTED';
-            $scope.statusNotFriends = 'NOT_FRIENDS';
+            $scope.errorMessage = '';
+            $scope.successMessage = '';
+            var photoBase64 = '';
 
             loadProfile();
 
             function loadProfile() {
-                $http.get('/user/' + $routeParams.userId + '?loadImage=true').then(function(response) {
+                $http.get('/currentUser/profile').then(function(response) {
                     $scope.profile = response.data;
-                    loadFriendshipStatus();
-                });
-            }
-
-            $http.get('/currentUser').then(function(response) {
-                $rootScope.user = response.data;
-            });
-
-            $scope.myProfile = function () {
-                if ($rootScope.user == undefined || $scope.profile == undefined) {
-                    return false;
-                }
-                if ($rootScope.user.id == $scope.profile.id) {
-                    return true;
-                }
-                return false;
-            };
-
-            function loadFriendshipStatus() {
-                $http.get('/friendship/status/?friendUserId=' + $routeParams.userId).then(function(response) {
-                    friendshipStatus = response.data.value;
+                    loadPhoto();
                 });
             };
 
-            $scope.isFriendshipStatus = function (status) {
-                if (friendshipStatus == status) {
-                    return true;
-                } else {
-                    return false;
-                }
+            $scope.save = function () {
+                $scope.successMessage = '';
+                $scope.errorMessage = '';
+                validatePhoto(getPhoto())
             };
 
-            $scope.openChat = function () {
-                $http.get('/chat/id' + '?interlocutor=' + $scope.profile.id).then(function(response) {
-                    if (response.data == -1) {
-                        console.log(response.data);
-                    } else {
-                        $scope.chatId = response.data;
-                        window.location.replace('#!/messages/' + $scope.chatId);
+            function loadPhoto() {
+                $scope.photo = 'data:image/jpeg;base64,' + $scope.profile.photo;
+                photoBase64 = $scope.photo;
+                isProductPhoto = true;
+            };
+
+            function validatePhoto(file) {
+                if (file == undefined) {
+                    if (photoBase64 == undefined || photoBase64 == '') {
+                        $scope.errorMessage = 'Choose photo, please.';
+                        return;
                     }
-                });
+                    editInformation();
+                    return;
+                }
+                encodeBase64(file);
             };
 
-            $scope.openFriendRequests = function () {
-                window.location.replace('#!/friends/requests/incoming');
-            }
-
-            $scope.openFriends = function () {
-                window.location.replace('#!/friends');
+            function encodeBase64(file) {
+                var reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = function () {
+                    photoBase64 = reader.result;
+                    editInformation();
+                };
             };
 
-            function loadFriendRequests() {
-                $http.get('/friend-requests/incoming/not-reviewed').then(function(response) {
-                    $rootScope.newFriendRequests = response.data.length;
-                    console.log('$rootScope.newFriendRequests: ' + $rootScope.newFriendRequests);
-                });
-            }
-
-            $scope.addFriend = function (userId) {
-                $http({
-                    method: 'POST',
-                    url: '/friend/request',
-                    data: userId
-                }).then(function(response) {
-                    loadProfile();
-                });
-            };
-
-            $scope.removeFriendRequest = function (userId) {
+            function editInformation() {
                 $http({
                     method: 'PUT',
-                    url: '/friend/request/outgoing/reject',
-                    data: userId
+                    url: '/user/information/update',
+                    data: {
+                        id: $scope.profile.id,
+                        firstName: $scope.profile.firstName,
+                        lastName: $scope.profile.lastName,
+                        email: $scope.profile.email,
+                        lastVisit: $scope.profile.lastVisit,
+                        photo: photoBase64
+                    }
                 }).then(function(response) {
-                    loadProfile();
+                    if (response.status == 200) {
+                        $scope.successMessage = 'Information saved successfully';
+                    }
+                },function errorCallback(response) {
+                    $scope.errorMessage = 'Sorry, but an error occurred. Try again, please.';
                 });
             };
 
-            $scope.confirmFriendRequest = function (userId) {
-                $http({
-                    method: 'PUT',
-                    url: '/friend/request/confirm',
-                    data: userId
-                }).then(function(response) {
-                    loadProfile();
-                    loadFriendRequests();
-                    $rootScope.chats.push(response.data);
-                });
+            function getPhoto() {
+                return document.getElementById('choose-photo-input').files[0];
             };
 
-            $scope.removeFriend = function (userId) {
-                $http({
-                    method: 'PUT',
-                    url: '/friends/remove',
-                    data: userId
-                }).then(function(response) {
-                    loadProfile();
-                });
-            };
-
-            $scope.rejectFriendRequest = function (userId) {
-                $http({
-                    method: 'PUT',
-                    url: '/friend/request/reject',
-                    data: userId
-                }).then(function(response) {
-                    loadProfile();
-                    loadFriendRequests();
-                });
-            };
+            document.getElementById('choose-photo-button').addEventListener("click", function() {
+                document.getElementById('choose-photo-input').click();
+            });
 
         }
     ]
 });
+
+var isProductPhoto = false;
+
+function mouseOverEditProduct(element){
+    element.childNodes[1].style.visibility='visible';
+};
+
+function mouseOutEditProduct(element){
+    if (isProductPhoto) {
+        element.childNodes[1].style.visibility='hidden';
+    }
+};
+
+function readProductPhotoURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#photo').attr('src', e.target.result);
+            isProductPhoto = true;
+            document.getElementById('choose-photo-container').style.visibility='hidden';
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
+};

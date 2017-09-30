@@ -17,29 +17,12 @@
 }
 #photo-container {
     margin-top: 10px;
+    display: table-cell;
+    width: 300px;
 }
 #photo {
     width: 300px;
     height: 300px;
-}
-#btn-group-top {
-    margin-top: 10px;
-}
-#btn-group-bottom {
-    margin-top: 1px;
-}
-.social-button {
-    width: 150px;
-}
-.wide-button {
-    width: 300px;
-}
-#user-information {
-    margin-top: 20px;
-}
-#buttons-container {
-    display: table-cell;
-    width: 300px
 }
 #internal-information-container {
     margin-left: 20px;
@@ -47,6 +30,57 @@
     top: 10px
 }
 #username-container {
-    font-size: 14px;
     font-weight: bold;
+    display: table;
+}
+#save-button {
+    width: 300px;
+    margin-top: 30px;
+}
+div#message-container {
+    margin-top: 20px;
+    height: 25px;
+}
+#errorMessage {
+    color: red;
+}
+#successMessage {
+    color: green;
+}
+#choose-photo-input {
+    display: none;
+}
+#choose-photo-container {
+    position: absolute;
+    height: 302px;
+    width: 302px;
+    text-align: center;
+    visibility: hidden;
+}
+#choose-photo-button {
+    margin-top: 45%;
+    outline: none;
+    box-shadow: none;
+}
+#choose-photo-label {
+    margin-top: 30%;
+    font-size: 20px;
+    color: lightgray;
+}
+.form-control {
+    height: 25px;
+}
+#firstName {
+    display: table-cell;
+    width: 200px;
+}
+#lastName {
+    display: table-cell;
+    width: 200px;
+    margin-left: 2px;
+}
+#save-button-container {
+    margin-left: 35%;
+    position: absolute;
+    bottom: 0px;
 }
