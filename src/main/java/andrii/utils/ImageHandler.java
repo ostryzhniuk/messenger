@@ -39,15 +39,17 @@ public class ImageHandler {
         }
     }
 
-    public static String loadEncodedImage(Path path) {
+    public static String loadEncodedImage(Path path) throws FileNotFoundException {
 
         try (InputStream inputStream = new FileInputStream(path.toString())){
 
             byte[] binaryData = IOUtils.toByteArray(inputStream);
             return new String(Base64.encodeBase64(binaryData));
 
-        }catch (IOException e){
-            LOGGER.warn("Photo not found.", e);
+        }catch (FileNotFoundException e){
+            throw new FileNotFoundException(e.toString());
+        } catch (IOException e){
+            LOGGER.warn("Photo upload fails.", e);
             return null;
         }
     }

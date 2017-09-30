@@ -9,6 +9,8 @@ import andrii.entities.User;
 import andrii.entities.UserRole;
 import andrii.entities.UserRoleBuilder;
 import andrii.utils.ImageHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -17,6 +19,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.io.FileNotFoundException;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -25,6 +29,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserService.class);
 
     @Autowired
     private UserDAO userDAO;
@@ -144,7 +150,18 @@ public class UserService {
         String separator = FileSystems.getDefault().getSeparator();
         Path path = Paths.get(resourcesPath + "messenger" + separator + "images"
                 + separator + "avatars" + separator + userId + ".jpg");
-        return ImageHandler.loadEncodedImage(path);
+        try {
+            return ImageHandler.loadEncodedImage(path);
+        } catch (FileNotFoundException e) {
+            path = Paths.get(resourcesPath + "messenger" + separator + "images"
+                    + separator + "default" + separator + "no_photo.jpg");
+            try {
+                return ImageHandler.loadEncodedImage(path);
+            } catch (FileNotFoundException e1) {
+                LOGGER.warn("Photo upload fails.", e);
+                return null;
+            }
+        }
     }
 
     private void savePhoto(String photoBASE64, Integer userId) {
