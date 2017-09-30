@@ -51,14 +51,16 @@ public class ChatController {
                                   @AuthenticationPrincipal Authentication authentication) {
 
         MessageDTO messageDTO = chatService.saveMessage(message, authentication);
-        List<UserDTO> userList = userService.getChatParticipants(message.getChatId(), authentication);
+        UserDTO userDTO = userService.getChatParticipant(
+                message.getChatId(),
+                authentication.getName(),
+                false);
 
-        userList
-                .forEach(user -> messagingTemplate
-                        .convertAndSendToUser(
-                                user.getEmail(),
-                                "/queue/reply",
-                                messageDTO));
+        messagingTemplate
+                .convertAndSendToUser(
+                        userDTO.getEmail(),
+                        "/queue/reply",
+                        messageDTO);
 
         messagingTemplate
                 .convertAndSendToUser(

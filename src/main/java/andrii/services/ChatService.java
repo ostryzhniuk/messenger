@@ -15,7 +15,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,12 +46,18 @@ public class ChatService {
 
         Integer currentUserId = userService.getCurrentUserId();
         List<ChatDTO> chatDTOList = convertToChatDTOList(chatDAO.getChats(currentUserId));
-        chatDTOList.forEach(chatDTO ->
+        chatDTOList.forEach(chatDTO -> {
             chatDTO.setUnreadMessages(
-                            messageDAO.getUnreadMessages(
-                                    chatDTO.getId(),
-                                    userService.getCurrentUserId()))
-        );
+                    messageDAO.getUnreadMessages(
+                            chatDTO.getId(),
+                            userService.getCurrentUserId()));
+
+            chatDTO.setUser(
+                    userService.getChatParticipant(
+                            chatDTO.getId(),
+                            userService.getCurrentUser().getUsername(),
+                    true));
+        });
         return chatDTOList;
     }
 

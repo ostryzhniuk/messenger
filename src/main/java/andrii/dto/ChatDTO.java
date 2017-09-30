@@ -7,6 +7,7 @@ public class ChatDTO {
 
     private Integer id;
     private Long unreadMessages;
+    private UserDTO user;
 
     public Integer getId() {
         return id;
@@ -22,6 +23,14 @@ public class ChatDTO {
 
     public void setUnreadMessages(Long unreadMessages) {
         this.unreadMessages = unreadMessages;
+    }
+
+    public UserDTO getUser() {
+        return user;
+    }
+
+    public void setUser(UserDTO user) {
+        this.user = user;
     }
 
     public Chat convertToEntity() {

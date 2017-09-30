@@ -69,14 +69,48 @@ footer {
 }
 
 
-
 #chat-list-container {
-
+    margin: 0px;
+    width: 100%;
+    position: absolute;
+    left: 0px;
+    overflow-y:scroll;
 }
 #contact-panel {
     height: 60px;
+    width: 100%;
+}
+#chat-user-photo {
+    margin: 5px;
+    width: 50px;
+    height: 50px;
     border: 1px solid;
-    margin-bottom: 1px;
-    min-width: 100%;
-    cursor: pointer;
+}
+#unread-messages-container {
+    width: 40px;
+    float: right;
+    margin-top: 18px;
+}
+#list-group-item {
+    padding: 0px;
+    border-radius: 0px;
+}
+
+
+#chat-list-container::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+}
+
+#chat-list-container::-webkit-scrollbar
+{
+    width: 5px;
+    background-color: #F5F5F5;
+}
+
+#chat-list-container::-webkit-scrollbar-thumb
+{
+    background-color: #666161;
+    border: 2px solid #555555;
 }

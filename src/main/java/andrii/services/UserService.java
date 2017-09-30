@@ -119,9 +119,15 @@ public class UserService {
     }
 
     @Transactional
-    public List<UserDTO> getChatParticipants(Integer chatId, Authentication authentication) {
-        Integer currentUserId = getUserId(authentication.getName());
-        return convertToDTOList(userDAO.getChatParticipants(chatId, currentUserId));
+    public UserDTO getChatParticipant(Integer chatId, String userEmail, boolean loadPhoto) {
+        UserDTO userDTO = UserDTO.convertToDTO(
+                userDAO.getChatParticipant(
+                        chatId,
+                        getUserId(userEmail)));
+        if (loadPhoto) {
+            userDTO.setPhoto(loadPhoto(userDTO.getId()));
+        }
+        return userDTO;
     }
 
     @Transactional

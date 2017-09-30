@@ -50,7 +50,7 @@ public class UserDAO extends GenericDAO<User> {
         return query.getResultList();
     }
 
-    public List<User> getChatParticipants(Integer chatId, Integer currentUserId){
+    public User getChatParticipant(Integer chatId, Integer currentUserId){
         Query<User> query = getSession().createQuery("select u " +
                 "from User as u, UserChat as uc, Chat as c " +
                 "where c.id = :chatId and " +
@@ -60,7 +60,7 @@ public class UserDAO extends GenericDAO<User> {
 
         query.setParameter("chatId", chatId);
         query.setParameter("currentUserId", currentUserId);
-        return query.getResultList();
+        return query.getSingleResult();
     }
 
     public List<User> getFriendRequests(Integer userId, UserFriendship.Status status) {

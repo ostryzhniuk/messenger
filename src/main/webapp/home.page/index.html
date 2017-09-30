@@ -94,10 +94,22 @@
 
     <div id="content-panel">
 
-        <div class="col-md-3" id="chat-list-container" ng-if="!isAuthority('ROLE_ANONYMOUS')">
-            <div ng-repeat="chat in chats">
-                <div ng-click="openChat(chat)" id="contact-panel">
-                    {{chat.id}} ({{chat.unreadMessages}})
+        <div class="col-md-3">
+            <div class="list-group" id="chat-list-container" ng-if="!isAuthority('ROLE_ANONYMOUS')">
+                <div ng-repeat="chat in chats">
+                    <a href="" class="list-group-item" id="list-group-item">
+                        <div ng-click="openChat(chat)" id="contact-panel">
+                            <img ng-src="data:image/jpeg;base64,{{chat.user.photo}}" class="img-circle" id="chat-user-photo">
+                            <span style="font-weight: bold">
+                                {{chat.user.firstName}} {{chat.user.lastName}}
+                            </span>
+                            <div id="unread-messages-container">
+                                <span class="badge">
+                                    {{chat.unreadMessages}}
+                                </span>
+                            </div>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>

@@ -1,6 +1,5 @@
 #panel-body {
     border: 1px solid;
-    height: 89%;
     position: relative;
     padding: 0px;
 }
@@ -28,4 +27,23 @@ textarea {
 #not-selected-chat-message {
     text-align: center;
     margin-top: 20%;
+}
+
+
+#messages-container::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+}
+
+#messages-container::-webkit-scrollbar
+{
+    width: 5px;
+    background-color: #F5F5F5;
+}
+
+#messages-container::-webkit-scrollbar-thumb
+{
+    background-color: #666161;
+    border: 2px solid #555555;
 }

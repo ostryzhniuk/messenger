@@ -18,6 +18,7 @@ component('chat', {
             $scope.model.newMessage = '';
             var chatId;
 
+            resizeChat();
             configureStompClient();
             loadChat();
 
@@ -104,6 +105,16 @@ component('chat', {
                 }
                 return false;
             };
+
+            function resizeChat() {
+                $(document).ready(function(){
+                    $('#panel-body').height($(window).height() - 75);
+                });
+            }
+
+            window.addEventListener('resize', function(event){
+                resizeChat();
+            });
         }
     ]
 });

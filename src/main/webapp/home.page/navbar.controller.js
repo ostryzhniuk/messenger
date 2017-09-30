@@ -5,6 +5,7 @@ angular
 .controller('navbarCtrl', function ($http, $scope, $rootScope, $routeParams) {
 
     $scope.searchParameter = '';
+    resizeChatList();
 
     $http.get('/currentUser').then(function(response) {
         $rootScope.user = response.data;
@@ -96,5 +97,15 @@ angular
             window.location.replace('#!/search/' + $scope.searchParameter);
         }
     };
+
+    function resizeChatList() {
+        $(document).ready(function(){
+            $('#chat-list-container').height($(window).height() - 75);
+        });
+    }
+
+    window.addEventListener('resize', function(event){
+        resizeChatList();
+    });
 
 });
