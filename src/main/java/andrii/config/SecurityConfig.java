@@ -49,10 +49,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-                .antMatchers("/", "/home").permitAll()
-                .antMatchers("/people",
+                .antMatchers("/",
+                        "/home",
+                        "/authorize",
+                        "/signUp",
+                        "/currentUser").permitAll()
+                .antMatchers("/logout",
                         "/chat/id",
-                        "/chats").hasAnyAuthority("USER", "ADMIN")
+                        "/chats",
+                        "/messages/{chatId}",
+                        "/message/last",
+                        "/message",
+                        "/unreadMessages/count/{chatId}",
+                        "/friend-requests/**",
+                        "/friends",
+                        "/friends/remove",
+                        "/friend/**",
+                        "/friendship/status",
+                        "/currentUser/profile",
+                        "/user/{userId}",
+                        "/search",
+                        "/user/information/update").hasAnyAuthority("USER", "ADMIN")
                 .and()
                 .csrf().disable()
                 .formLogin().loginPage("/login")
