@@ -6,9 +6,10 @@ angular.
 module('friends').
 component('friends', {
     templateUrl: '/people/friends/friends.template.html',
-    controller: ['$http', '$scope',
-        function FriendsController($http, $scope) {
+    controller: ['$http', '$scope', '$rootScope',
+        function FriendsController($http, $scope, $rootScope) {
 
+            checkAuthority();
             loadFriends();
 
             function loadFriends() {
@@ -36,6 +37,25 @@ component('friends', {
                 }).then(function(response) {
                     loadFriends();
                 });
+            };
+
+            function checkAuthority() {
+                if (isAuthority('ROLE_ANONYMOUS')) {
+                    window.location.replace('#!/hello');
+                }
+            };
+
+            function isAuthority (role) {
+                if ($rootScope.user == undefined) {
+                    return false;
+                }
+                var authorities = $rootScope.user.authorities;
+                for (var authority in authorities) {
+                    if (authorities[authority].authority == role) {
+                        return true;
+                    }
+                }
+                return false;
             };
 
         }

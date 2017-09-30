@@ -9,6 +9,8 @@ component('profile', {
     controller: ['$http', '$scope', '$routeParams', '$rootScope',
         function ProfileController($http, $scope, $routeParams, $rootScope) {
 
+            checkAuthority();
+
             var friendshipStatus = '';
             $scope.statusFriends = 'FRIENDS';
             $scope.statusRequested = 'REQUESTED';
@@ -130,6 +132,25 @@ component('profile', {
                     loadProfile();
                     loadFriendRequests();
                 });
+            };
+
+            function checkAuthority() {
+                if (isAuthority('ROLE_ANONYMOUS')) {
+                    window.location.replace('#!/hello');
+                }
+            };
+
+            function isAuthority (role) {
+                if ($rootScope.user == undefined) {
+                    return false;
+                }
+                var authorities = $rootScope.user.authorities;
+                for (var authority in authorities) {
+                    if (authorities[authority].authority == role) {
+                        return true;
+                    }
+                }
+                return false;
             };
 
         }

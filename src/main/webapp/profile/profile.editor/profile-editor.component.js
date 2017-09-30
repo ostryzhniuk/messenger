@@ -9,6 +9,8 @@ component('profileEditor', {
     controller: ['$http', '$scope', '$routeParams', '$rootScope',
         function ProfileEditorController($http, $scope, $routeParams, $rootScope) {
 
+            checkAuthority();
+
             $scope.errorMessage = '';
             $scope.successMessage = '';
             var photoBase64 = '';
@@ -83,6 +85,25 @@ component('profileEditor', {
             document.getElementById('choose-photo-button').addEventListener("click", function() {
                 document.getElementById('choose-photo-input').click();
             });
+
+            function checkAuthority() {
+                if (isAuthority('ROLE_ANONYMOUS')) {
+                    window.location.replace('#!/hello');
+                }
+            };
+
+            function isAuthority (role) {
+                if ($rootScope.user == undefined) {
+                    return false;
+                }
+                var authorities = $rootScope.user.authorities;
+                for (var authority in authorities) {
+                    if (authorities[authority].authority == role) {
+                        return true;
+                    }
+                }
+                return false;
+            };
 
         }
     ]

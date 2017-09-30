@@ -9,6 +9,8 @@ component('chat', {
     controller: ['$http', '$scope', '$routeParams', '$rootScope', '$location',
         function ChatController ($http, $scope, $routeParams, $rootScope, $location) {
 
+            checkAuthority();
+
             var stompClient = $rootScope.stompClient;
 
             $scope.isSelectedChat = false;
@@ -83,6 +85,25 @@ component('chat', {
                     });
                 }
             }
+
+            function checkAuthority() {
+                if (isAuthority('ROLE_ANONYMOUS')) {
+                    window.location.replace('#!/hello');
+                }
+            }
+
+            function isAuthority (role) {
+                if ($rootScope.user == undefined) {
+                    return false;
+                }
+                var authorities = $rootScope.user.authorities;
+                for (var authority in authorities) {
+                    if (authorities[authority].authority == role) {
+                        return true;
+                    }
+                }
+                return false;
+            };
         }
     ]
 });

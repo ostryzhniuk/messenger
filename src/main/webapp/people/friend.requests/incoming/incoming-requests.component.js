@@ -9,6 +9,7 @@ component('incomingRequests', {
     controller: ['$http', '$scope', '$rootScope',
         function IncomingRequestsController($http, $scope, $rootScope) {
 
+            checkAuthority();
             loadNotReviewedRequests();
             loadRejectedRequests();
 
@@ -53,6 +54,25 @@ component('incomingRequests', {
                     loadRejectedRequests();
                     loadFriendRequests();
                 });
+            };
+
+            function checkAuthority() {
+                if (isAuthority('ROLE_ANONYMOUS')) {
+                    window.location.replace('#!/hello');
+                }
+            }
+
+            function isAuthority (role) {
+                if ($rootScope.user == undefined) {
+                    return false;
+                }
+                var authorities = $rootScope.user.authorities;
+                for (var authority in authorities) {
+                    if (authorities[authority].authority == role) {
+                        return true;
+                    }
+                }
+                return false;
             };
 
         }
