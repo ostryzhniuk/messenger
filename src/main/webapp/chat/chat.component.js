@@ -108,7 +108,7 @@ component('chat', {
 
             function resizeChat() {
                 $(document).ready(function(){
-                    $('#panel-body').height($(window).height() - 75);
+                    $('#panel-body').height(window.innerHeight - 75);
                 });
             }
 

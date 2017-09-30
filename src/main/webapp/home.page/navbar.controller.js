@@ -100,7 +100,7 @@ angular
 
     function resizeChatList() {
         $(document).ready(function(){
-            $('#chat-list-container').height($(window).height() - 75);
+            $('#chat-list-container').height(window.innerHeight - 75);
         });
     }
 
