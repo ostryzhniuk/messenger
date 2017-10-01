@@ -1,0 +1,43 @@
+#panel-body {
+    border: 1px solid;
+    height: 89%;
+    position: relative;
+    padding: 0px;
+}
+#people-container {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    width: 100%;
+    margin-left: 0px;
+}
+#photo {
+    height: 80px;
+    width: 80px;
+}
+#list-group-item {
+    border-radius: 1px;
+    height: 100px;
+    font-size: 13px;
+    position: relative;
+    display: flex;
+    position: relative;
+    cursor: pointer;
+}
+#list-group {
+    margin: 0 0 5px;
+}
+#left-container {
+    margin-left: 1%;
+}
+#center-container {
+    margin-left: 20px;
+    width: 40%;
+}
+#name-container {
+    display: flex;
+    margin-top: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #428bca;
+}

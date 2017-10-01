@@ -1,0 +1,57 @@
+#panel-body {
+    border: 1px solid;
+    height: 89%;
+    position: relative;
+    padding: 0px;
+}
+#profile-wrapper {
+    position: absolute;
+    top: 10px;
+    bottom: 0px;
+    display: table;
+    margin-left: 20px;
+}
+#user-information-container {
+    display: table-cell;
+    min-width: 600px;
+}
+#photo-container {
+    margin-top: 10px;
+}
+#photo {
+    width: 300px;
+    height: 300px;
+}
+#btn-group-top {
+    margin-top: 10px;
+}
+#btn-group-bottom {
+    margin-top: 1px;
+}
+.social-button {
+    width: 150px;
+}
+.wide-button {
+    width: 300px;
+}
+#user-information {
+    margin-top: 20px;
+}
+#buttons-container {
+    display: table-cell;
+    width: 300px
+}
+#internal-information-container {
+    margin-left: 20px;
+    position: absolute;
+    top: 10px
+}
+#username-container {
+    font-size: 14px;
+    font-weight: bold;
+}
+#edit-button {
+    margin-left: 20px;
+    cursor: pointer;
+    color: gray;
+}

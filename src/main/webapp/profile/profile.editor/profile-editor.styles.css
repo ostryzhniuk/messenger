@@ -1,0 +1,86 @@
+#panel-body {
+    border: 1px solid;
+    height: 89%;
+    position: relative;
+    padding: 0px;
+}
+#profile-wrapper {
+    position: absolute;
+    top: 10px;
+    bottom: 0px;
+    display: table;
+    margin-left: 20px;
+}
+#user-information-container {
+    display: table-cell;
+    min-width: 600px;
+}
+#photo-container {
+    margin-top: 10px;
+    display: table-cell;
+    width: 300px;
+}
+#photo {
+    width: 300px;
+    height: 300px;
+}
+#internal-information-container {
+    margin-left: 20px;
+    position: absolute;
+    top: 10px
+}
+#username-container {
+    font-weight: bold;
+    display: table;
+}
+#save-button {
+    width: 300px;
+    margin-top: 30px;
+}
+div#message-container {
+    margin-top: 20px;
+    height: 25px;
+}
+#errorMessage {
+    color: red;
+}
+#successMessage {
+    color: green;
+}
+#choose-photo-input {
+    display: none;
+}
+#choose-photo-container {
+    position: absolute;
+    height: 302px;
+    width: 302px;
+    text-align: center;
+    visibility: hidden;
+}
+#choose-photo-button {
+    margin-top: 45%;
+    outline: none;
+    box-shadow: none;
+}
+#choose-photo-label {
+    margin-top: 30%;
+    font-size: 20px;
+    color: lightgray;
+}
+.form-control {
+    height: 25px;
+}
+#firstName {
+    display: table-cell;
+    width: 200px;
+}
+#lastName {
+    display: table-cell;
+    width: 200px;
+    margin-left: 2px;
+}
+#save-button-container {
+    margin-left: 35%;
+    position: absolute;
+    bottom: 0px;
+}

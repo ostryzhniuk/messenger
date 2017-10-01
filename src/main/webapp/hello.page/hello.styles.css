@@ -1,0 +1,17 @@
+#greeting {
+    margin-top: 10%;
+    font-size: 18px;
+    border: 1px solid #eee;
+}
+div#body {
+    text-align: center;
+}
+.btn-authorization {
+    width: 250px;
+}
+div#login {
+    margin-top: 20px;
+}
+div#signUp{
+    margin-top: 10px;
+}

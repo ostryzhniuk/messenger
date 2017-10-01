@@ -1,0 +1,74 @@
+#panel-body {
+    border: 1px solid;
+    height: 89%;
+    position: relative;
+    padding: 0px;
+}
+#people-container {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    width: 100%;
+    margin-left: 0px;
+}
+.photo {
+    height: 80px;
+    width: 80px;
+}
+.confirm-button {
+    margin-top: 14%;
+}
+#reject-button {
+    margin-top: 14%;
+    margin-left: 1px;
+}
+.list-group-item {
+    border-radius: 1px;
+    height: 100px;
+    font-size: 13px;
+    position: relative;
+    display: flex;
+    position: relative;
+}
+.list-group {
+    margin: 0 0 5px;
+}
+.left-container {
+    margin-left: 1%;
+}
+.center-container {
+    margin-left: 20px;
+    width: 40%;
+}
+.name-container {
+    display: flex;
+    margin-top: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #428bca;
+}
+.right-container {
+    right: 1%;
+    position: absolute;
+    width: 180px;
+}
+#top-line-container {
+    margin-top: 15px;
+    text-align: center;
+}
+#bottom-line-container {
+    margin-top: 30px;
+    text-align: center;
+}
+hr {
+    border: 1px solid;
+    margin-top: 5px;
+    color: gray;
+}
+#outgoingRequests {
+    position: absolute;
+    right: 1%;
+    margin-right: 20px;
+    font-size: 15px;
+    text-decoration: none;
+}

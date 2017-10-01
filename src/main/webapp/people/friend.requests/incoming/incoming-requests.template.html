@@ -1,0 +1,79 @@
+<head>
+    <link rel="stylesheet" href="/people/friend.requests/incoming/incoming-requests.styles.css"/>
+</head>
+
+<div class="col-md-9" id="panel-body">
+    <div class="row" id="people-container">
+
+        <div id="top-line-container">
+            NEW REQUESTS
+            <a href="#!/friends/requests/outgoing" id="outgoingRequests" type="button">
+                Outgoing requests
+            </a>
+            <hr>
+        </div>
+
+        <div class="list-group" ng-repeat="person in newRequests">
+            <div class="list-group-item" id="list-group-item">
+
+                <div class="left-container">
+                    <a href="#!/id{{person.id}}">
+                        <img ng-src="data:image/jpeg;base64,{{person.photo}}" class="photo">
+                    </a>
+                </div>
+
+                <div class="center-container">
+                    <div class="name-container">
+                        <a href="#!/id{{person.id}}">
+                            {{person.firstName}} {{person.lastName}}
+                        </a>
+                    </div>
+                </div>
+
+                <div class="right-container">
+                    <button type="button" class="btn btn-primary btn-sm confirm-button"
+                            ng-click="confirm(person.id)">
+                        <span class="glyphicon glyphicon-user"></span> Confirm
+                    </button>
+                    <button id="reject-button" type="button" class="btn btn-default btn-sm"
+                            ng-click="reject(person.id)">
+                        <span class="glyphicon glyphicon-remove"></span> Reject
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="bottom-line-container">
+            REJECTED REQUESTS
+            <hr>
+        </div>
+
+        <div class="list-group" ng-repeat="person in rejectedRequests">
+            <div class="list-group-item">
+
+                <div class="left-container">
+                    <a href="#!/id{{person.id}}">
+                        <img ng-src="data:image/jpeg;base64,{{person.photo}}" class="photo">
+                    </a>
+                </div>
+
+                <div class="center-container">
+                    <div class="name-container">
+                        <a href="#!/id{{person.id}}">
+                            {{person.firstName}} {{person.lastName}}
+                        </a>
+                    </div>
+                </div>
+
+                <div class="right-container">
+                    <button type="button" class="btn btn-primary btn-sm confirm-button"
+                            ng-click="confirm(person.id)">
+                        <span class="glyphicon glyphicon-user"></span> Confirm
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

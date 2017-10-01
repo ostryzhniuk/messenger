@@ -1,0 +1,115 @@
+#content-panel {
+    margin-bottom: 50px;
+    background-color: #eee;
+}
+body {
+    background-color: #eee;
+}
+
+#main-navbar {
+    border-top: 1px solid #3d579b;
+    border-bottom: 1px solid #0f0f0f;
+    border-radius: 0px;
+    background-color: #3d579b;
+}
+footer {
+    background-color: #3b5998;
+    color: #ababab;
+    height: 30px;
+    padding-top: 4px;
+    padding-left: 50px;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    font-size: 12px;
+    padding-top: 8px;
+}
+#search-input {
+    outline: none;
+    box-shadow: none;
+    width: 300px;
+    height: 28px;
+}
+.search-group {
+    height: 28px;
+    margin-top: 3px;
+}
+#search-submit {
+    outline: none;
+    box-shadow: none;
+}
+#home-button {
+    color: white;
+}
+#a-user-name {
+    color: white;
+}
+#user-name {
+    font-weight: 100
+}
+#login-button {
+    color: white;
+}
+#logout-button {
+    color: white;
+}
+#sign-up-button {
+    color: white;
+}
+#find-friends-button {
+    color: white;
+    margin-left: 50px;
+}
+#friends-button {
+    color: white;
+}
+#friend-requests-button {
+    color: white;
+}
+
+
+#chat-list-container {
+    margin: 0px;
+    width: 100%;
+    position: absolute;
+    left: 0px;
+    overflow-y:scroll;
+}
+#contact-panel-chat {
+    height: 60px;
+    width: 100%;
+    background-color: white;
+    margin-bottom: 1px;
+    cursor: pointer;
+}
+#chat-user-photo {
+    margin: 5px;
+    width: 50px;
+    height: 50px;
+    border: 1px solid;
+}
+#unread-messages-container {
+    width: 40px;
+    float: right;
+    margin-top: 18px;
+}
+
+
+#chat-list-container::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+}
+
+#chat-list-container::-webkit-scrollbar
+{
+    width: 5px;
+    background-color: #F5F5F5;
+}
+
+#chat-list-container::-webkit-scrollbar-thumb
+{
+    background-color: #666161;
+    border: 2px solid #555555;
+}

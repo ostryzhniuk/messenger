@@ -1,0 +1,120 @@
+<html lang="en" ng-app="messengerApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Messenger</title>
+    <meta firstName="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="/resources/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/home.page/home-page.styles.css"/>
+
+    <script src="/resources/js/jquery-3.2.1.min.js"></script>
+    <script src="/resources/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/resources/js/angular.min.js"></script>
+    <script src="/resources/js/ui-bootstrap-tpls.min.js"></script>
+    <script src="/resources/js/angular-resource.min.js"></script>
+    <script src="/resources/js/angular-route.min.js"></script>
+    <script src="/resources/js/sockjs-0.3.min.js"></script>
+    <script src="/resources/js/stomp.min.js"></script>
+
+    <script src="/home.page/app.config.js"></script>
+    <script src="/home.page/navbar.controller.js"></script>
+    <script src="/home.page/home.component.js"></script>
+    <script src="/hello.page/hello.component.js"></script>
+    <script src="/sign.up/sign-up.component.js"></script>
+    <script src="/login/login.component.js"></script>
+    <script src="/profile/profile.component.js"></script>
+    <script src="/people/searching/searching.component.js"></script>
+    <script src="/chat/chat.component.js"></script>
+    <script src="/people/friend.requests/incoming/incoming-requests.component.js"></script>
+    <script src="/people/friend.requests/outgoing/outgoing-requests.component.js"></script>
+    <script src="/people/friends/friends.component.js"></script>
+    <script src="/profile/profile.editor/profile-editor.component.js"></script>
+</head>
+<body ng-controller="navbarCtrl">
+
+
+<nav class="navbar navbar-inverse" id="main-navbar" ng-controller="navbarCtrl">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse">
+
+            <ul class="nav navbar-nav">
+                <li><a id="home-button" href="#!/home">Messenger</a></li>
+            </ul>
+
+            <form class="navbar-form navbar-left" ng-submit="search()">
+                <div class="input-group">
+                    <input ng-model="searchParameter" placeholder="Search"
+                           class="form-control search-group" id="search-input">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default search-group" id="search-submit" type="submit">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <ul class="nav navbar-nav" ng-if="!isAuthority('ROLE_ANONYMOUS')">
+                <li><a id="friends-button" href="#!/friends">Friends</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav" ng-if="!isAuthority('ROLE_ANONYMOUS')">
+                <li><a id="friend-requests-button" href="#!/friends/requests/incoming">Friend requests
+                    ({{newFriendRequests}})
+                </a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <div id="user-name" class="nav navbar-nav" ng-if="!isAuthority('ROLE_ANONYMOUS')">
+                    <li><a href="" ng-click="myProfile()" id="a-user-name">
+                        <span class="glyphicon glyphicon-user"></span>&nbsp;{{user.username}}
+                    </a></li>
+                </div>
+
+                <div class="nav navbar-nav" id="user-functions-button-panel">
+                    <li ng-if="isAuthority('ROLE_ANONYMOUS')">
+                        <a href="#!/signUp" id="sign-up-button">
+                            <span class="glyphicon glyphicon-user"></span>&nbsp;Sign Up
+                        </a>
+                    </li>
+                    <li ng-if="isAuthority('ROLE_ANONYMOUS')">
+                        <a href="#!/login" id="logout-button">
+                            <span class="glyphicon glyphicon-log-in"></span>&nbsp;Login
+                        </a>
+                    </li>
+                    <li ng-if="!isAuthority('ROLE_ANONYMOUS')">
+                        <a href="" ng-click="logout()" id="login-button">
+                            <span class="glyphicon glyphicon-log-out"></span>&nbsp;Logout
+                        </a>
+                    </li>
+                </div>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div id="content-panel">
+
+    <div class="col-md-3">
+        <div id="chat-list-container" ng-if="!isAuthority('ROLE_ANONYMOUS')">
+            <div ng-repeat="chat in chats">
+                <div ng-click="openChat(chat)" id="contact-panel-chat">
+                    <img ng-src="data:image/jpeg;base64,{{chat.user.photo}}" class="img-circle" id="chat-user-photo">
+                    <span style="font-weight: bold">
+                        {{chat.user.firstName}} {{chat.user.lastName}}
+                    </span>
+                    <div id="unread-messages-container">
+                        <span class="badge">
+                            {{chat.unreadMessages}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div ng-view></div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+<head>
+    <link rel="stylesheet" href="/profile/profile.editor/profile-editor.styles.css"/>
+</head>
+
+<div class="col-md-9" id="panel-body">
+
+    <form ng-submit="save()">
+
+        <div id="profile-wrapper">
+
+
+            <div id="photo-container" onmouseover="mouseOverEditProduct(this)" onmouseout="mouseOutEditProduct(this)">
+                <div id="choose-photo-container">
+                    <input ng-model="photo" id="choose-photo-input" type="file" accept=".jpg,.jpeg,.png"
+                           onchange="readProductPhotoURL(this)">
+                    <button id="choose-photo-button" type="button" class="btn btn-default">Choose photo</button>
+                    <p><label id="choose-photo-label" for="choose-photo-button">1 X 1</label></p>
+                </div>
+
+                <img ng-src="{{photo}}" id="photo">
+            </div>
+
+            <div id="user-information-container">
+                <div id="internal-information-container">
+                    <div id="username-container">
+                        <input ng-model="profile.firstName" id="firstName" class="form-control"
+                               placeholder="First Name" required maxlength="50">
+
+                        <input ng-model="profile.lastName" id="lastName" class="form-control"
+                               placeholder="Last Name" required maxlength="50">
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div id="save-button-container">
+            <button id="save-button" type="submit" class="btn btn-success">Save</button>
+
+            <div id="message-container">
+                <span id="errorMessage">{{errorMessage}}</span>
+                <span id="successMessage">{{successMessage}}</span>
+            </div>
+        </div>
+
+    </form>
+</div>

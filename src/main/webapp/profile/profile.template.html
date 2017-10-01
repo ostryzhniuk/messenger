@@ -1,0 +1,68 @@
+<head>
+    <link rel="stylesheet" href="/profile/profile.styles.css"/>
+</head>
+
+<div class="col-md-9" id="panel-body">
+    <div id="profile-wrapper">
+
+        <div id="buttons-container">
+
+            <div id="photo-container">
+                <img ng-src="data:image/jpeg;base64,{{profile.photo}}" id="photo">
+            </div>
+
+            <div id="btn-group-top" class="btn-group">
+                <button type="button" class="btn btn-primary social-button" ng-if="myProfile()"
+                        ng-click="openFriends()">Friends
+                </button>
+
+                <button type="button" class="btn btn-primary social-button" ng-if="myProfile()"
+                        ng-click="openFriendRequests()">Requests
+                </button>
+
+                <button type="button" class="btn btn-primary wide-button" ng-click="openChat()"
+                        ng-if="isFriendshipStatus(statusFriends)">Message
+                </button>
+
+                <button type="button" class="btn btn-primary wide-button" ng-click="addFriend(profile.id)"
+                        ng-if="isFriendshipStatus(statusNotFriends)">Add friend
+                </button>
+
+                <button type="button" class="btn btn-default wide-button" ng-click="removeFriendRequest(profile.id)"
+                        ng-if="isFriendshipStatus(statusRequested)">Reject your friendship request
+                </button>
+
+                <button type="button" class="btn btn-primary wide-button" ng-click="confirmFriendRequest(profile.id)"
+                        ng-if="isFriendshipStatus(statusNotReviewed) ||
+                                isFriendshipStatus(statusRejected)">Confirm friendship request
+                </button>
+            </div>
+
+            <div id="btn-group-bottom">
+                <button type="button" class="btn btn-default wide-button" ng-click="removeFriend(profile.id)"
+                        ng-if="isFriendshipStatus(statusFriends)">Remove from friends
+                </button>
+
+                <button type="button" class="btn btn-default wide-button" ng-click="rejectFriendRequest(profile.id)"
+                        ng-if="isFriendshipStatus(statusNotReviewed)">Reject friendship request
+                </button>
+            </div>
+        </div>
+
+        <div id="user-information-container">
+            <div id="internal-information-container">
+                <div id="username-container">
+                    {{profile.firstName}} {{profile.lastName}}
+                    <a href="#!/profile/edit">
+                        <span id="edit-button" class="glyphicon glyphicon-edit" title="Edit information"
+                              ng-if="myProfile()"></span>
+                    </a>
+                </div>
+                <div id="user-information">
+                    user information
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
