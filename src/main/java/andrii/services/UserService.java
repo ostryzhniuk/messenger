@@ -20,7 +20,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.net.URL;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -159,12 +161,10 @@ public class UserService {
         try {
             return ImageHandler.loadEncodedImage(path);
         } catch (FileNotFoundException e) {
-            path = Paths.get(resourcesPath + "messenger" + separator + "images"
-                    + separator + "default" + separator + "no_photo.jpg");
             try {
-                return ImageHandler.loadEncodedImage(path);
+                return ImageHandler.loadEncodedImage(getPathToDefaultPhoto());
             } catch (FileNotFoundException e1) {
-                LOGGER.warn("Photo upload fails.", e);
+                LOGGER.error("Photo is not found", e, e1);
                 return null;
             }
         }
@@ -176,6 +176,17 @@ public class UserService {
                 + separator + "avatars" + separator + userId + ".jpg");
 
         ImageHandler.save(ImageHandler.decodeBase64Image(photoBASE64), path);
+    }
+
+    private Path getPathToDefaultPhoto() throws FileNotFoundException {
+        String separator = FileSystems.getDefault().getSeparator();
+        URL noPhotoURL = getClass().getClassLoader().getResource("image" + separator + "no_photo.jpg");
+
+        if (noPhotoURL == null) {
+            throw new FileNotFoundException("Default photo is not found");
+        } else {
+            return Paths.get(noPhotoURL.getPath());
+        }
     }
 
 }
