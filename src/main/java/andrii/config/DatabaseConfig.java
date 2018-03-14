@@ -24,12 +24,24 @@ public class DatabaseConfig {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DatabaseConfig.class);
 
+    @Value("${db.host}")
+    private String dbHost;
+
+    @Value("${db.port}")
+    private String dbPort;
+
+    @Value("${db.name}")
+    private String dbName;
+
+    @Value("${db.username}")
+    private String dbUsername;
+
     @Value("${db.password}")
     private String dbPassword;
 
     @Bean
     public DataSource dataSource() {
-        return  createDataSource("127.0.0.1", "3306", "messenger", "root", dbPassword);
+        return  createDataSource(dbHost, dbPort, dbName, dbUsername, dbPassword);
     }
 
     private static DataSource createDataSource(String address,
